@@ -1,0 +1,30 @@
+# Virtual Environment
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Django
+*.sqlite3
+media/
+staticfiles/
+local_settings.py
+
+# Environment Variables (wichtig! keine Secrets ins Repo)
+.env
+.env.*
+
+# IDE
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+db.sqlite3
