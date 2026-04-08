@@ -1,0 +1,43 @@
+
+' Diese Datei enthält ein paar Beispielanfragen zum Testen des API,'
+
+
+
+# Alle Produkte
+http://127.0.0.1:8000/api/products/
+
+# Einzelnes Produkt
+http://127.0.0.1:8000/api/products/1/
+http://127.0.0.1:8000/api/products/5/
+
+# Alle Kategorien
+http://127.0.0.1:8000/api/categories/
+
+# ── Globalsuche ──
+http://127.0.0.1:8000/api/products/?search=laptop
+http://127.0.0.1:8000/api/products/?search=Technik
+http://127.0.0.1:8000/api/products/?search=TECH-001
+
+# ── Gezielte Suche ──
+http://127.0.0.1:8000/api/products/?name=laptop
+http://127.0.0.1:8000/api/products/?sku=TECH
+http://127.0.0.1:8000/api/products/?name=laptop&min_price=500
+
+# ── Preisrange ──
+http://127.0.0.1:8000/api/products/?min_price=10&max_price=50
+http://127.0.0.1:8000/api/products/?min_price=100
+
+# ── Exakte Filter ──
+http://127.0.0.1:8000/api/products/?active=true
+http://127.0.0.1:8000/api/products/?category=1
+
+# ── Sortierung ──
+http://127.0.0.1:8000/api/products/?ordering=price
+http://127.0.0.1:8000/api/products/?ordering=-price
+http://127.0.0.1:8000/api/products/?ordering=name
+http://127.0.0.1:8000/api/products/?ordering=category__name
+
+# ── Kombiniert ──
+http://127.0.0.1:8000/api/products/?search=laptop&ordering=-price
+http://127.0.0.1:8000/api/products/?active=true&ordering=price&min_price=50
+http://127.0.0.1:8000/api/products/?category=1&ordering=-price

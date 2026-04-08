@@ -60,11 +60,14 @@ MIDDLEWARE = [
 # REST Framework Konfiguration
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',   # Für den Browserbasierten API-Explorer
+        'rest_framework.renderers.JSONRenderer',     # Standard Renderer JSON
         'rest_framework_xml.renderers.XMLRenderer',  # -> XML Support
     ],
     'DEFAULT_PARSER_CLASSES': [
-        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.JSONParser',        # Standard Parser JSON
+        'rest_framework.parsers.FormParser',        # für Formulare -> sieht einfach besser aus als JSON
+        'rest_framework.parsers.MultiPartParser',       # um Bilder hochzuladen per Formular
         'rest_framework_xml.parsers.XMLParser',       # -> XML Input
     ],
     'DEFAULT_FILTER_BACKENDS': [

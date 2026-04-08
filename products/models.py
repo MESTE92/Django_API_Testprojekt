@@ -4,8 +4,15 @@ from django.db import models
 class Category(models.Model):                 # das Model Category
     name = models.CharField(max_length=100)
 
+    class Meta:
+        verbose_name = 'Kategorie'
+        verbose_name_plural = 'Kategorien'
+
     def __str__(self):
         return self.name
+
+
+
 
 class Product(models.Model):                  # das Model Product
     name        = models.CharField(max_length=100)
@@ -26,8 +33,10 @@ class Product(models.Model):                  # das Model Product
             models.Index(fields=['sku']),  # oft gesucht -> Index sinnvoll
             models.Index(fields=['active']),  # oft gefiltert -> Index sinnvoll
             models.Index(fields=['category']),  # FK -> oft gefiltert
+            models.Index(fields=['name']), # nach Name filteren
         ]
-        ordering = ['-active', 'category', 'name']   # Standardsortierung in dieser Reihenfolge
+        ordering = ['-active', 'category', 'name','price']   # Standardsortierung in dieser Reihenfolge wenn in
+                                                            # der URL keine Sortierung angegeben ist -> siehe Views.py
 
         verbose_name = 'Produkt'    # Anzeige in Adminpannel bei einem Produkt
         verbose_name_plural = 'Produkte'   # Anzeige in Adminpannel bei mehreren Produkten
