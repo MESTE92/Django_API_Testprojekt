@@ -1,3 +1,35 @@
+# products/models.py
 from django.db import models
 
-# Create your models here.
+class Category(models.Model):                 # das Model Category
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class Product(models.Model):                  # das Model Product
+    name        = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    price       = models.DecimalField(max_digits=8, decimal_places=2)
+    stock       = models.IntegerField(default=0)
+    active      = models.BooleanField(default=True)
+    sku         = models.CharField(max_length=50, unique=True)
+    image       = models.ImageField(upload_to='products/', blank=True, null=True)   #Bilderpfad
+    category    = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        unique_together = ['name', 'category']
+        indexes = [
+            models.Index(fields=['sku']),  # oft gesucht -> Index sinnvoll
+            models.Index(fields=['active']),  # oft gefiltert -> Index sinnvoll
+            models.Index(fields=['category']),  # FK -> oft gefiltert
+        ]
+        ordering = ['-active', 'category', 'name']   # Standardsortierung in dieser Reihenfolge
+
+        verbose_name = 'Produkt'    # Anzeige in Adminpannel bei einem Produkt
+        verbose_name_plural = 'Produkte'   # Anzeige in Adminpannel bei mehreren Produkten
+
+
