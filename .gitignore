@@ -14,11 +14,9 @@ build/
 *.sqlite3
 media/
 staticfiles/
-local_settings.py
 
 # Environment Variablen (wichtig! keine Secrets ins Repo)
 .env
-.env.*
 
 # IDE
 .idea/
