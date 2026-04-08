@@ -16,7 +16,7 @@ media/
 staticfiles/
 local_settings.py
 
-# Environment Variables (wichtig! keine Secrets ins Repo)
+# Environment Variablen (wichtig! keine Secrets ins Repo)
 .env
 .env.*
 
