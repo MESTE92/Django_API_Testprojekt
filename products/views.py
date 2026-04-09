@@ -30,11 +30,15 @@ class ProductListCreateView(ListCreateAPIView):
                                                                 # -> schneller und effizienter, weniger DB-Aufrufe
                                                                 # (Queryset-Optimierung)
 
-        name = self.request.query_params.get('name')                # .get('name') ist nur der URL-Parameter
-        description = self.request.query_params.get('description')
+        name = self.request.query_params.get('name')                # .get('name') ist nur der URL-Parameter für
+        description = self.request.query_params.get('description')  # eigene Filter
         sku = self.request.query_params.get('sku')
         min_price = self.request.query_params.get('min_price')
         max_price = self.request.query_params.get('max_price')
+
+
+        # prüft ob der Parameter in der URL angegeben ist, falls ja wird der Filter
+        # über eine AND-Verknüpfung angewendet -> so wird schrittweise der Query gefiltert
 
         if name:
             queryset = queryset.filter(name__icontains=name)
@@ -48,8 +52,6 @@ class ProductListCreateView(ListCreateAPIView):
             queryset = queryset.filter(price__lte=max_price)
 
         return queryset
-
-
 
 
 

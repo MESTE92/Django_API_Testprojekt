@@ -2,6 +2,13 @@
 
 Ein vollständiges Django-Testprojekt mit REST API für Produkt- und Kategorienverwaltung, inklusive Filterfunktionen, Suchoptionen und Admin-Panel.
 
+## Screenshots
+
+<p align="center">
+  <img src="Beispielbilder/bidl_1.png" alt="API Browsable Interface" width="45%">
+  <img src="Beispielbilder/bild_2.png" alt="API Response Example" width="45%">
+</p>
+
 ---
 
 ## Inhaltsverzeichnis
@@ -245,12 +252,48 @@ curl http://127.0.0.1:8000/api/products/
 
 Zugriff auf das Django Admin-Panel: **http://127.0.0.1:8000/admin/**
 
-### Standard-Credentials (siehe `hints.txt`)
+### Anmeldung mit Standard-Credentials
+
+Die vorkonfigurierten Admin-Zugangsdaten findest du in der `hints.txt`:
 
 ```
 E-Mail: Admin@Test.de
 Passwort: Admin1234!
 ```
+
+**So meldest du dich an:**
+1. Öffne http://127.0.0.1:8000/admin/ in deinem Browser
+2. Gib die E-Mail-Adresse ein: `Admin@Test.de`
+3. Gib das Passwort ein: `Admin1234!`
+4. Klicke auf "Log in"
+
+### Eigenen Superuser erstellen
+
+Falls die Standard-Credentials nicht funktionieren oder du einen eigenen Superuser anlegen möchtest:
+
+```bash
+python manage.py createsuperuser
+```
+
+**Du wirst nach folgenden Informationen gefragt:**
+1. **Username**: Dein gewünschter Benutzername (z.B. `admin` oder dein Name)
+2. **Email address**: Deine E-Mail-Adresse (z.B. `admin@example.com`)
+3. **Password**: Dein Passwort (mindestens 8 Zeichen, wird beim Eingeben nicht angezeigt)
+4. **Password (again)**: Passwort zur Bestätigung nochmal eingeben
+
+**Beispiel:**
+```bash
+$ python manage.py createsuperuser
+Username: admin
+Email address: admin@example.com
+Password: ********
+Password (again): ********
+Superuser created successfully.
+```
+
+**Anschließend kannst du dich mit deinen neuen Zugangsdaten unter http://127.0.0.1:8000/admin/ anmelden.**
+
+### Was du im Admin-Panel tun kannst
 
 **Im Admin-Panel kannst du:**
 - Produkte erstellen, bearbeiten und löschen
@@ -258,6 +301,7 @@ Passwort: Admin1234!
 - Produktbilder hochladen
 - Lagerbestände anpassen
 - Produkte aktivieren/deaktivieren
+- Benutzer und Berechtigungen verwalten
 
 ---
 
