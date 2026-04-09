@@ -1,0 +1,6 @@
+# Admin
+# Admin@Test.de
+# Admin1234!
+
+
+-> Zugang zum Adminbereich
