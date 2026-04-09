@@ -1,387 +1,2872 @@
 [
-{
-  "model": "products.category",
-  "pk": 1,
-  "fields": {
-    "name": "Technik"
+  {
+    "model": "products.category",
+    "pk": 1,
+    "fields": {
+      "name": "Technik"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 2,
+    "fields": {
+      "name": "Lebensmittel"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 3,
+    "fields": {
+      "name": "Kleidung"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 4,
+    "fields": {
+      "name": "Haushalt"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 5,
+    "fields": {
+      "name": "Sport"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 6,
+    "fields": {
+      "name": "Buecher"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 7,
+    "fields": {
+      "name": "Spielzeug"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 8,
+    "fields": {
+      "name": "Beauty"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 9,
+    "fields": {
+      "name": "Garten"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 10,
+    "fields": {
+      "name": "Buero"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+      "name": "Laptop",
+      "description": "Laptop aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "9.88",
+      "stock": 41,
+      "active": true,
+      "sku": "TECH-001",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+      "name": "Smartphone",
+      "description": "Smartphone aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "11.51",
+      "stock": 48,
+      "active": true,
+      "sku": "TECH-002",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+      "name": "Tastatur",
+      "description": "Tastatur aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "13.14",
+      "stock": 55,
+      "active": true,
+      "sku": "TECH-003",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+      "name": "Monitor",
+      "description": "Monitor aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "14.77",
+      "stock": 62,
+      "active": true,
+      "sku": "TECH-004",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+      "name": "Kopfhörer",
+      "description": "Kopfhörer aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "16.40",
+      "stock": 69,
+      "active": true,
+      "sku": "TECH-005",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 6,
+    "fields": {
+      "name": "Maus",
+      "description": "Maus aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "18.03",
+      "stock": 76,
+      "active": true,
+      "sku": "TECH-006",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 7,
+    "fields": {
+      "name": "Tablet",
+      "description": "Tablet aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "19.66",
+      "stock": 83,
+      "active": true,
+      "sku": "TECH-007",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 8,
+    "fields": {
+      "name": "Webcam",
+      "description": "Webcam aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "21.29",
+      "stock": 90,
+      "active": true,
+      "sku": "TECH-008",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 9,
+    "fields": {
+      "name": "Router",
+      "description": "Router aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "22.92",
+      "stock": 97,
+      "active": true,
+      "sku": "TECH-009",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 10,
+    "fields": {
+      "name": "SSD",
+      "description": "SSD aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "24.55",
+      "stock": 104,
+      "active": true,
+      "sku": "TECH-010",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 11,
+    "fields": {
+      "name": "USB-Stick",
+      "description": "USB-Stick aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "26.18",
+      "stock": 111,
+      "active": true,
+      "sku": "TECH-011",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 12,
+    "fields": {
+      "name": "Bluetooth-Lautsprecher",
+      "description": "Bluetooth-Lautsprecher aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "27.81",
+      "stock": 118,
+      "active": true,
+      "sku": "TECH-012",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 13,
+    "fields": {
+      "name": "Smartwatch",
+      "description": "Smartwatch aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "29.44",
+      "stock": 125,
+      "active": true,
+      "sku": "TECH-013",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 14,
+    "fields": {
+      "name": "Drucker",
+      "description": "Drucker aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "31.07",
+      "stock": 132,
+      "active": true,
+      "sku": "TECH-014",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 15,
+    "fields": {
+      "name": "Mikrofon",
+      "description": "Mikrofon aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "32.70",
+      "stock": 139,
+      "active": true,
+      "sku": "TECH-015",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 16,
+    "fields": {
+      "name": "Projektor",
+      "description": "Projektor aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "34.33",
+      "stock": 146,
+      "active": true,
+      "sku": "TECH-016",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 17,
+    "fields": {
+      "name": "Grafikkarte",
+      "description": "Grafikkarte aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "35.96",
+      "stock": 153,
+      "active": true,
+      "sku": "TECH-017",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 18,
+    "fields": {
+      "name": "Powerbank",
+      "description": "Powerbank aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "37.59",
+      "stock": 160,
+      "active": true,
+      "sku": "TECH-018",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 19,
+    "fields": {
+      "name": "Dockingstation",
+      "description": "Dockingstation aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "39.22",
+      "stock": 167,
+      "active": true,
+      "sku": "TECH-019",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 20,
+    "fields": {
+      "name": "E-Reader",
+      "description": "E-Reader aus der Kategorie Technik mit solider Qualität für den täglichen Einsatz.",
+      "price": "40.85",
+      "stock": 174,
+      "active": true,
+      "sku": "TECH-020",
+      "image": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 21,
+    "fields": {
+      "name": "Haferflocken",
+      "description": "Haferflocken aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "13.63",
+      "stock": 60,
+      "active": true,
+      "sku": "FOOD-001",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 22,
+    "fields": {
+      "name": "Olivenöl",
+      "description": "Olivenöl aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "15.26",
+      "stock": 67,
+      "active": true,
+      "sku": "FOOD-002",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 23,
+    "fields": {
+      "name": "Müsliriegel",
+      "description": "Müsliriegel aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "16.89",
+      "stock": 74,
+      "active": true,
+      "sku": "FOOD-003",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 24,
+    "fields": {
+      "name": "Proteinpulver",
+      "description": "Proteinpulver aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "18.52",
+      "stock": 81,
+      "active": true,
+      "sku": "FOOD-004",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 25,
+    "fields": {
+      "name": "Mandelbutter",
+      "description": "Mandelbutter aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "20.15",
+      "stock": 88,
+      "active": true,
+      "sku": "FOOD-005",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 26,
+    "fields": {
+      "name": "Vollkornnudeln",
+      "description": "Vollkornnudeln aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "21.78",
+      "stock": 95,
+      "active": true,
+      "sku": "FOOD-006",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 27,
+    "fields": {
+      "name": "Reis",
+      "description": "Reis aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "23.41",
+      "stock": 102,
+      "active": true,
+      "sku": "FOOD-007",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 28,
+    "fields": {
+      "name": "Tomatensauce",
+      "description": "Tomatensauce aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "25.04",
+      "stock": 109,
+      "active": true,
+      "sku": "FOOD-008",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 29,
+    "fields": {
+      "name": "Erdnussbutter",
+      "description": "Erdnussbutter aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "26.67",
+      "stock": 116,
+      "active": true,
+      "sku": "FOOD-009",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 30,
+    "fields": {
+      "name": "Kaffee",
+      "description": "Kaffee aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "28.30",
+      "stock": 123,
+      "active": true,
+      "sku": "FOOD-010",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 31,
+    "fields": {
+      "name": "Tee",
+      "description": "Tee aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "29.93",
+      "stock": 130,
+      "active": true,
+      "sku": "FOOD-011",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 32,
+    "fields": {
+      "name": "Honig",
+      "description": "Honig aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "31.56",
+      "stock": 137,
+      "active": true,
+      "sku": "FOOD-012",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 33,
+    "fields": {
+      "name": "Quinoa",
+      "description": "Quinoa aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "33.19",
+      "stock": 144,
+      "active": true,
+      "sku": "FOOD-013",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 34,
+    "fields": {
+      "name": "Linsen",
+      "description": "Linsen aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "34.82",
+      "stock": 151,
+      "active": true,
+      "sku": "FOOD-014",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 35,
+    "fields": {
+      "name": "Kichererbsen",
+      "description": "Kichererbsen aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "36.45",
+      "stock": 158,
+      "active": true,
+      "sku": "FOOD-015",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 36,
+    "fields": {
+      "name": "Dunkle Schokolade",
+      "description": "Dunkle Schokolade aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "38.08",
+      "stock": 165,
+      "active": true,
+      "sku": "FOOD-016",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 37,
+    "fields": {
+      "name": "Mandeln",
+      "description": "Mandeln aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "39.71",
+      "stock": 172,
+      "active": true,
+      "sku": "FOOD-017",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 38,
+    "fields": {
+      "name": "Cashews",
+      "description": "Cashews aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "41.34",
+      "stock": 179,
+      "active": true,
+      "sku": "FOOD-018",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 39,
+    "fields": {
+      "name": "Apfelessig",
+      "description": "Apfelessig aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "42.97",
+      "stock": 186,
+      "active": true,
+      "sku": "FOOD-019",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 40,
+    "fields": {
+      "name": "Gewürzmix",
+      "description": "Gewürzmix aus der Kategorie Lebensmittel mit solider Qualität für den täglichen Einsatz.",
+      "price": "44.60",
+      "stock": 193,
+      "active": true,
+      "sku": "FOOD-020",
+      "image": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 41,
+    "fields": {
+      "name": "T-Shirt",
+      "description": "T-Shirt aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "17.38",
+      "stock": 79,
+      "active": true,
+      "sku": "CLTH-001",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 42,
+    "fields": {
+      "name": "Jogginghose",
+      "description": "Jogginghose aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "19.01",
+      "stock": 86,
+      "active": true,
+      "sku": "CLTH-002",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 43,
+    "fields": {
+      "name": "Socken",
+      "description": "Socken aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "20.64",
+      "stock": 93,
+      "active": true,
+      "sku": "CLTH-003",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 44,
+    "fields": {
+      "name": "Hoodie",
+      "description": "Hoodie aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "22.27",
+      "stock": 100,
+      "active": true,
+      "sku": "CLTH-004",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 45,
+    "fields": {
+      "name": "Jeans",
+      "description": "Jeans aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "23.90",
+      "stock": 107,
+      "active": true,
+      "sku": "CLTH-005",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 46,
+    "fields": {
+      "name": "Poloshirt",
+      "description": "Poloshirt aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "25.53",
+      "stock": 114,
+      "active": true,
+      "sku": "CLTH-006",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 47,
+    "fields": {
+      "name": "Jacke",
+      "description": "Jacke aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "27.16",
+      "stock": 121,
+      "active": true,
+      "sku": "CLTH-007",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 48,
+    "fields": {
+      "name": "Pullover",
+      "description": "Pullover aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "28.79",
+      "stock": 128,
+      "active": true,
+      "sku": "CLTH-008",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 49,
+    "fields": {
+      "name": "Shorts",
+      "description": "Shorts aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "30.42",
+      "stock": 135,
+      "active": true,
+      "sku": "CLTH-009",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 50,
+    "fields": {
+      "name": "Hemden",
+      "description": "Hemden aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "32.05",
+      "stock": 142,
+      "active": true,
+      "sku": "CLTH-010",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 51,
+    "fields": {
+      "name": "Bluse",
+      "description": "Bluse aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "33.68",
+      "stock": 149,
+      "active": true,
+      "sku": "CLTH-011",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 52,
+    "fields": {
+      "name": "Leggings",
+      "description": "Leggings aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "35.31",
+      "stock": 156,
+      "active": true,
+      "sku": "CLTH-012",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 53,
+    "fields": {
+      "name": "Sport-BH",
+      "description": "Sport-BH aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "36.94",
+      "stock": 163,
+      "active": true,
+      "sku": "CLTH-013",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 54,
+    "fields": {
+      "name": "Regenjacke",
+      "description": "Regenjacke aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "38.57",
+      "stock": 170,
+      "active": true,
+      "sku": "CLTH-014",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 55,
+    "fields": {
+      "name": "Wintermantel",
+      "description": "Wintermantel aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "40.20",
+      "stock": 177,
+      "active": true,
+      "sku": "CLTH-015",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 56,
+    "fields": {
+      "name": "Mütze",
+      "description": "Mütze aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "41.83",
+      "stock": 184,
+      "active": true,
+      "sku": "CLTH-016",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 57,
+    "fields": {
+      "name": "Schal",
+      "description": "Schal aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "43.46",
+      "stock": 191,
+      "active": true,
+      "sku": "CLTH-017",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 58,
+    "fields": {
+      "name": "Handschuhe",
+      "description": "Handschuhe aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "45.09",
+      "stock": 198,
+      "active": true,
+      "sku": "CLTH-018",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 59,
+    "fields": {
+      "name": "Sneaker",
+      "description": "Sneaker aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "46.72",
+      "stock": 205,
+      "active": true,
+      "sku": "CLTH-019",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 60,
+    "fields": {
+      "name": "Gürtel",
+      "description": "Gürtel aus der Kategorie Kleidung mit solider Qualität für den täglichen Einsatz.",
+      "price": "48.35",
+      "stock": 212,
+      "active": true,
+      "sku": "CLTH-020",
+      "image": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 61,
+    "fields": {
+      "name": "Pfanne",
+      "description": "Pfanne aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "21.13",
+      "stock": 98,
+      "active": true,
+      "sku": "HOME-001",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 62,
+    "fields": {
+      "name": "Topfset",
+      "description": "Topfset aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "22.76",
+      "stock": 105,
+      "active": true,
+      "sku": "HOME-002",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 63,
+    "fields": {
+      "name": "Wasserkocher",
+      "description": "Wasserkocher aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "24.39",
+      "stock": 112,
+      "active": true,
+      "sku": "HOME-003",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 64,
+    "fields": {
+      "name": "Toaster",
+      "description": "Toaster aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "26.02",
+      "stock": 119,
+      "active": true,
+      "sku": "HOME-004",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 65,
+    "fields": {
+      "name": "Messerblock",
+      "description": "Messerblock aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "27.65",
+      "stock": 126,
+      "active": true,
+      "sku": "HOME-005",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 66,
+    "fields": {
+      "name": "Schneidebrett",
+      "description": "Schneidebrett aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "29.28",
+      "stock": 133,
+      "active": true,
+      "sku": "HOME-006",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 67,
+    "fields": {
+      "name": "Bettwäsche",
+      "description": "Bettwäsche aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "30.91",
+      "stock": 140,
+      "active": true,
+      "sku": "HOME-007",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 68,
+    "fields": {
+      "name": "Handtücher",
+      "description": "Handtücher aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "32.54",
+      "stock": 147,
+      "active": true,
+      "sku": "HOME-008",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 69,
+    "fields": {
+      "name": "Staubsauger",
+      "description": "Staubsauger aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "34.17",
+      "stock": 154,
+      "active": true,
+      "sku": "HOME-009",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 70,
+    "fields": {
+      "name": "Besen",
+      "description": "Besen aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "35.80",
+      "stock": 161,
+      "active": true,
+      "sku": "HOME-010",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 71,
+    "fields": {
+      "name": "Wischmopp",
+      "description": "Wischmopp aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "37.43",
+      "stock": 168,
+      "active": true,
+      "sku": "HOME-011",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 72,
+    "fields": {
+      "name": "Aufbewahrungsbox",
+      "description": "Aufbewahrungsbox aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "39.06",
+      "stock": 175,
+      "active": true,
+      "sku": "HOME-012",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 73,
+    "fields": {
+      "name": "Kleiderbügel",
+      "description": "Kleiderbügel aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "40.69",
+      "stock": 182,
+      "active": true,
+      "sku": "HOME-013",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 74,
+    "fields": {
+      "name": "Duftkerze",
+      "description": "Duftkerze aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "42.32",
+      "stock": 189,
+      "active": true,
+      "sku": "HOME-014",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 75,
+    "fields": {
+      "name": "Luftreiniger",
+      "description": "Luftreiniger aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "43.95",
+      "stock": 196,
+      "active": true,
+      "sku": "HOME-015",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 76,
+    "fields": {
+      "name": "Küchenwaage",
+      "description": "Küchenwaage aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "45.58",
+      "stock": 203,
+      "active": true,
+      "sku": "HOME-016",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 77,
+    "fields": {
+      "name": "Mixer",
+      "description": "Mixer aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "47.21",
+      "stock": 210,
+      "active": true,
+      "sku": "HOME-017",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 78,
+    "fields": {
+      "name": "Backform",
+      "description": "Backform aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "48.84",
+      "stock": 217,
+      "active": true,
+      "sku": "HOME-018",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 79,
+    "fields": {
+      "name": "Thermoskanne",
+      "description": "Thermoskanne aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "50.47",
+      "stock": 224,
+      "active": true,
+      "sku": "HOME-019",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 80,
+    "fields": {
+      "name": "Badvorleger",
+      "description": "Badvorleger aus der Kategorie Haushalt mit solider Qualität für den täglichen Einsatz.",
+      "price": "52.10",
+      "stock": 21,
+      "active": true,
+      "sku": "HOME-020",
+      "image": "",
+      "category": 4
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 81,
+    "fields": {
+      "name": "Yoga-Matte",
+      "description": "Yoga-Matte aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "24.88",
+      "stock": 117,
+      "active": true,
+      "sku": "SPRT-001",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 82,
+    "fields": {
+      "name": "Hantelset",
+      "description": "Hantelset aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "26.51",
+      "stock": 124,
+      "active": true,
+      "sku": "SPRT-002",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 83,
+    "fields": {
+      "name": "Springseil",
+      "description": "Springseil aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "28.14",
+      "stock": 131,
+      "active": true,
+      "sku": "SPRT-003",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 84,
+    "fields": {
+      "name": "Fitnessband",
+      "description": "Fitnessband aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "29.77",
+      "stock": 138,
+      "active": true,
+      "sku": "SPRT-004",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 85,
+    "fields": {
+      "name": "Laufshirt",
+      "description": "Laufshirt aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "31.40",
+      "stock": 145,
+      "active": true,
+      "sku": "SPRT-005",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 86,
+    "fields": {
+      "name": "Sporthose",
+      "description": "Sporthose aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "33.03",
+      "stock": 152,
+      "active": true,
+      "sku": "SPRT-006",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 87,
+    "fields": {
+      "name": "Fussball",
+      "description": "Fussball aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "34.66",
+      "stock": 159,
+      "active": true,
+      "sku": "SPRT-007",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 88,
+    "fields": {
+      "name": "Basketball",
+      "description": "Basketball aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "36.29",
+      "stock": 166,
+      "active": true,
+      "sku": "SPRT-008",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 89,
+    "fields": {
+      "name": "Trinkflasche",
+      "description": "Trinkflasche aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "37.92",
+      "stock": 173,
+      "active": true,
+      "sku": "SPRT-009",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 90,
+    "fields": {
+      "name": "Fahrradhelm",
+      "description": "Fahrradhelm aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "39.55",
+      "stock": 180,
+      "active": true,
+      "sku": "SPRT-010",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 91,
+    "fields": {
+      "name": "Pulsuhr",
+      "description": "Pulsuhr aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "41.18",
+      "stock": 187,
+      "active": true,
+      "sku": "SPRT-011",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 92,
+    "fields": {
+      "name": "Kettlebell",
+      "description": "Kettlebell aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "42.81",
+      "stock": 194,
+      "active": true,
+      "sku": "SPRT-012",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 93,
+    "fields": {
+      "name": "Trainingshandschuhe",
+      "description": "Trainingshandschuhe aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "44.44",
+      "stock": 201,
+      "active": true,
+      "sku": "SPRT-013",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 94,
+    "fields": {
+      "name": "Schwimmbrille",
+      "description": "Schwimmbrille aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "46.07",
+      "stock": 208,
+      "active": true,
+      "sku": "SPRT-014",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 95,
+    "fields": {
+      "name": "Tennisbälle",
+      "description": "Tennisbälle aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "47.70",
+      "stock": 215,
+      "active": true,
+      "sku": "SPRT-015",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 96,
+    "fields": {
+      "name": "Widerstandsband",
+      "description": "Widerstandsband aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "49.33",
+      "stock": 222,
+      "active": true,
+      "sku": "SPRT-016",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 97,
+    "fields": {
+      "name": "Schaumstoffrolle",
+      "description": "Schaumstoffrolle aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "50.96",
+      "stock": 19,
+      "active": true,
+      "sku": "SPRT-017",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 98,
+    "fields": {
+      "name": "Sporttasche",
+      "description": "Sporttasche aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "52.59",
+      "stock": 26,
+      "active": true,
+      "sku": "SPRT-018",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 99,
+    "fields": {
+      "name": "Step-Brett",
+      "description": "Step-Brett aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "54.22",
+      "stock": 33,
+      "active": true,
+      "sku": "SPRT-019",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 100,
+    "fields": {
+      "name": "Rudergriff",
+      "description": "Rudergriff aus der Kategorie Sport mit solider Qualität für den täglichen Einsatz.",
+      "price": "55.85",
+      "stock": 40,
+      "active": true,
+      "sku": "SPRT-020",
+      "image": "",
+      "category": 5
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 101,
+    "fields": {
+      "name": "Roman",
+      "description": "Roman aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "28.63",
+      "stock": 136,
+      "active": true,
+      "sku": "BOOK-001",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 102,
+    "fields": {
+      "name": "Sachbuch",
+      "description": "Sachbuch aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "30.26",
+      "stock": 143,
+      "active": true,
+      "sku": "BOOK-002",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 103,
+    "fields": {
+      "name": "Kochbuch",
+      "description": "Kochbuch aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "31.89",
+      "stock": 150,
+      "active": true,
+      "sku": "BOOK-003",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 104,
+    "fields": {
+      "name": "Reiseführer",
+      "description": "Reiseführer aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "33.52",
+      "stock": 157,
+      "active": true,
+      "sku": "BOOK-004",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 105,
+    "fields": {
+      "name": "Kinderbuch",
+      "description": "Kinderbuch aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "35.15",
+      "stock": 164,
+      "active": true,
+      "sku": "BOOK-005",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 106,
+    "fields": {
+      "name": "Fantasy-Band",
+      "description": "Fantasy-Band aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "36.78",
+      "stock": 171,
+      "active": true,
+      "sku": "BOOK-006",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 107,
+    "fields": {
+      "name": "Thriller",
+      "description": "Thriller aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "38.41",
+      "stock": 178,
+      "active": true,
+      "sku": "BOOK-007",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 108,
+    "fields": {
+      "name": "Biografie",
+      "description": "Biografie aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "40.04",
+      "stock": 185,
+      "active": true,
+      "sku": "BOOK-008",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 109,
+    "fields": {
+      "name": "Lernheft",
+      "description": "Lernheft aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "41.67",
+      "stock": 192,
+      "active": true,
+      "sku": "BOOK-009",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 110,
+    "fields": {
+      "name": "Wörterbuch",
+      "description": "Wörterbuch aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "43.30",
+      "stock": 199,
+      "active": true,
+      "sku": "BOOK-010",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 111,
+    "fields": {
+      "name": "Notizbuch",
+      "description": "Notizbuch aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "44.93",
+      "stock": 206,
+      "active": true,
+      "sku": "BOOK-011",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 112,
+    "fields": {
+      "name": "Kalender",
+      "description": "Kalender aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "46.56",
+      "stock": 213,
+      "active": true,
+      "sku": "BOOK-012",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 113,
+    "fields": {
+      "name": "Comicsammlung",
+      "description": "Comicsammlung aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "48.19",
+      "stock": 220,
+      "active": true,
+      "sku": "BOOK-013",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 114,
+    "fields": {
+      "name": "Ratgeber",
+      "description": "Ratgeber aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "49.82",
+      "stock": 17,
+      "active": true,
+      "sku": "BOOK-014",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 115,
+    "fields": {
+      "name": "Gedichtband",
+      "description": "Gedichtband aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "51.45",
+      "stock": 24,
+      "active": true,
+      "sku": "BOOK-015",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 116,
+    "fields": {
+      "name": "Historischer Roman",
+      "description": "Historischer Roman aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "53.08",
+      "stock": 31,
+      "active": true,
+      "sku": "BOOK-016",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 117,
+    "fields": {
+      "name": "Wissenschaftsbuch",
+      "description": "Wissenschaftsbuch aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "54.71",
+      "stock": 38,
+      "active": true,
+      "sku": "BOOK-017",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 118,
+    "fields": {
+      "name": "Manga",
+      "description": "Manga aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "56.34",
+      "stock": 45,
+      "active": true,
+      "sku": "BOOK-018",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 119,
+    "fields": {
+      "name": "Kurzgeschichten",
+      "description": "Kurzgeschichten aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "57.97",
+      "stock": 52,
+      "active": true,
+      "sku": "BOOK-019",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 120,
+    "fields": {
+      "name": "Sprachkurs",
+      "description": "Sprachkurs aus der Kategorie Buecher mit solider Qualität für den täglichen Einsatz.",
+      "price": "59.60",
+      "stock": 59,
+      "active": true,
+      "sku": "BOOK-020",
+      "image": "",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 121,
+    "fields": {
+      "name": "Bauklötze",
+      "description": "Bauklötze aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "32.38",
+      "stock": 155,
+      "active": true,
+      "sku": "TOYS-001",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 122,
+    "fields": {
+      "name": "Puppenhaus",
+      "description": "Puppenhaus aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "34.01",
+      "stock": 162,
+      "active": true,
+      "sku": "TOYS-002",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 123,
+    "fields": {
+      "name": "Ferngesteuertes Auto",
+      "description": "Ferngesteuertes Auto aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "35.64",
+      "stock": 169,
+      "active": true,
+      "sku": "TOYS-003",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 124,
+    "fields": {
+      "name": "Puzzle",
+      "description": "Puzzle aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "37.27",
+      "stock": 176,
+      "active": true,
+      "sku": "TOYS-004",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 125,
+    "fields": {
+      "name": "Lernspiel",
+      "description": "Lernspiel aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "38.90",
+      "stock": 183,
+      "active": true,
+      "sku": "TOYS-005",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 126,
+    "fields": {
+      "name": "Kuscheltier",
+      "description": "Kuscheltier aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "40.53",
+      "stock": 190,
+      "active": true,
+      "sku": "TOYS-006",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 127,
+    "fields": {
+      "name": "Spielkarten",
+      "description": "Spielkarten aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "42.16",
+      "stock": 197,
+      "active": true,
+      "sku": "TOYS-007",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 128,
+    "fields": {
+      "name": "Brettspiel",
+      "description": "Brettspiel aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "43.79",
+      "stock": 204,
+      "active": true,
+      "sku": "TOYS-008",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 129,
+    "fields": {
+      "name": "Malkoffer",
+      "description": "Malkoffer aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "45.42",
+      "stock": 211,
+      "active": true,
+      "sku": "TOYS-009",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 130,
+    "fields": {
+      "name": "Wasserpistole",
+      "description": "Wasserpistole aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "47.05",
+      "stock": 218,
+      "active": true,
+      "sku": "TOYS-010",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 131,
+    "fields": {
+      "name": "Dino-Set",
+      "description": "Dino-Set aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "48.68",
+      "stock": 15,
+      "active": true,
+      "sku": "TOYS-011",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 132,
+    "fields": {
+      "name": "Zauberwürfel",
+      "description": "Zauberwürfel aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "50.31",
+      "stock": 22,
+      "active": true,
+      "sku": "TOYS-012",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 133,
+    "fields": {
+      "name": "Holzeisenbahn",
+      "description": "Holzeisenbahn aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "51.94",
+      "stock": 29,
+      "active": true,
+      "sku": "TOYS-013",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 134,
+    "fields": {
+      "name": "Knete",
+      "description": "Knete aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "53.57",
+      "stock": 36,
+      "active": true,
+      "sku": "TOYS-014",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 135,
+    "fields": {
+      "name": "Actionfigur",
+      "description": "Actionfigur aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "55.20",
+      "stock": 43,
+      "active": true,
+      "sku": "TOYS-015",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 136,
+    "fields": {
+      "name": "Mini-Drohne",
+      "description": "Mini-Drohne aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "56.83",
+      "stock": 50,
+      "active": true,
+      "sku": "TOYS-016",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 137,
+    "fields": {
+      "name": "Kinderküche",
+      "description": "Kinderküche aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "58.46",
+      "stock": 57,
+      "active": true,
+      "sku": "TOYS-017",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 138,
+    "fields": {
+      "name": "Seifenblasen",
+      "description": "Seifenblasen aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "60.09",
+      "stock": 64,
+      "active": true,
+      "sku": "TOYS-018",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 139,
+    "fields": {
+      "name": "Balancierspiel",
+      "description": "Balancierspiel aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "61.72",
+      "stock": 71,
+      "active": true,
+      "sku": "TOYS-019",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 140,
+    "fields": {
+      "name": "Spielzeug-Keyboard",
+      "description": "Spielzeug-Keyboard aus der Kategorie Spielzeug mit solider Qualität für den täglichen Einsatz.",
+      "price": "63.35",
+      "stock": 78,
+      "active": true,
+      "sku": "TOYS-020",
+      "image": "",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 141,
+    "fields": {
+      "name": "Gesichtscreme",
+      "description": "Gesichtscreme aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "36.13",
+      "stock": 174,
+      "active": true,
+      "sku": "BEAU-001",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 142,
+    "fields": {
+      "name": "Shampoo",
+      "description": "Shampoo aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "37.76",
+      "stock": 181,
+      "active": true,
+      "sku": "BEAU-002",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 143,
+    "fields": {
+      "name": "Conditioner",
+      "description": "Conditioner aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "39.39",
+      "stock": 188,
+      "active": true,
+      "sku": "BEAU-003",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 144,
+    "fields": {
+      "name": "Duschgel",
+      "description": "Duschgel aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "41.02",
+      "stock": 195,
+      "active": true,
+      "sku": "BEAU-004",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 145,
+    "fields": {
+      "name": "Parfum",
+      "description": "Parfum aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "42.65",
+      "stock": 202,
+      "active": true,
+      "sku": "BEAU-005",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 146,
+    "fields": {
+      "name": "Sonnencreme",
+      "description": "Sonnencreme aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "44.28",
+      "stock": 209,
+      "active": true,
+      "sku": "BEAU-006",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 147,
+    "fields": {
+      "name": "Lippenbalsam",
+      "description": "Lippenbalsam aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "45.91",
+      "stock": 216,
+      "active": true,
+      "sku": "BEAU-007",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 148,
+    "fields": {
+      "name": "Handcreme",
+      "description": "Handcreme aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "47.54",
+      "stock": 223,
+      "active": true,
+      "sku": "BEAU-008",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 149,
+    "fields": {
+      "name": "Make-up-Pinsel",
+      "description": "Make-up-Pinsel aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "49.17",
+      "stock": 20,
+      "active": true,
+      "sku": "BEAU-009",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 150,
+    "fields": {
+      "name": "Mascara",
+      "description": "Mascara aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "50.80",
+      "stock": 27,
+      "active": true,
+      "sku": "BEAU-010",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 151,
+    "fields": {
+      "name": "Eyeliner",
+      "description": "Eyeliner aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "52.43",
+      "stock": 34,
+      "active": true,
+      "sku": "BEAU-011",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 152,
+    "fields": {
+      "name": "Nagellack",
+      "description": "Nagellack aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "54.06",
+      "stock": 41,
+      "active": true,
+      "sku": "BEAU-012",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 153,
+    "fields": {
+      "name": "Haarserum",
+      "description": "Haarserum aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "55.69",
+      "stock": 48,
+      "active": true,
+      "sku": "BEAU-013",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 154,
+    "fields": {
+      "name": "Gesichtsmaske",
+      "description": "Gesichtsmaske aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "57.32",
+      "stock": 55,
+      "active": true,
+      "sku": "BEAU-014",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 155,
+    "fields": {
+      "name": "Peeling",
+      "description": "Peeling aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "58.95",
+      "stock": 62,
+      "active": true,
+      "sku": "BEAU-015",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 156,
+    "fields": {
+      "name": "Bodylotion",
+      "description": "Bodylotion aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "60.58",
+      "stock": 69,
+      "active": true,
+      "sku": "BEAU-016",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 157,
+    "fields": {
+      "name": "Deodorant",
+      "description": "Deodorant aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "62.21",
+      "stock": 76,
+      "active": true,
+      "sku": "BEAU-017",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 158,
+    "fields": {
+      "name": "Augencreme",
+      "description": "Augencreme aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "63.84",
+      "stock": 83,
+      "active": true,
+      "sku": "BEAU-018",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 159,
+    "fields": {
+      "name": "Rasiergel",
+      "description": "Rasiergel aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "65.47",
+      "stock": 90,
+      "active": true,
+      "sku": "BEAU-019",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 160,
+    "fields": {
+      "name": "Badezusatz",
+      "description": "Badezusatz aus der Kategorie Beauty mit solider Qualität für den täglichen Einsatz.",
+      "price": "67.10",
+      "stock": 97,
+      "active": true,
+      "sku": "BEAU-020",
+      "image": "",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 161,
+    "fields": {
+      "name": "Gartenschere",
+      "description": "Gartenschere aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "39.88",
+      "stock": 193,
+      "active": true,
+      "sku": "GARD-001",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 162,
+    "fields": {
+      "name": "Blumenerde",
+      "description": "Blumenerde aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "41.51",
+      "stock": 200,
+      "active": true,
+      "sku": "GARD-002",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 163,
+    "fields": {
+      "name": "Giesskanne",
+      "description": "Giesskanne aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "43.14",
+      "stock": 207,
+      "active": true,
+      "sku": "GARD-003",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 164,
+    "fields": {
+      "name": "Samenmix",
+      "description": "Samenmix aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "44.77",
+      "stock": 214,
+      "active": true,
+      "sku": "GARD-004",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 165,
+    "fields": {
+      "name": "Pflanzentopf",
+      "description": "Pflanzentopf aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "46.40",
+      "stock": 221,
+      "active": true,
+      "sku": "GARD-005",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 166,
+    "fields": {
+      "name": "Handschaufel",
+      "description": "Handschaufel aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "48.03",
+      "stock": 18,
+      "active": true,
+      "sku": "GARD-006",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 167,
+    "fields": {
+      "name": "Gartenhandschuhe",
+      "description": "Gartenhandschuhe aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "49.66",
+      "stock": 25,
+      "active": true,
+      "sku": "GARD-007",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 168,
+    "fields": {
+      "name": "Komposter",
+      "description": "Komposter aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "51.29",
+      "stock": 32,
+      "active": true,
+      "sku": "GARD-008",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 169,
+    "fields": {
+      "name": "Rankgitter",
+      "description": "Rankgitter aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "52.92",
+      "stock": 39,
+      "active": true,
+      "sku": "GARD-009",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 170,
+    "fields": {
+      "name": "Rasenmäher",
+      "description": "Rasenmäher aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "54.55",
+      "stock": 46,
+      "active": true,
+      "sku": "GARD-010",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 171,
+    "fields": {
+      "name": "Wasserschlauch",
+      "description": "Wasserschlauch aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "56.18",
+      "stock": 53,
+      "active": true,
+      "sku": "GARD-011",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 172,
+    "fields": {
+      "name": "Dünger",
+      "description": "Dünger aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "57.81",
+      "stock": 60,
+      "active": true,
+      "sku": "GARD-012",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 173,
+    "fields": {
+      "name": "Sprühflasche",
+      "description": "Sprühflasche aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "59.44",
+      "stock": 67,
+      "active": true,
+      "sku": "GARD-013",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 174,
+    "fields": {
+      "name": "Vogelfutterhaus",
+      "description": "Vogelfutterhaus aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "61.07",
+      "stock": 74,
+      "active": true,
+      "sku": "GARD-014",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 175,
+    "fields": {
+      "name": "Unkrautstecher",
+      "description": "Unkrautstecher aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "62.70",
+      "stock": 81,
+      "active": true,
+      "sku": "GARD-015",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 176,
+    "fields": {
+      "name": "Pflanzenlampe",
+      "description": "Pflanzenlampe aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "64.33",
+      "stock": 88,
+      "active": true,
+      "sku": "GARD-016",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 177,
+    "fields": {
+      "name": "Hochbeet",
+      "description": "Hochbeet aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "65.96",
+      "stock": 95,
+      "active": true,
+      "sku": "GARD-017",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 178,
+    "fields": {
+      "name": "Astsäge",
+      "description": "Astsäge aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "67.59",
+      "stock": 102,
+      "active": true,
+      "sku": "GARD-018",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 179,
+    "fields": {
+      "name": "Laubbesen",
+      "description": "Laubbesen aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "69.22",
+      "stock": 109,
+      "active": true,
+      "sku": "GARD-019",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 180,
+    "fields": {
+      "name": "Terrakotta-Topf",
+      "description": "Terrakotta-Topf aus der Kategorie Garten mit solider Qualität für den täglichen Einsatz.",
+      "price": "70.85",
+      "stock": 116,
+      "active": true,
+      "sku": "GARD-020",
+      "image": "",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 181,
+    "fields": {
+      "name": "Kugelschreiber",
+      "description": "Kugelschreiber aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "43.63",
+      "stock": 212,
+      "active": true,
+      "sku": "OFFC-001",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 182,
+    "fields": {
+      "name": "Notizblock",
+      "description": "Notizblock aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "45.26",
+      "stock": 219,
+      "active": true,
+      "sku": "OFFC-002",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 183,
+    "fields": {
+      "name": "Ordner",
+      "description": "Ordner aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "46.89",
+      "stock": 16,
+      "active": true,
+      "sku": "OFFC-003",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 184,
+    "fields": {
+      "name": "Heftgerät",
+      "description": "Heftgerät aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "48.52",
+      "stock": 23,
+      "active": true,
+      "sku": "OFFC-004",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 185,
+    "fields": {
+      "name": "Locher",
+      "description": "Locher aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "50.15",
+      "stock": 30,
+      "active": true,
+      "sku": "OFFC-005",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 186,
+    "fields": {
+      "name": "Schreibtischlampe",
+      "description": "Schreibtischlampe aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "51.78",
+      "stock": 37,
+      "active": true,
+      "sku": "OFFC-006",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 187,
+    "fields": {
+      "name": "Mauspad",
+      "description": "Mauspad aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "53.41",
+      "stock": 44,
+      "active": true,
+      "sku": "OFFC-007",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 188,
+    "fields": {
+      "name": "Whiteboard",
+      "description": "Whiteboard aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "55.04",
+      "stock": 51,
+      "active": true,
+      "sku": "OFFC-008",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 189,
+    "fields": {
+      "name": "Marker-Set",
+      "description": "Marker-Set aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "56.67",
+      "stock": 58,
+      "active": true,
+      "sku": "OFFC-009",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 190,
+    "fields": {
+      "name": "Kalenderplaner",
+      "description": "Kalenderplaner aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "58.30",
+      "stock": 65,
+      "active": true,
+      "sku": "OFFC-010",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 191,
+    "fields": {
+      "name": "Briefumschläge",
+      "description": "Briefumschläge aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "59.93",
+      "stock": 72,
+      "active": true,
+      "sku": "OFFC-011",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 192,
+    "fields": {
+      "name": "Papierpaket",
+      "description": "Papierpaket aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "61.56",
+      "stock": 79,
+      "active": true,
+      "sku": "OFFC-012",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 193,
+    "fields": {
+      "name": "Tintenpatrone",
+      "description": "Tintenpatrone aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "63.19",
+      "stock": 86,
+      "active": true,
+      "sku": "OFFC-013",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 194,
+    "fields": {
+      "name": "Etiketten",
+      "description": "Etiketten aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "64.82",
+      "stock": 93,
+      "active": true,
+      "sku": "OFFC-014",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 195,
+    "fields": {
+      "name": "Taschenrechner",
+      "description": "Taschenrechner aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "66.45",
+      "stock": 100,
+      "active": true,
+      "sku": "OFFC-015",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 196,
+    "fields": {
+      "name": "Schreibtischstuhl",
+      "description": "Schreibtischstuhl aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "68.08",
+      "stock": 107,
+      "active": true,
+      "sku": "OFFC-016",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 197,
+    "fields": {
+      "name": "Laptopständer",
+      "description": "Laptopständer aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "69.71",
+      "stock": 114,
+      "active": true,
+      "sku": "OFFC-017",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 198,
+    "fields": {
+      "name": "Aktenablage",
+      "description": "Aktenablage aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "71.34",
+      "stock": 121,
+      "active": true,
+      "sku": "OFFC-018",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 199,
+    "fields": {
+      "name": "USB-Hub",
+      "description": "USB-Hub aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "72.97",
+      "stock": 128,
+      "active": true,
+      "sku": "OFFC-019",
+      "image": "",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 200,
+    "fields": {
+      "name": "Dokumentenmappe",
+      "description": "Dokumentenmappe aus der Kategorie Buero mit solider Qualität für den täglichen Einsatz.",
+      "price": "74.60",
+      "stock": 135,
+      "active": true,
+      "sku": "OFFC-020",
+      "image": "",
+      "category": 10
+    }
   }
-},
-{
-  "model": "products.category",
-  "pk": 2,
-  "fields": {
-    "name": "Lebensmittel"
-  }
-},
-{
-  "model": "products.category",
-  "pk": 3,
-  "fields": {
-    "name": "Kleidung"
-  }
-},
-{
-  "model": "products.category",
-  "pk": 4,
-  "fields": {
-    "name": "Haushalt"
-  }
-},
-{
-  "model": "products.category",
-  "pk": 5,
-  "fields": {
-    "name": "Sport"
-  }
-},
-{
-  "model": "products.product",
-  "pk": 1,
-  "fields": {
-    "name": "Laptop",
-    "description": "Ein Leistungsstarker Laptop mit 15 Zoll Display und 32 GB RAM",
-    "price": "947.95",
-    "stock": 17,
-    "active": true,
-    "sku": "TECH-001",
-    "image": "",
-    "category": 1
-  }
-},
-{
-  "model": "products.product",
-  "pk": 2,
-  "fields": {
-    "name": "Smartphone",
-    "description": "Modernes Smartphone mit 128GB Speicher und Triple-Kamera",
-    "price": "683.34",
-    "stock": 30,
-    "active": true,
-    "sku": "TECH-002",
-    "image": "",
-    "category": 1
-  }
-},
-{
-  "model": "products.product",
-  "pk": 3,
-  "fields": {
-    "name": "Tastatur",
-    "description": "Mechanische Tastatur mit RGB Beleuchtung und deutschem Layout",
-    "price": "22.90",
-    "stock": 43,
-    "active": true,
-    "sku": "TECH-003",
-    "image": "",
-    "category": 1
-  }
-},
-{
-  "model": "products.product",
-  "pk": 4,
-  "fields": {
-    "name": "Monitor",
-    "description": "27 Zoll Full-HD Monitor mit 144Hz und niedrigem Blaulichtanteil",
-    "price": "349.50",
-    "stock": 20,
-    "active": true,
-    "sku": "TECH-004",
-    "image": "",
-    "category": 1
-  }
-},
-{
-  "model": "products.product",
-  "pk": 5,
-  "fields": {
-    "name": "Kopfhöhrer",
-    "description": "Over-Ear Kopfhörer mit aktiver Geraeuschunterdrueckung und 30h Akku",
-    "price": "150.00",
-    "stock": 79,
-    "active": true,
-    "sku": "TECH-005",
-    "image": "",
-    "category": 1
-  }
-},
-{
-  "model": "products.product",
-  "pk": 6,
-  "fields": {
-    "name": "Haferflocken",
-    "description": "Zarte Haferflocken aus biologischem Anbau, 500g",
-    "price": "2.20",
-    "stock": 60,
-    "active": true,
-    "sku": "FOOD-001",
-    "image": "",
-    "category": 2
-  }
-},
-{
-  "model": "products.product",
-  "pk": 7,
-  "fields": {
-    "name": "Olivenöl",
-    "description": "Kaltgepresstes natives Olivenöl extra aus Griechenland, 500ml",
-    "price": "8.99",
-    "stock": 83,
-    "active": true,
-    "sku": "FOOD-002",
-    "image": "",
-    "category": 2
-  }
-},
-{
-  "model": "products.product",
-  "pk": 8,
-  "fields": {
-    "name": "Müsliriegel",
-    "description": "Knuspriger Müsliriegel mit Schokolade und Nüssen, 6er Pack",
-    "price": "4.57",
-    "stock": 137,
-    "active": true,
-    "sku": "FOOD-003",
-    "image": "",
-    "category": 2
-  }
-},
-{
-  "model": "products.product",
-  "pk": 9,
-  "fields": {
-    "name": "Proteinpulver",
-    "description": "Whey Protein Pulver mit 24g Protein pro Portion, Geschmack Vanille",
-    "price": "34.99",
-    "stock": 17,
-    "active": true,
-    "sku": "FOOD-004",
-    "image": "",
-    "category": 2
-  }
-},
-{
-  "model": "products.product",
-  "pk": 10,
-  "fields": {
-    "name": "Mandelbutter",
-    "description": "Cremige Mandelbutter ohne Zuckerzusatz, 250g",
-    "price": "5.56",
-    "stock": 46,
-    "active": true,
-    "sku": "FOOD-005",
-    "image": "",
-    "category": 2
-  }
-},
-{
-  "model": "products.product",
-  "pk": 11,
-  "fields": {
-    "name": "T-Shirt",
-    "description": "Klassisches Baumwoll T-Shirt in verschiedenen Farben, Unisex",
-    "price": "19.90",
-    "stock": 105,
-    "active": true,
-    "sku": "CLTH-001",
-    "image": "",
-    "category": 3
-  }
-},
-{
-  "model": "products.product",
-  "pk": 12,
-  "fields": {
-    "name": "Jogginghose",
-    "description": "Bequeme Jogginghose mit Taschen und elastischem Bund",
-    "price": "40.00",
-    "stock": 73,
-    "active": true,
-    "sku": "CLTH-002",
-    "image": "",
-    "category": 3
-  }
-},
-{
-  "model": "products.product",
-  "pk": 13,
-  "fields": {
-    "name": "Socken",
-    "description": "5er Pack Baumwollsocken mit verstärkter Ferse, Größe 39-42",
-    "price": "9.99",
-    "stock": 216,
-    "active": true,
-    "sku": "CLTH-003",
-    "image": "",
-    "category": 3
-  }
-},
-{
-  "model": "products.product",
-  "pk": 14,
-  "fields": {
-    "name": "Hoodie",
-    "description": "Warmer Hoodie aus Bio-Baumwolle ohne Logo",
-    "price": "59.92",
-    "stock": 54,
-    "active": true,
-    "sku": "CLTH-004",
-    "image": "",
-    "category": 3
-  }
-},
-{
-  "model": "products.product",
-  "pk": 15,
-  "fields": {
-    "name": "Winterjacke",
-    "description": "Wasserdichte Winterjacke mit Kunstfellfutter und vielen Taschen",
-    "price": "129.99",
-    "stock": 79,
-    "active": true,
-    "sku": "CLTH-005",
-    "image": "",
-    "category": 3
-  }
-},
-{
-  "model": "products.product",
-  "pk": 16,
-  "fields": {
-    "name": "Staubsauger",
-    "description": "Beutelloser Staubsauger mit HEPA Filter und 2400 Watt",
-    "price": "190.40",
-    "stock": 19,
-    "active": true,
-    "sku": "HAUS-001",
-    "image": "",
-    "category": 4
-  }
-},
-{
-  "model": "products.product",
-  "pk": 17,
-  "fields": {
-    "name": "Kaffeemaschine",
-    "description": "Filterkaffeemaschine mit Thermoskanne fuer bis zu 8 Tassen",
-    "price": "89.99",
-    "stock": 25,
-    "active": true,
-    "sku": "HAUS-002",
-    "image": "",
-    "category": 4
-  }
-},
-{
-  "model": "products.product",
-  "pk": 18,
-  "fields": {
-    "name": "Bettwäsche",
-    "description": "Mikrofaser Bettwäsche Set 135x200cm, inklusive Kissenbezug",
-    "price": "49.99",
-    "stock": 41,
-    "active": true,
-    "sku": "HAUS-003",
-    "image": "",
-    "category": 4
-  }
-},
-{
-  "model": "products.product",
-  "pk": 19,
-  "fields": {
-    "name": "Handtücher",
-    "description": "4er Set Frottee Handtücher aus 100% Baumwolle, 50x100cm",
-    "price": "24.98",
-    "stock": 80,
-    "active": true,
-    "sku": "HAUS-004",
-    "image": "",
-    "category": 4
-  }
-},
-{
-  "model": "products.product",
-  "pk": 20,
-  "fields": {
-    "name": "Küchenmesser",
-    "description": "Kochmesser aus Edelstahl, 20cm Klinge",
-    "price": "29.50",
-    "stock": 29,
-    "active": true,
-    "sku": "HAUS-005",
-    "image": "",
-    "category": 4
-  }
-},
-{
-  "model": "products.product",
-  "pk": 21,
-  "fields": {
-    "name": "Yogamatte",
-    "description": "Rutschfeste Yogamatte aus TPE Material, 183x61cm, 6mm dick",
-    "price": "18.90",
-    "stock": 50,
-    "active": true,
-    "sku": "SPRT-001",
-    "image": "",
-    "category": 5
-  }
-},
-{
-  "model": "products.product",
-  "pk": 22,
-  "fields": {
-    "name": "Springseil",
-    "description": "Verstellbares Springseil mit Kugellager und Schaumstoffgriffen",
-    "price": "12.90",
-    "stock": 60,
-    "active": true,
-    "sku": "SPRT-002",
-    "image": "",
-    "category": 5
-  }
-},
-{
-  "model": "products.product",
-  "pk": 23,
-  "fields": {
-    "name": "Hanteln 5kg",
-    "description": "Kurzhanteln 5kg, rutschfest und gelenkschonend",
-    "price": "24.99",
-    "stock": 40,
-    "active": true,
-    "sku": "SPRT-003",
-    "image": "",
-    "category": 5
-  }
-},
-{
-  "model": "products.product",
-  "pk": 24,
-  "fields": {
-    "name": "Trinkflasche",
-    "description": "Auslaufsichere Trinkflasche 750ml, BPA-frei",
-    "price": "14.99",
-    "stock": 90,
-    "active": true,
-    "sku": "SPRT-004",
-    "image": "",
-    "category": 5
-  }
-},
-{
-  "model": "products.product",
-  "pk": 25,
-  "fields": {
-    "name": "Fitnessband",
-    "description": "Resistance Band Set mit 3 Staerken fuer Kraft und Dehnuebungen",
-    "price": "9.99",
-    "stock": 70,
-    "active": true,
-    "sku": "SPRT-005",
-    "image": "",
-    "category": 5
-  }
-}
 ]

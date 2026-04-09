@@ -1,43 +1,64 @@
+# Diese Datei enthält Beispielanfragen zum Testen der API.
 
-' Diese Datei enthält ein paar Beispielanfragen zum Testen des API,'
-
-
-
-# Alle Produkte
+# Basis-Checks
 http://127.0.0.1:8000/api/products/
-
-# Einzelnes Produkt
-http://127.0.0.1:8000/api/products/1/
-http://127.0.0.1:8000/api/products/5/
-
-# Alle Kategorien
 http://127.0.0.1:8000/api/categories/
 
-# ── Globalsuche ──
+# Einzelne Produkte
+http://127.0.0.1:8000/api/products/1/
+http://127.0.0.1:8000/api/products/20/
+http://127.0.0.1:8000/api/products/100/
+http://127.0.0.1:8000/api/products/200/
+
+# Produkte nach Kategorie (alle 10)
+http://127.0.0.1:8000/api/products/?category=1
+http://127.0.0.1:8000/api/products/?category=2
+http://127.0.0.1:8000/api/products/?category=3
+http://127.0.0.1:8000/api/products/?category=4
+http://127.0.0.1:8000/api/products/?category=5
+http://127.0.0.1:8000/api/products/?category=6
+http://127.0.0.1:8000/api/products/?category=7
+http://127.0.0.1:8000/api/products/?category=8
+http://127.0.0.1:8000/api/products/?category=9
+http://127.0.0.1:8000/api/products/?category=10
+
+# Globalsuche
 http://127.0.0.1:8000/api/products/?search=laptop
 http://127.0.0.1:8000/api/products/?search=Technik
-http://127.0.0.1:8000/api/products/?search=TECH-001
+http://127.0.0.1:8000/api/products/?search=FOOD-001
+http://127.0.0.1:8000/api/products/?search=Buecher
+http://127.0.0.1:8000/api/products/?search=kugelschreiber
 
-# ── Gezielte Suche ──
-http://127.0.0.1:8000/api/products/?name=laptop
-http://127.0.0.1:8000/api/products/?sku=TECH
-http://127.0.0.1:8000/api/products/?name=laptop&min_price=500
+# Gezielte Suche / Feldsuche
+http://127.0.0.1:8000/api/products/?name=Laptop
+http://127.0.0.1:8000/api/products/?name=Roman
+http://127.0.0.1:8000/api/products/?sku=TECH-001
+http://127.0.0.1:8000/api/products/?sku=OFFC
+http://127.0.0.1:8000/api/products/?description=hochwertig
 
-# ── Preisrange ──
-http://127.0.0.1:8000/api/products/?min_price=10&max_price=50
-http://127.0.0.1:8000/api/products/?min_price=100
+# Preisfilter
+http://127.0.0.1:8000/api/products/?min_price=10
+http://127.0.0.1:8000/api/products/?max_price=30
+http://127.0.0.1:8000/api/products/?min_price=10&max_price=30
+http://127.0.0.1:8000/api/products/?min_price=50&max_price=100
 
-# ── Exakte Filter ──
+# Weitere Filter
 http://127.0.0.1:8000/api/products/?active=true
-http://127.0.0.1:8000/api/products/?category=1
+http://127.0.0.1:8000/api/products/?active=false
 
-# ── Sortierung ──
+# Sortierung
 http://127.0.0.1:8000/api/products/?ordering=price
 http://127.0.0.1:8000/api/products/?ordering=-price
 http://127.0.0.1:8000/api/products/?ordering=name
+http://127.0.0.1:8000/api/products/?ordering=-name
 http://127.0.0.1:8000/api/products/?ordering=category__name
+http://127.0.0.1:8000/api/products/?ordering=-category__name
 
-# ── Kombiniert ──
-http://127.0.0.1:8000/api/products/?search=laptop&ordering=-price
-http://127.0.0.1:8000/api/products/?active=true&ordering=price&min_price=50
-http://127.0.0.1:8000/api/products/?category=1&ordering=-price
+# Kombinierte Suche + Filter
+http://127.0.0.1:8000/api/products/?category=1&search=laptop
+http://127.0.0.1:8000/api/products/?category=2&min_price=10&max_price=30
+http://127.0.0.1:8000/api/products/?category=6&name=Roman&ordering=price
+http://127.0.0.1:8000/api/products/?category=10&sku=OFFC&ordering=name
+http://127.0.0.1:8000/api/products/?search=creme&active=true&ordering=-price
+http://127.0.0.1:8000/api/products/?search=garten&min_price=20&ordering=price
+http://127.0.0.1:8000/api/products/?category=1&min_price=50&max_price=150&ordering=-price
