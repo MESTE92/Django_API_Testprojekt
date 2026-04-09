@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',   # für API und DRF
     'django_filters',   # für einfache Filter in API
+    'drf_spectacular',  # für API-Dokumentation
     'products',
 ]
 
@@ -77,6 +78,8 @@ REST_FRAMEWORK = {
         'rest_framework.filters.OrderingFilter',                    # für Sortierung
         'rest_framework.filters.SearchFilter',                      # ein einfacher Suchfilter
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
     #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     #'PAGE_SIZE': 5
     # -> das wäre eine Alternative globale Pagination

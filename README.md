@@ -5,8 +5,9 @@ Ein kleines Django-Testprojekt mit REST API für Produkt- und Kategorienverwaltu
 ## Screenshots
 
 <p align="center">
-  <img src="Beispielbilder/bidl_1.png" alt="API Browsable Interface" width="45%">
-  <img src="Beispielbilder/bild_2.png" alt="API Response Example" width="45%">
+  <img src="Beispielbilder/bidl_1.png" alt="API Browsable Interface" width="30%">
+  <img src="Beispielbilder/bild_2.png" alt="API Response Example" width="30%">
+  <img src="Beispielbilder/API_Doku.png" alt="Interactive API Documentation" width="30%">
 </p>
 
 ---
@@ -18,6 +19,7 @@ Ein kleines Django-Testprojekt mit REST API für Produkt- und Kategorienverwaltu
 - [Installation & Setup](#installation--setup)
 - [Datenbank mit Testdaten befüllen](#datenbank-mit-testdaten-befüllen)
 - [Server starten](#server-starten)
+- [API-Dokumentation](#api-dokumentation)
 - [API testen](#api-testen)
 - [Admin-Panel](#admin-panel)
 - [Projektstruktur](#projektstruktur)
@@ -44,6 +46,10 @@ Ein kleines Django-Testprojekt mit REST API für Produkt- und Kategorienverwaltu
   - Anpassbare Seitengröße über URL-Parameter (`?page_size=`)
   - Separate Pagination-Einstellungen für Produkte (max: 100) und Kategorien (max: 10)
   - Kombinierbar mit verschiedenen Filter- und Suchfunktionen
+- **Interaktive API-Dokumentation** mit Swagger/OpenAPI:
+  - Automatisch generierte API-Dokumentation
+  - Interaktive Testmöglichkeit direkt im Browser
+  - OpenAPI 3.0 Schema-Export
 - **Django Admin-Panel** zur Verwaltung
 - **Vorkonfigurierte Testdaten** zum sofortigen Ausprobieren
 - **Formatunterstützung**: JSON, XML, CSV
@@ -56,6 +62,7 @@ Ein kleines Django-Testprojekt mit REST API für Produkt- und Kategorienverwaltu
 - **API**: Django REST Framework 3.17.1
 - **Datenbank**: SQLite3 (Standard)
 - **Filter**: django-filter
+- **API-Dokumentation**: drf-spectacular (OpenAPI 3.0)
 - **Python**: 3.x
 
 ---
@@ -156,6 +163,35 @@ python manage.py runserver
 ```
 
 Der Server läuft standardmäßig auf: **http://127.0.0.1:8000/**
+
+---
+
+## API-Dokumentation
+
+Das Projekt nutzt **drf-spectacular** für eine automatisch generierte, interaktive API-Dokumentation im Swagger/OpenAPI-Format.
+
+### Interaktive Swagger-Dokumentation
+
+Öffne die interaktive API-Dokumentation im Browser:
+
+**http://127.0.0.1:8000/api/docs/**
+
+![API Dokumentation](Beispielbilder/API_Doku.png)
+
+**Was du hier tun kannst:**
+- 📖 Alle verfügbaren Endpunkte durchsuchen
+- 🔍 Request/Response-Schemas ansehen
+- ✅ API-Requests direkt im Browser testen (Try it out!)
+- 📝 Parameter und Filter dokumentiert
+- 🎯 Beispiel-Responses für jeden Endpunkt
+
+### OpenAPI Schema exportieren
+
+Das vollständige OpenAPI 3.0 Schema ist verfügbar unter:
+
+**http://127.0.0.1:8000/api/schema/**
+
+Du kannst das Schema herunterladen und in Tools wie **Postman**, **Insomnia** oder anderen API-Clients importieren.
 
 ---
 
@@ -322,9 +358,14 @@ Projekt_mit_API/
 │   └── admin.py                   # Admin-Konfiguration
 │
 ├── Testprojekt/                   # Hauptprojekt-Konfiguration
-│   ├── settings.py                # Django Settings
-│   ├── urls.py                    # Haupt-URL-Konfiguration
+│   ├── settings.py                # Django Settings (inkl. drf-spectacular Config)
+│   ├── urls.py                    # Haupt-URL-Konfiguration (inkl. API-Docs)
 │   └── wsgi.py                    # WSGI-Konfiguration
+│
+├── Beispielbilder/                # Screenshots für README
+│   ├── bidl_1.png                 # API Browsable Interface
+│   ├── bild_2.png                 # API Response Example
+│   └── API_Doku.png               # Swagger-Dokumentation
 │
 ├── manage.py                      # Django Management-Script
 ├── db.sqlite3                     # SQLite Datenbank
@@ -343,8 +384,9 @@ Projekt_mit_API/
 2. **Überprüfe die `requirements.txt`** für alle installierten Pakete
 3. **Konfiguriere deine `.env`** basierend auf `.env.example`
 4. **Importiere Testdaten** mit `loaddata` Kommando
-5. **Teste die API** mit den URLs aus `test_requests.txt`
-6. **Erkunde das Admin-Panel** unter `/admin/`
+5. **Öffne die API-Dokumentation** unter http://127.0.0.1:8000/api/docs/
+6. **Teste die API** mit den URLs aus `test_requests.txt`
+7. **Erkunde das Admin-Panel** unter http://127.0.0.1:8000/admin/
 
 ---
 
