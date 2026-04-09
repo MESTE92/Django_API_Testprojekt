@@ -14,6 +14,11 @@ Ein vollständiges Django-Testprojekt mit REST API für Produkt- und Kategorienv
 - [API testen](#api-testen)
 - [Admin-Panel](#admin-panel)
 - [Projektstruktur](#projektstruktur)
+- [Nächste Schritte](#nächste-schritte)
+- [Wichtige Dateien zum Lesen](#wichtige-dateien-zum-lesen)
+- [Notizen](#notizen)
+- [Kurzanleitung](#kurzanleitung)
+- [Empfohlene Betrachtungsweise](#empfohlene-betrachtungsweise)
 
 ---
 
