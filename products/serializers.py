@@ -1,17 +1,17 @@
-import bleach                                          # für Datenbereinigung
+import bleach                                          # für Datenbereinigung XSS
 from rest_framework import serializers                 # für Serialisierung
 from .models import Category, Product                  # Model-Klassen für Serialisierung
 
-
-class CategorySerializer(serializers.ModelSerializer):   # Serialisierung der Kategorien
+# Serialisierung der Kategorien
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model  = Category                                # Jeder Serializer braucht ein Model
-        fields = ['id', 'name']                          # welche Felder sollen serialisiert werden?
+        fields = ['id', 'name']                          # Felder die erialisiert werden sollen
 
 
 
 
-
+# Serialisierung der Produkte
 class ProductSerializer(serializers.ModelSerializer):
     # dieses Field bezieht sich per FK auf den Namen der Kategorie passend zum Produkt
     # read only -> wird nicht als Input erwartet
@@ -49,7 +49,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
     # Schritt 1: Datenbereinigung
-    def validate(self, attrs):   # eine Build in Methode von DRF für Validierungen
+    def validate(self, attrs):   # eine Build in Methode vom DRF für Validierungen
         fields_to_validate = ['name', 'description','sku']  # Felder die potentiell XSS enthalten könnten
         for field in fields_to_validate:
             if attrs.get(field):    # Wenn das Feld im Request enthalten , also nicht leer ist...

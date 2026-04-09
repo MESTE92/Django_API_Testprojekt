@@ -287,4 +287,33 @@ Projekt_mit_API/
 
 ---
 
+## Kurzanleitung
+- **pip install -r requirements.txt**
+- **python manage.py migrate**
+- **python manage.py loaddata initial_data.json**
+- **python manage.py runserver**
+
+
+---
+
+## Empfohlene Betrachtungsweise
+- **Ordner products / settings.py**
+
+
+- **Ordner products / models.py**
+- **Ordner products / admin.py**
+
+
+- **Ordner products / serializers.py**
+
+
+- **Ordner products / views.py**
+
+
+- **Ordner products / urls.py**
+
+
+- **Ordner Testprojekt / urls.py**
+
+---
 **Viel Erfolg beim Testen!**

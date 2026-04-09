@@ -1,4 +1,4 @@
-# products/models.py
+
 from django.db import models
 
 class Category(models.Model):                 # das Model Category
@@ -22,7 +22,11 @@ class Product(models.Model):                  # das Model Product
     active      = models.BooleanField(default=True)
     sku         = models.CharField(max_length=50, unique=True)
     image       = models.ImageField(upload_to='products/', blank=True, null=True)   #Bilderpfad
-    category    = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
+    category    = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products')
+
+                                                            # related_name='products' ist ein Alias für die Beziehung,
+                                                            # es erlaubt die Produkte von der Kategorie aus zu finden
+                                                            # zb. kategorieprodukte = Kategorie.products.all()
 
     def __str__(self):
         return self.name

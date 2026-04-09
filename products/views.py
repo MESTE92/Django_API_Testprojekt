@@ -28,7 +28,7 @@ class ProductListCreateView(ListCreateAPIView):
     # OrderingFilter       -> aktiviert Sortierung per ordering_fields
     #                      -> ?ordering=price, ?ordering=-name
 
-    filterset_fields = ['active', 'category']      # Filter für exakte Suchwerte zb. ?active=true
+    filterset_fields = ['active', 'category']                   # Filter für exakte Suchwerte zb. ?active=true
     ordering_fields  = ['price', 'name', 'category__name']      # Custom Sortierung wenn die Parameter in der URL angegeben sind
 
     # category__name -> FK-Feld -> z.B. ?category__name=Kleidung  über einen Join in der DB
