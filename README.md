@@ -27,13 +27,16 @@ Ein vollständiges Django-Testprojekt mit REST API für Produkt- und Kategorienv
 - **RESTful API** mit Django REST Framework
 - **Produkt- und Kategorieverwaltung** mit vollständigem CRUD
 - **Erweiterte Suchfunktionen**:
-  - Globale Suche über mehrere Felder
-  - Gezielte Filterung (Name, SKU, Preis, Kategorie, Status)
-  - Preisbereich-Filter (min_price, max_price)
-  - Sortierung nach verschiedenen Feldern
+  - Globale Suche über mehrere Felder (`?search=`)
+  - Gezielte Filterung (Name, SKU, Beschreibung, Preis, Kategorie, Status)
+  - Filter nach Kategorie-ID oder Kategorie-Name (`?category=1` oder `?category__name=Technik`)
+  - Preisbereich-Filter (`?min_price=` & `?max_price=`)
+  - Sortierung nach verschiedenen Feldern (`?ordering=price`, `?ordering=-name`)
 - **Pagination** (Seitenweise Anzeige):
   - Standard: 5 Einträge pro Seite
-  - Anpassbare Seitengröße über URL-Parameter
+  - Anpassbare Seitengröße über URL-Parameter (`?page_size=`)
+  - Separate Pagination-Einstellungen für Produkte (max: 100) und Kategorien (max: 10)
+  - Automatische Fallback auf letzte Seite bei ungültigen Seitenzahlen
   - Kombinierbar mit allen Filter- und Suchfunktionen
 - **Django Admin-Panel** zur Verwaltung
 - **Vorkonfigurierte Testdaten** zum sofortigen Ausprobieren
@@ -131,8 +134,8 @@ python manage.py loaddata products/fixtures/initial_data.json
 ```
 
 **Was wird importiert?**
-- 5 Kategorien (Technik, Lebensmittel, Kleidung, Haushalt, Sport)
-- Mehrere Beispielprodukte mit unterschiedlichen Preisen, SKUs und Lagerbeständen
+- 10 Kategorien (Technik, Lebensmittel, Kleidung, Haushalt, Sport, Buecher, Spielzeug, Beauty, Garten, Buero)
+- 200 Beispielprodukte mit unterschiedlichen Preisen, SKUs und Lagerbeständen
 
 > **TIPP**: Die Fixture-Datei enthält realistische Testdaten, um die API-Funktionen direkt ausprobieren zu können.
 
@@ -174,7 +177,9 @@ http://127.0.0.1:8000/api/products/?search=Technik
 ```
 http://127.0.0.1:8000/api/products/?name=laptop
 http://127.0.0.1:8000/api/products/?sku=TECH
-http://127.0.0.1:8000/api/products/?category=1
+http://127.0.0.1:8000/api/products/?category=1              # Filter nach Kategorie-ID
+http://127.0.0.1:8000/api/products/?category__name=Technik  # Filter nach Kategorie-Name
+http://127.0.0.1:8000/api/products/?active=true             # Nur aktive Produkte
 ```
 
 **Preisfilter**:
@@ -198,15 +203,22 @@ http://127.0.0.1:8000/api/products/?category=1&ordering=-price&active=true
 
 **Pagination** (Seitenweise Anzeige):
 ```
-http://127.0.0.1:8000/api/products/?page=1              # Seite 1 (Standard: 5 Einträge)
-http://127.0.0.1:8000/api/products/?page=2              # Seite 2
-http://127.0.0.1:8000/api/products/?page_size=10        # 10 Einträge pro Seite
-http://127.0.0.1:8000/api/products/?page=2&page_size=20 # Seite 2 mit 20 Einträgen
+http://127.0.0.1:8000/api/products/?page=1                # Seite 1 (Standard: 5 Einträge)
+http://127.0.0.1:8000/api/products/?page=2                # Seite 2
+http://127.0.0.1:8000/api/products/?page_size=10          # 10 Einträge pro Seite
+http://127.0.0.1:8000/api/products/?page=2&page_size=20   # Seite 2 mit 20 Einträgen
+http://127.0.0.1:8000/api/categories/?page=1&page_size=5  # Kategorien mit Pagination
 ```
+
+**Pagination-Einstellungen**:
+- **Produkte**: Standard 5 pro Seite, Maximum 100 pro Seite
+- **Kategorien**: Standard 5 pro Seite, Maximum 10 pro Seite
+- Bei ungültiger Seitenzahl wird automatisch die letzte Seite zurückgegeben
 
 **Pagination kombiniert mit Filtern**:
 ```
 http://127.0.0.1:8000/api/products/?category=1&page=1
+http://127.0.0.1:8000/api/products/?category__name=Technik&page=1&page_size=5
 http://127.0.0.1:8000/api/products/?search=laptop&page_size=3&ordering=-price
 http://127.0.0.1:8000/api/products/?min_price=20&max_price=100&page=1
 ```

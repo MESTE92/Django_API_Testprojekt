@@ -73,8 +73,9 @@ REST_FRAMEWORK = {
         'rest_framework_xml.parsers.XMLParser',       # -> XML Input
     ],
     'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend',# Filter Backend
-        'rest_framework.filters.OrderingFilter',
+        'django_filters.rest_framework.DjangoFilterBackend',        # Filter Backend
+        'rest_framework.filters.OrderingFilter',                    # für Sortierung
+        'rest_framework.filters.SearchFilter',                      # ein einfacher Suchfilter
     ],
     #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     #'PAGE_SIZE': 5
