@@ -1,6 +1,6 @@
 # Django REST API Testprojekt
 
-Ein vollständiges Django-Testprojekt mit REST API für Produkt- und Kategorienverwaltung, inklusive Filterfunktionen, Suchoptionen und Admin-Panel.
+Ein kleines Django-Testprojekt mit REST API für Produkt- und Kategorienverwaltung, inklusive Filterfunktionen, Suchoptionen und Admin-Panel.
 
 ## Screenshots
 
@@ -43,8 +43,7 @@ Ein vollständiges Django-Testprojekt mit REST API für Produkt- und Kategorienv
   - Standard: 5 Einträge pro Seite
   - Anpassbare Seitengröße über URL-Parameter (`?page_size=`)
   - Separate Pagination-Einstellungen für Produkte (max: 100) und Kategorien (max: 10)
-  - Automatische Fallback auf letzte Seite bei ungültigen Seitenzahlen
-  - Kombinierbar mit allen Filter- und Suchfunktionen
+  - Kombinierbar mit verschiedenen Filter- und Suchfunktionen
 - **Django Admin-Panel** zur Verwaltung
 - **Vorkonfigurierte Testdaten** zum sofortigen Ausprobieren
 - **Formatunterstützung**: JSON, XML, CSV
@@ -257,13 +256,14 @@ Zugriff auf das Django Admin-Panel: **http://127.0.0.1:8000/admin/**
 Die vorkonfigurierten Admin-Zugangsdaten findest du in der `hints.txt`:
 
 ```
+Username: Admin
 E-Mail: Admin@Test.de
 Passwort: Admin1234!
 ```
 
 **So meldest du dich an:**
 1. Öffne http://127.0.0.1:8000/admin/ in deinem Browser
-2. Gib die E-Mail-Adresse ein: `Admin@Test.de`
+2. Gib den Usernamen ein: `Admin`
 3. Gib das Passwort ein: `Admin1234!`
 4. Klicke auf "Log in"
 
@@ -386,6 +386,9 @@ Projekt_mit_API/
 
 
 - **Ordner products / serializers.py**
+
+
+- **Ordner products / pagination.py**
 
 
 - **Ordner products / views.py**
