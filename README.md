@@ -31,6 +31,10 @@ Ein vollständiges Django-Testprojekt mit REST API für Produkt- und Kategorienv
   - Gezielte Filterung (Name, SKU, Preis, Kategorie, Status)
   - Preisbereich-Filter (min_price, max_price)
   - Sortierung nach verschiedenen Feldern
+- **Pagination** (Seitenweise Anzeige):
+  - Standard: 5 Einträge pro Seite
+  - Anpassbare Seitengröße über URL-Parameter
+  - Kombinierbar mit allen Filter- und Suchfunktionen
 - **Django Admin-Panel** zur Verwaltung
 - **Vorkonfigurierte Testdaten** zum sofortigen Ausprobieren
 - **Formatunterstützung**: JSON, XML, CSV
@@ -192,6 +196,21 @@ http://127.0.0.1:8000/api/products/?search=laptop&ordering=-price
 http://127.0.0.1:8000/api/products/?category=1&ordering=-price&active=true
 ```
 
+**Pagination** (Seitenweise Anzeige):
+```
+http://127.0.0.1:8000/api/products/?page=1              # Seite 1 (Standard: 5 Einträge)
+http://127.0.0.1:8000/api/products/?page=2              # Seite 2
+http://127.0.0.1:8000/api/products/?page_size=10        # 10 Einträge pro Seite
+http://127.0.0.1:8000/api/products/?page=2&page_size=20 # Seite 2 mit 20 Einträgen
+```
+
+**Pagination kombiniert mit Filtern**:
+```
+http://127.0.0.1:8000/api/products/?category=1&page=1
+http://127.0.0.1:8000/api/products/?search=laptop&page_size=3&ordering=-price
+http://127.0.0.1:8000/api/products/?min_price=20&max_price=100&page=1
+```
+
 > **Vollständige Liste**: Öffne `test_requests.txt` für alle verfügbaren Testanfragen mit Beispielen.
 
 ### API im Browser testen
@@ -243,6 +262,7 @@ Projekt_mit_API/
 │   ├── serializers.py             # DRF Serializers
 │   ├── views.py                   # API Views
 │   ├── urls.py                    # API URL-Routing
+│   ├── pagination.py              # Pagination-Konfiguration
 │   └── admin.py                   # Admin-Konfiguration
 │
 ├── Testprojekt/                   # Hauptprojekt-Konfiguration

@@ -10,7 +10,7 @@ http://127.0.0.1:8000/api/products/20/
 http://127.0.0.1:8000/api/products/100/
 http://127.0.0.1:8000/api/products/200/
 
-# Produkte nach Kategorie (alle 10)
+# Produkte nach Kategorie - Filter nach ID
 http://127.0.0.1:8000/api/products/?category=1
 http://127.0.0.1:8000/api/products/?category=2
 http://127.0.0.1:8000/api/products/?category=3
@@ -21,6 +21,18 @@ http://127.0.0.1:8000/api/products/?category=7
 http://127.0.0.1:8000/api/products/?category=8
 http://127.0.0.1:8000/api/products/?category=9
 http://127.0.0.1:8000/api/products/?category=10
+
+# Produkte nach Kategorie - Filter nach Namen (exakte Suche)
+http://127.0.0.1:8000/api/products/?category__name=Technik
+http://127.0.0.1:8000/api/products/?category__name=Lebensmittel
+http://127.0.0.1:8000/api/products/?category__name=Kleidung
+http://127.0.0.1:8000/api/products/?category__name=Haushalt
+http://127.0.0.1:8000/api/products/?category__name=Sport
+http://127.0.0.1:8000/api/products/?category__name=Buecher
+http://127.0.0.1:8000/api/products/?category__name=Spielzeug
+http://127.0.0.1:8000/api/products/?category__name=Beauty
+http://127.0.0.1:8000/api/products/?category__name=Garten
+http://127.0.0.1:8000/api/products/?category__name=Buero
 
 # Globalsuche
 http://127.0.0.1:8000/api/products/?search=laptop
@@ -62,3 +74,59 @@ http://127.0.0.1:8000/api/products/?category=10&sku=OFFC&ordering=name
 http://127.0.0.1:8000/api/products/?search=creme&active=true&ordering=-price
 http://127.0.0.1:8000/api/products/?search=garten&min_price=20&ordering=price
 http://127.0.0.1:8000/api/products/?category=1&min_price=50&max_price=150&ordering=-price
+
+# Kombinierte Filter mit category__name
+http://127.0.0.1:8000/api/products/?category__name=Technik&search=laptop
+http://127.0.0.1:8000/api/products/?category__name=Lebensmittel&min_price=5&max_price=20
+http://127.0.0.1:8000/api/products/?category__name=Buecher&ordering=price
+http://127.0.0.1:8000/api/products/?category__name=Sport&active=true
+http://127.0.0.1:8000/api/products/?category__name=Beauty&ordering=-price&min_price=10
+
+# Pagination (Seitenweise Anzeige)
+http://127.0.0.1:8000/api/products/?page=1                          # Seite 1 (erste 5 Produkte)
+http://127.0.0.1:8000/api/products/?page=2                          # Seite 2 (nächste 5 Produkte)
+http://127.0.0.1:8000/api/products/?page=5                          # Seite 5
+http://127.0.0.1:8000/api/categories/?page=1                        # Seite 1 (erste 5 Kategorien)
+http://127.0.0.1:8000/api/categories/?page=2                        # Seite 2 (nächste 5 Kategorien)
+
+# Pagination mit custom Page Size
+http://127.0.0.1:8000/api/products/?page_size=10                    # 10 Produkte pro Seite
+http://127.0.0.1:8000/api/products/?page_size=20                    # 20 Produkte pro Seite
+http://127.0.0.1:8000/api/products/?page=2&page_size=10             # Seite 2 mit 10 Produkten
+http://127.0.0.1:8000/api/categories/?page_size=10                  # Alle 10 Kategorien auf einer Seite
+
+# Pagination kombiniert mit Filtern und Sortierung
+http://127.0.0.1:8000/api/products/?category=1&page=1               # Kategorie 1, Seite 1
+http://127.0.0.1:8000/api/products/?search=laptop&page_size=3       # Suche mit 3 Ergebnissen pro Seite
+http://127.0.0.1:8000/api/products/?ordering=-price&page=1&page_size=10      # Sortiert nach Preis, 10 pro Seite
+http://127.0.0.1:8000/api/products/?min_price=20&max_price=100&page=1        # Preisfilter mit Pagination
+
+# Pagination Edge Cases
+http://127.0.0.1:8000/api/products/?page=999                        # Ungültige Seite (sollte letzte Seite zurückgeben)
+http://127.0.0.1:8000/api/categories/?page=999                      # Ungültige Seite bei Kategorien
+http://127.0.0.1:8000/api/products/?page=0                          # Seite 0 (ungültig)
+http://127.0.0.1:8000/api/products/?page=-1                         # Negative Seite (ungültig)
+http://127.0.0.1:8000/api/products/?page_size=150                   # page_size über max_page_size (sollte auf 100 begrenzt werden)
+http://127.0.0.1:8000/api/categories/?page_size=50                  # page_size über max_page_size bei Kategorien
+
+# Pagination Tests für Kategorien
+http://127.0.0.1:8000/api/categories/?page=1&page_size=2            # 2 Kategorien pro Seite, Seite 1
+http://127.0.0.1:8000/api/categories/?page=2&page_size=2            # 2 Kategorien pro Seite, Seite 2
+http://127.0.0.1:8000/api/categories/?page=3&page_size=3            # 3 Kategorien pro Seite, Seite 3
+http://127.0.0.1:8000/api/categories/?page=1&page_size=5            # Standardgröße, erste Seite
+
+# Pagination Tests für Produkte - verschiedene page_size Werte
+http://127.0.0.1:8000/api/products/?page=1&page_size=2              # 2 Produkte pro Seite
+http://127.0.0.1:8000/api/products/?page=1&page_size=5              # 5 Produkte pro Seite (default)
+http://127.0.0.1:8000/api/products/?page=1&page_size=8              # 8 Produkte pro Seite
+http://127.0.0.1:8000/api/products/?page=1&page_size=10             # 10 Produkte pro Seite (maximum)
+
+# Pagination mit verschiedenen Kategorien (nach ID)
+http://127.0.0.1:8000/api/products/?category=1&page=1&page_size=5   # Kategorie 1, 5 pro Seite
+http://127.0.0.1:8000/api/products/?category=2&page=2&page_size=3   # Kategorie 2, Seite 2, 3 pro Seite
+http://127.0.0.1:8000/api/products/?category=3&page=1&page_size=10  # Kategorie 3, alle auf einer Seite
+
+# Pagination mit category__name
+http://127.0.0.1:8000/api/products/?category__name=Technik&page=1&page_size=5
+http://127.0.0.1:8000/api/products/?category__name=Lebensmittel&page=1&page_size=10
+http://127.0.0.1:8000/api/products/?category__name=Buecher&page=2&page_size=3

@@ -5,11 +5,13 @@ from rest_framework.filters import OrderingFilter                               
 from django_filters.rest_framework import DjangoFilterBackend                         # Das Filter Backend
 from .serializers import CategorySerializer, ProductSerializer                        # Die Serialisier
 from .models import Category, Product                                                 # Die Model-Klassen
+from .pagination import CategoryPagination, ProductPagination
 
 
 # Alle Kategorien (GET) + neue Kategorie (POST)
 class CategoryListCreateView(ListCreateAPIView):
     serializer_class = CategorySerializer              # jede Viewklasse braucht einen Serializer
+    pagination_class = CategoryPagination
     queryset         = Category.objects.all()           # und ein Queryset das die Daten aus einem Model holt
 
 
@@ -20,6 +22,7 @@ class CategoryListCreateView(ListCreateAPIView):
 class ProductListCreateView(ListCreateAPIView):
 
     serializer_class = ProductSerializer
+    pagination_class = ProductPagination
     filter_backends  = [DjangoFilterBackend, OrderingFilter]
 
     # DjangoFilterBackend  -> aktiviert exakte Filter per filterset_fields
@@ -28,8 +31,9 @@ class ProductListCreateView(ListCreateAPIView):
     # OrderingFilter       -> aktiviert Sortierung per ordering_fields
     #                      -> ?ordering=price, ?ordering=-name
 
-    filterset_fields = ['active', 'category']                   # Filter für exakte Suchwerte zb. ?active=true
-    ordering_fields  = ['price', 'name', 'category__name']      # Custom Sortierung wenn die Parameter in der URL angegeben sind
+    filterset_fields = ['active', 'category', 'category__name']          # Filter für exakte Suchwerte zb. ?active=true
+    ordering_fields  = ['price', 'name', 'category__name']               # Custom Sortierung wenn die Parameter in der URL angegeben sind
+    search_fields = ['name', 'description', 'sku', 'category__name']
 
     # category__name -> FK-Feld -> z.B. ?category__name=Kleidung  über einen Join in der DB
 
