@@ -1,0 +1,204 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mein Profil</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Zen+Kaku+Gothic+New:wght@300;400;700&display=swap');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --sakura-deep: #e91e8c; --sakura-petal: #ffb7c5;
+    --white-glass: rgba(255,255,255,0.82); --text-dark: #2d1b2e;
+    --text-mid: #6b3a5e; --input-bg: rgba(255,255,255,0.65);
+    --border-soft: rgba(233,30,140,0.25); --danger: #c2185b;
+  }
+  body {
+    min-height: 100vh; font-family: 'Zen Kaku Gothic New', sans-serif;
+    background: linear-gradient(160deg, #fff0f5 0%, #fce4ec 30%, #f3e5f5 60%, #e8eaf6 100%);
+    display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
+  }
+  #sakura-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  body::before {
+    content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(ellipse at 20% 20%, rgba(255,183,197,0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(206,147,216,0.25) 0%, transparent 50%);
+    z-index: 0;
+  }
+  .container { position: relative; z-index: 10; width: 100%; max-width: 500px; padding: 20px; }
+  .header-deco { text-align: center; margin-bottom: 24px; }
+  .kanji-deco { font-family: 'Noto Serif JP', serif; font-size: 12px; letter-spacing: 8px; color: var(--text-mid); opacity: 0.7; margin-bottom: 6px; }
+  .title-main { font-family: 'Noto Serif JP', serif; font-size: 26px; font-weight: 300; color: var(--text-dark); letter-spacing: 2px; margin-bottom: 4px; }
+  .divider { display: flex; align-items: center; gap: 12px; margin: 0 0 24px; }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(233,30,140,0.4), transparent); }
+  .avatar-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 28px; }
+  .avatar-ring { width: 96px; height: 96px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, #f06292, #e91e8c, #9c27b0); margin-bottom: 12px; box-shadow: 0 4px 20px rgba(233,30,140,0.3); }
+  .avatar-inner { width: 100%; height: 100%; border-radius: 50%; overflow: hidden; background: var(--sakura-petal); display: flex; align-items: center; justify-content: center; }
+  .avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
+  .avatar-placeholder { font-family: 'Noto Serif JP', serif; font-size: 32px; color: #fff; opacity: 0.9; }
+  .username-display { font-family: 'Noto Serif JP', serif; font-size: 18px; font-weight: 400; color: var(--text-dark); letter-spacing: 2px; }
+  .token-badge { margin-top: 6px; font-size: 10px; letter-spacing: 2px; color: var(--text-mid); opacity: 0.6; text-transform: uppercase; }
+  .card {
+    background: var(--white-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px; border: 1px solid rgba(255,183,197,0.5); padding: 36px 32px;
+    box-shadow: 0 8px 32px rgba(233,30,140,0.08), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9);
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 18px; }
+  label { display: block; font-size: 11px; letter-spacing: 3px; color: var(--text-mid); text-transform: uppercase; margin-bottom: 7px; font-weight: 700; }
+  input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%; padding: 12px 15px; background: var(--input-bg);
+    border: 1px solid var(--border-soft); border-radius: 12px;
+    font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 14px; color: var(--text-dark);
+    outline: none; transition: all 0.3s ease;
+  }
+  input:focus { border-color: rgba(233,30,140,0.5); background: rgba(255,255,255,0.9); box-shadow: 0 0 0 3px rgba(233,30,140,0.08); }
+  input::placeholder { color: rgba(107,58,94,0.35); }
+  .upload-area { border: 1.5px dashed rgba(233,30,140,0.35); border-radius: 12px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.3s; background: rgba(255,255,255,0.4); position: relative; overflow: hidden; }
+  .upload-area:hover { border-color: rgba(233,30,140,0.6); background: rgba(255,183,197,0.1); }
+  .upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .upload-text { font-size: 12px; color: var(--text-mid); letter-spacing: 1px; }
+  .error-msg { font-size: 12px; color: var(--danger); letter-spacing: 0.5px; margin-top: 5px; display: block; }
+  .alert { padding: 10px 16px; border-radius: 10px; font-size: 13px; margin-bottom: 16px; border: 1px solid rgba(233,30,140,0.2); background: rgba(233,30,140,0.07); color: var(--text-mid); }
+  .alert-success { background: rgba(76,175,80,0.08); border-color: rgba(76,175,80,0.3); color: #2e7d32; }
+  .section-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(233,30,140,0.25), transparent); margin: 20px 0; }
+  .section-label { font-size: 10px; letter-spacing: 4px; color: var(--text-mid); opacity: 0.6; text-transform: uppercase; margin-bottom: 16px; text-align: center; }
+  .btn-group { display: grid; grid-template-columns: 1fr auto; gap: 12px; margin-top: 8px; align-items: center; }
+  .btn-save {
+    padding: 14px; border: none; border-radius: 14px;
+    font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 3px; color: #fff; cursor: pointer;
+    background: linear-gradient(135deg, #f06292 0%, #e91e8c 40%, #9c27b0 100%);
+    box-shadow: 0 4px 18px rgba(233,30,140,0.35); transition: all 0.3s; text-transform: uppercase;
+    position: relative; overflow: hidden;
+  }
+  .btn-save::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
+  .btn-save:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(233,30,140,0.45); }
+  .btn-save:hover::before { left: 100%; }
+  .btn-delete {
+    padding: 14px 18px; border: 1.5px solid rgba(194,24,91,0.4); border-radius: 14px;
+    font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; color: var(--danger); cursor: pointer; background: rgba(255,255,255,0.5);
+    transition: all 0.3s; text-transform: uppercase; white-space: nowrap;
+  }
+  .btn-delete:hover { background: rgba(194,24,91,0.08); border-color: var(--danger); transform: translateY(-1px); }
+</style>
+</head>
+<body>
+<canvas id="sakura-canvas"></canvas>
+<div class="container">
+  <div class="header-deco">
+    <div class="kanji-deco">プロフィール · Profil</div>
+    <h1 class="title-main">Mein Profil</h1>
+  </div>
+  <div class="divider"><span style="font-size:14px;color:#e91e8c;opacity:0.7;">🌸</span></div>
+
+  <div class="avatar-section">
+    <div class="avatar-ring">
+      <div class="avatar-inner">
+        {% if user.profile_picture %}
+          <img src="{{ user.profile_picture.url }}" alt="Profilbild">
+        {% else %}
+          <span class="avatar-placeholder">{{ user.username|first|upper }}</span>
+        {% endif %}
+      </div>
+    </div>
+    <div class="username-display">{{ user.username }}</div>
+    <div class="token-badge">Token · 認証済み</div>
+  </div>
+
+  <div class="card">
+    {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+    {% if success %}<div class="alert alert-success">{{ success }}</div>{% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="first_name">Vorname</label>
+          <input type="text" id="first_name" name="first_name"
+                 placeholder="Max" value="{{ user.first_name }}">
+        </div>
+        <div class="form-group">
+          <label for="last_name">Nachname</label>
+          <input type="text" id="last_name" name="last_name"
+                 placeholder="Mustermann" value="{{ user.last_name }}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="username">Benutzername</label>
+        <input type="text" id="username" name="username"
+               value="{{ user.username }}">
+        {% if errors.username %}<span class="error-msg">{{ errors.username.0 }}</span>{% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" name="email"
+               value="{{ user.email }}">
+        {% if errors.email %}<span class="error-msg">{{ errors.email.0 }}</span>{% endif %}
+      </div>
+
+      <div class="section-divider"></div>
+      <div class="section-label">Passwort ändern · パスワード変更</div>
+
+      <div class="form-group">
+        <label for="password">Neues Passwort <span style="opacity:0.5;font-size:10px;">(optional)</span></label>
+        <input type="password" id="password" name="password"
+               placeholder="Leer lassen = nicht ändern">
+        {% if errors.password %}<span class="error-msg">{{ errors.password.0 }}</span>{% endif %}
+      </div>
+
+      <div class="section-divider"></div>
+
+      <div class="form-group">
+        <label>Profilbild</label>
+        <div class="upload-area">
+          <input type="file" name="profile_picture" accept="image/*">
+          <div class="upload-text">🌸 &nbsp;Neues Bild auswählen</div>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button type="submit" name="action" value="update" class="btn-save">保存 · Speichern</button>
+        <button type="submit" name="action" value="delete" class="btn-delete"
+                onclick="return confirm('Profil wirklich löschen?')">削除</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+const canvas = document.getElementById('sakura-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+const petals = Array.from({length: 50}, () => ({
+  x: Math.random() * canvas.width, y: Math.random() * canvas.height - canvas.height,
+  size: Math.random() * 13 + 6, speedY: Math.random() * 1.1 + 0.35,
+  speedX: Math.random() * 0.7 - 0.35, rotation: Math.random() * Math.PI * 2,
+  rotSpeed: (Math.random() - 0.5) * 0.03, opacity: Math.random() * 0.45 + 0.2,
+  swaySpeed: Math.random() * 0.018 + 0.005, swayOffset: Math.random() * Math.PI * 2,
+  sway: Math.random() * 2,
+  color: ['#ffb7c5','#ffc1cc','#f48fb1','#f8bbd9','#ff80ab','#fce4ec'][Math.floor(Math.random()*6)]
+}));
+let frame = 0;
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height); frame++;
+  petals.forEach(p => {
+    p.y += p.speedY; p.x += p.speedX + Math.sin(frame * p.swaySpeed + p.swayOffset) * p.sway * 0.05;
+    p.rotation += p.rotSpeed;
+    if (p.y > canvas.height + 20) { p.y = -20; p.x = Math.random() * canvas.width; }
+    ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rotation); ctx.globalAlpha = p.opacity; ctx.fillStyle = p.color;
+    ctx.beginPath(); ctx.ellipse(0, -p.size/2, p.size*0.38, p.size*0.58, 0, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(p.size*0.28, 0, p.size*0.38, p.size*0.58, Math.PI/3, 0, Math.PI*2); ctx.fill();
+    ctx.restore();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>

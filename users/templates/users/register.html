@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registrierung</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Zen+Kaku+Gothic+New:wght@300;400;700&display=swap');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --sakura-deep: #e91e8c;
+    --sakura-petal: #ffb7c5;
+    --white-glass: rgba(255,255,255,0.82);
+    --text-dark: #2d1b2e;
+    --text-mid: #6b3a5e;
+    --input-bg: rgba(255,255,255,0.65);
+    --border-soft: rgba(233,30,140,0.25);
+  }
+  body {
+    min-height: 100vh;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    background: linear-gradient(160deg, #fff0f5 0%, #fce4ec 30%, #f3e5f5 60%, #e8eaf6 100%);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+  }
+  #sakura-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  body::before {
+    content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(ellipse at 20% 20%, rgba(255,183,197,0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(206,147,216,0.25) 0%, transparent 50%);
+    z-index: 0;
+  }
+  .container { position: relative; z-index: 10; width: 100%; max-width: 460px; padding: 20px; }
+  .header-deco { text-align: center; margin-bottom: 28px; }
+  .kanji-deco { font-family: 'Noto Serif JP', serif; font-size: 13px; letter-spacing: 8px; color: var(--text-mid); opacity: 0.7; margin-bottom: 8px; }
+  .title-main { font-family: 'Noto Serif JP', serif; font-size: 28px; font-weight: 300; color: var(--text-dark); letter-spacing: 2px; margin-bottom: 6px; }
+  .title-sub { font-size: 12px; color: var(--text-mid); letter-spacing: 4px; opacity: 0.8; }
+  .divider { display: flex; align-items: center; gap: 12px; margin: 0 0 28px; }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(233,30,140,0.4), transparent); }
+  .card {
+    background: var(--white-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px; border: 1px solid rgba(255,183,197,0.5); padding: 40px 36px;
+    box-shadow: 0 8px 32px rgba(233,30,140,0.08), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9);
+  }
+  .form-group { margin-bottom: 20px; }
+  label { display: block; font-size: 11px; letter-spacing: 3px; color: var(--text-mid); text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
+  input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%; padding: 13px 16px; background: var(--input-bg);
+    border: 1px solid var(--border-soft); border-radius: 12px;
+    font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 15px; color: var(--text-dark);
+    outline: none; transition: all 0.3s ease;
+  }
+  input:focus { border-color: rgba(233,30,140,0.5); background: rgba(255,255,255,0.85); box-shadow: 0 0 0 3px rgba(233,30,140,0.08); }
+  input::placeholder { color: rgba(107,58,94,0.4); }
+  .upload-area {
+    border: 1.5px dashed rgba(233,30,140,0.35); border-radius: 12px; padding: 20px;
+    text-align: center; cursor: pointer; transition: all 0.3s; background: rgba(255,255,255,0.4);
+    position: relative; overflow: hidden;
+  }
+  .upload-area:hover { border-color: rgba(233,30,140,0.6); background: rgba(255,183,197,0.1); }
+  .upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .upload-text { font-size: 12px; color: var(--text-mid); letter-spacing: 1px; }
+  .error-msg { font-size: 12px; color: #c2185b; letter-spacing: 0.5px; margin-top: 5px; display: block; }
+  .alert { padding: 10px 16px; border-radius: 10px; font-size: 13px; margin-bottom: 16px; border: 1px solid rgba(233,30,140,0.2); background: rgba(233,30,140,0.07); color: var(--text-mid); }
+  .alert-success { background: rgba(76,175,80,0.08); border-color: rgba(76,175,80,0.3); color: #2e7d32; }
+  .btn-submit {
+    width: 100%; padding: 15px; margin-top: 8px; border: none; border-radius: 14px;
+    font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 14px; font-weight: 700;
+    letter-spacing: 4px; color: #fff; cursor: pointer;
+    background: linear-gradient(135deg, #f06292 0%, #e91e8c 40%, #9c27b0 100%);
+    box-shadow: 0 4px 20px rgba(233,30,140,0.35); transition: all 0.3s ease;
+    text-transform: uppercase; position: relative; overflow: hidden;
+  }
+  .btn-submit::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s ease; }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(233,30,140,0.45); }
+  .btn-submit:hover::before { left: 100%; }
+  .btn-submit:active { transform: translateY(0); }
+  .login-link { text-align: center; margin-top: 20px; font-size: 13px; color: var(--text-mid); opacity: 0.8; }
+  .login-link a { color: var(--sakura-deep); text-decoration: none; font-weight: 700; letter-spacing: 1px; border-bottom: 1px solid rgba(233,30,140,0.3); padding-bottom: 1px; transition: border-color 0.2s; }
+  .login-link a:hover { border-color: var(--sakura-deep); }
+</style>
+</head>
+<body>
+<canvas id="sakura-canvas"></canvas>
+<div class="container">
+  <div class="header-deco">
+    <div class="kanji-deco">桜 · さくら · Sakura</div>
+    <h1 class="title-main">Registrierung</h1>
+    <div class="title-sub">WILLKOMMEN · ようこそ</div>
+  </div>
+  <div class="divider"><span style="font-size:16px;color:#e91e8c;opacity:0.7;">🌸</span></div>
+  <div class="card">
+    {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+    {% if success %}<div class="alert alert-success">{{ success }}</div>{% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="username">Benutzername</label>
+        <input type="text" id="username" name="username"
+               placeholder="dein_username" value="{{ request.POST.username }}">
+        {% if errors.username %}<span class="error-msg">{{ errors.username.0 }}</span>{% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" name="email"
+               placeholder="name@email.de" value="{{ request.POST.email }}">
+        {% if errors.email %}<span class="error-msg">{{ errors.email.0 }}</span>{% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="password">Passwort</label>
+        <input type="password" id="password" name="password"
+               placeholder="Min. 8 Zeichen · A-z · 0-9 · Sonderzeichen">
+        {% if errors.password %}<span class="error-msg">{{ errors.password.0 }}</span>{% endif %}
+      </div>
+
+      <div class="form-group">
+        <label>Profilbild <span style="opacity:0.5;font-size:10px;">(optional)</span></label>
+        <div class="upload-area">
+          <input type="file" name="profile_picture" accept="image/*">
+          <span style="font-size:28px;display:block;margin-bottom:8px;">🌸</span>
+          <div class="upload-text">Bild auswählen · 画像を選択</div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">登録 · Registrieren</button>
+    </form>
+
+    <div class="login-link">
+      Bereits registriert? <a href="{% url 'login' %}">Anmelden</a>
+    </div>
+  </div>
+</div>
+<script>
+const canvas = document.getElementById('sakura-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+const petals = Array.from({length: 55}, () => ({
+  x: Math.random() * canvas.width, y: Math.random() * canvas.height - canvas.height,
+  size: Math.random() * 14 + 7, speedY: Math.random() * 1.2 + 0.4,
+  speedX: Math.random() * 0.8 - 0.4, rotation: Math.random() * Math.PI * 2,
+  rotSpeed: (Math.random() - 0.5) * 0.03, opacity: Math.random() * 0.5 + 0.25,
+  swaySpeed: Math.random() * 0.02 + 0.005, swayOffset: Math.random() * Math.PI * 2,
+  sway: Math.random() * 2,
+  color: ['#ffb7c5','#ffc1cc','#f48fb1','#f8bbd9','#ff80ab','#fce4ec'][Math.floor(Math.random()*6)]
+}));
+let frame = 0;
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height); frame++;
+  petals.forEach(p => {
+    p.y += p.speedY; p.x += p.speedX + Math.sin(frame * p.swaySpeed + p.swayOffset) * p.sway * 0.05;
+    p.rotation += p.rotSpeed;
+    if (p.y > canvas.height + 20) { p.y = -20; p.x = Math.random() * canvas.width; }
+    ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rotation); ctx.globalAlpha = p.opacity; ctx.fillStyle = p.color;
+    ctx.beginPath(); ctx.ellipse(0, -p.size/2, p.size*0.38, p.size*0.58, 0, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(p.size*0.28, 0, p.size*0.38, p.size*0.58, Math.PI/3, 0, Math.PI*2); ctx.fill();
+    ctx.restore();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
