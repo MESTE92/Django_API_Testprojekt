@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',   # für API und DRF
+    'rest_framework.authtoken',   # für Token Authentication
+    'rest_framework_csv',
+    'rest_framework_xml',
     'django_filters',   # für einfache Filter in API
     'drf_spectacular',  # für API-Dokumentation
     'products',
@@ -64,10 +67,11 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.BrowsableAPIRenderer',   # Für den Browserbasierten API-Explorer
-        'rest_framework.renderers.JSONRenderer',     # Standard Renderer JSON
-        'rest_framework_xml.renderers.XMLRenderer',  # -> XML Support
+        'rest_framework.renderers.JSONRenderer',           # Standard Renderer JSON
+        'rest_framework_xml.renderers.XMLRenderer',        # -> XML Support
+        'rest_framework_csv.renderers.CSVRenderer',        # -> CSV Support
     ],
-    'DEFAULT_PARSER_CLASSES': [
+    'DEFAULT_PARSER_CLASSES': [                     # für Input relevant
         'rest_framework.parsers.JSONParser',        # Standard Parser JSON
         'rest_framework.parsers.FormParser',        # für Formulare -> sieht einfach besser aus als JSON
         'rest_framework.parsers.MultiPartParser',       # um Bilder hochzuladen per Formular
