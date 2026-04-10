@@ -130,3 +130,50 @@ http://127.0.0.1:8000/api/products/?category=3&page=1&page_size=10  # Kategorie 
 http://127.0.0.1:8000/api/products/?category__name=Technik&page=1&page_size=5
 http://127.0.0.1:8000/api/products/?category__name=Lebensmittel&page=1&page_size=10
 http://127.0.0.1:8000/api/products/?category__name=Buecher&page=2&page_size=3
+
+# =====================================================
+# JOBS API - Erfordert Token Authentication
+# =====================================================
+# WICHTIG: Für alle Jobs-Requests muss ein Authorization Header gesetzt werden:
+# Authorization: Token <your-token-key>
+#
+# Token erstellen:
+# 1. python manage.py shell
+# 2. from django.contrib.auth.models import User
+# 3. from rest_framework.authtoken.models import Token
+# 4. user = User.objects.get(username='Admin')
+# 5. token, created = Token.objects.get_or_create(user=user)
+# 6. print(token.key)
+
+# Basis-Endpoints für Jobs
+http://127.0.0.1:8000/api/jobs/                                      # Alle Jobs abrufen (Token erforderlich!)
+http://127.0.0.1:8000/api/jobs/1/                                    # Einzelner Job (ID: 1)
+http://127.0.0.1:8000/api/jobs/50/                                   # Einzelner Job (ID: 50)
+
+# Suche nach Job-Namen
+http://127.0.0.1:8000/api/jobs/?search=Engineer                      # Alle Jobs mit "Engineer" im Namen/Description
+http://127.0.0.1:8000/api/jobs/?search=Developer                     # Alle Developer-Jobs
+http://127.0.0.1:8000/api/jobs/?search=Manager                       # Alle Manager-Jobs
+http://127.0.0.1:8000/api/jobs/?search=Python                        # Jobs mit Python-Kenntnissen
+http://127.0.0.1:8000/api/jobs/?search=medizinische                  # Jobs im medizinischen Bereich
+
+# Gehaltsfilter
+http://127.0.0.1:8000/api/jobs/?min_salary=50000                     # Jobs mit Mindestgehalt 50.000€
+http://127.0.0.1:8000/api/jobs/?max_salary=60000                     # Jobs bis max. 60.000€
+http://127.0.0.1:8000/api/jobs/?min_salary=60000&max_salary=80000    # Gehaltsspanne 60k-80k
+http://127.0.0.1:8000/api/jobs/?min_salary=100000                    # Top-Verdiener (>100k)
+
+# Sortierung nach Gehalt
+http://127.0.0.1:8000/api/jobs/?ordering=salary                      # Aufsteigend nach Gehalt
+http://127.0.0.1:8000/api/jobs/?ordering=-salary                     # Absteigend nach Gehalt (Bestverdiener zuerst)
+http://127.0.0.1:8000/api/jobs/?ordering=name                        # Alphabetisch nach Job-Name
+
+# Kombinierte Filter
+http://127.0.0.1:8000/api/jobs/?search=Developer&min_salary=60000    # Developer-Jobs ab 60k
+http://127.0.0.1:8000/api/jobs/?search=agile&ordering=-salary        # Jobs mit agilen Methoden, nach Gehalt sortiert
+http://127.0.0.1:8000/api/jobs/?search=Kreativität&max_salary=50000  # Kreative Jobs bis 50k
+
+# Pagination für Jobs
+http://127.0.0.1:8000/api/jobs/?page=1                               # Erste Seite
+http://127.0.0.1:8000/api/jobs/?page=1&page_size=10                  # 10 Jobs pro Seite
+http://127.0.0.1:8000/api/jobs/?search=Python&page=1&page_size=5     # Python-Jobs, 5 pro Seite
