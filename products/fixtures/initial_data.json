@@ -2868,5 +2868,905 @@
       "image": "",
       "category": 10
     }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 1,
+    "fields": {
+      "name": "Software Engineer",
+      "description": "Entwicklung moderner Webanwendungen mit Python und JavaScript. Erfahrung in agiler Softwareentwicklung erforderlich.",
+      "salary": "65000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 2,
+    "fields": {
+      "name": "Data Scientist",
+      "description": "Analyse großer Datenmengen und Entwicklung von Machine Learning Modellen. Python-Kenntnisse zwingend erforderlich.",
+      "salary": "72000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 3,
+    "fields": {
+      "name": "Marketing Manager",
+      "description": "Leitung des Marketing-Teams und Entwicklung innovativer Kampagnen. Erfahrung in digitaler Werbung notwendig.",
+      "salary": "58000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 4,
+    "fields": {
+      "name": "Projektmanager IT",
+      "description": "Koordination von IT-Projekten und Führung interdisziplinärer Teams. Agile Methoden und Kommunikationsfähigkeit erforderlich.",
+      "salary": "68000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 5,
+    "fields": {
+      "name": "Krankenpfleger",
+      "description": "Pflege und Betreuung von Patienten im Krankenhaus. Einfühlungsvermögen und medizinische Kenntnisse erforderlich.",
+      "salary": "42000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 6,
+    "fields": {
+      "name": "Maschinenbauingenieur",
+      "description": "Entwicklung und Konstruktion mechanischer Systeme. CAD-Software Kenntnisse und technisches Verständnis erforderlich.",
+      "salary": "62000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 7,
+    "fields": {
+      "name": "Content Writer",
+      "description": "Erstellung ansprechender Inhalte für Webseiten und Blogs. Kreativität und SEO-Kenntnisse erforderlich.",
+      "salary": "38000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 8,
+    "fields": {
+      "name": "UX Designer",
+      "description": "Gestaltung benutzerfreundlicher Interfaces für moderne Webanwendungen. Figma und Sketch Erfahrung notwendig.",
+      "salary": "55000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 9,
+    "fields": {
+      "name": "Vertriebsleiter",
+      "description": "Führung des Vertriebsteams und Entwicklung von Verkaufsstrategien. Kommunikationsfähigkeit und Führungserfahrung erforderlich.",
+      "salary": "70000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 10,
+    "fields": {
+      "name": "DevOps Engineer",
+      "description": "Automatisierung von Deployment-Prozessen und Verwaltung der Cloud-Infrastruktur. Erfahrung mit Docker und Kubernetes erforderlich.",
+      "salary": "68000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 11,
+    "fields": {
+      "name": "Grafikdesigner",
+      "description": "Entwicklung kreativer Designs für Print und digitale Medien. Adobe Creative Suite Kenntnisse erforderlich.",
+      "salary": "44000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 12,
+    "fields": {
+      "name": "HR Manager",
+      "description": "Leitung der Personalabteilung und Entwicklung von Recruiting-Strategien. Kommunikationsfähigkeit und Empathie erforderlich.",
+      "salary": "54000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 13,
+    "fields": {
+      "name": "Elektriker",
+      "description": "Installation und Wartung elektrischer Systeme in Gebäuden. Technische Ausbildung und Kenntnisse der Sicherheitsvorschriften erforderlich.",
+      "salary": "45000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 14,
+    "fields": {
+      "name": "Backend Developer",
+      "description": "Entwicklung skalierbarer Server-Anwendungen mit Python und Node.js. Datenbank-Kenntnisse erforderlich.",
+      "salary": "63000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 15,
+    "fields": {
+      "name": "Lehrer Mathematik",
+      "description": "Unterricht von Mathematik an einer Sekundarstufe. Pädagogische Fähigkeiten und Geduld erforderlich.",
+      "salary": "48000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 16,
+    "fields": {
+      "name": "Finanzanalyst",
+      "description": "Analyse von Finanzdaten und Erstellung von Investmentempfehlungen. Excel und Python-Kenntnisse erforderlich.",
+      "salary": "60000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 17,
+    "fields": {
+      "name": "Koch",
+      "description": "Zubereitung hochwertiger Speisen in gehobener Gastronomie. Kreativität und Leidenschaft für Kulinarik erforderlich.",
+      "salary": "36000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 18,
+    "fields": {
+      "name": "Rechtsanwalt",
+      "description": "Beratung von Mandanten in zivilrechtlichen Angelegenheiten. Juristisches Staatsexamen und Kommunikationsfähigkeit erforderlich.",
+      "salary": "75000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 19,
+    "fields": {
+      "name": "Social Media Manager",
+      "description": "Entwicklung und Umsetzung von Social-Media-Strategien. Kreativität und Kenntnisse in digitaler Werbung erforderlich.",
+      "salary": "46000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 20,
+    "fields": {
+      "name": "Architekt",
+      "description": "Planung und Gestaltung moderner Gebäude. AutoCAD und technisches Verständnis erforderlich.",
+      "salary": "64000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 21,
+    "fields": {
+      "name": "Cybersecurity Analyst",
+      "description": "Schutz der IT-Infrastruktur vor Cyberangriffen. Kenntnisse in Netzwerksicherheit und agiler Softwareentwicklung erforderlich.",
+      "salary": "71000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 22,
+    "fields": {
+      "name": "Produktmanager",
+      "description": "Entwicklung und Vermarktung neuer Produkte. Agile Methoden und Marktkenntnisse erforderlich.",
+      "salary": "67000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 23,
+    "fields": {
+      "name": "Zahnarzt",
+      "description": "Behandlung von Patienten und Durchführung zahnmedizinischer Eingriffe. Medizinische Kenntnisse und Präzision erforderlich.",
+      "salary": "80000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 24,
+    "fields": {
+      "name": "Frontend Developer",
+      "description": "Entwicklung moderner Webanwendungen mit React und Vue.js. JavaScript-Kenntnisse zwingend erforderlich.",
+      "salary": "61000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 25,
+    "fields": {
+      "name": "Logistikkoordinator",
+      "description": "Koordination von Warenflüssen und Optimierung der Lieferkette. Organisationstalent erforderlich.",
+      "salary": "43000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 26,
+    "fields": {
+      "name": "Business Analyst",
+      "description": "Analyse von Geschäftsprozessen und Entwicklung von Optimierungsstrategien. Excel und Python-Kenntnisse erforderlich.",
+      "salary": "59000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 27,
+    "fields": {
+      "name": "Physiotherapeut",
+      "description": "Behandlung und Rehabilitation von Patienten mit körperlichen Beschwerden. Medizinische Kenntnisse und Einfühlungsvermögen erforderlich.",
+      "salary": "41000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 28,
+    "fields": {
+      "name": "QA Engineer",
+      "description": "Testen von Softwareanwendungen und Sicherstellung der Qualität. Agile Softwareentwicklung und Testautomatisierung erforderlich.",
+      "salary": "56000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 29,
+    "fields": {
+      "name": "Fotograf",
+      "description": "Erstellung professioneller Foto- und Videoproduktionen. Kreativität und technisches Equipment-Verständnis erforderlich.",
+      "salary": "39000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 30,
+    "fields": {
+      "name": "Cloud Architect",
+      "description": "Entwicklung und Verwaltung der Cloud-Infrastruktur. Docker, Kubernetes und AWS-Kenntnisse erforderlich.",
+      "salary": "78000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 31,
+    "fields": {
+      "name": "Immobilienmakler",
+      "description": "Vermittlung von Immobilien und Beratung von Kunden. Kommunikationsfähigkeit und Marktkenntnisse erforderlich.",
+      "salary": "47000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 32,
+    "fields": {
+      "name": "Steuerberater",
+      "description": "Beratung von Mandanten in steuerlichen Angelegenheiten. Juristisches Fachwissen und Excel-Kenntnisse erforderlich.",
+      "salary": "66000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 33,
+    "fields": {
+      "name": "Mechatroniker",
+      "description": "Installation und Wartung mechatronischer Systeme. Technisches Verständnis und CAD-Software Kenntnisse erforderlich.",
+      "salary": "49000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 34,
+    "fields": {
+      "name": "Mobile App Developer",
+      "description": "Entwicklung nativer Apps für iOS und Android. Swift und Kotlin Kenntnisse erforderlich.",
+      "salary": "64000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 35,
+    "fields": {
+      "name": "Eventmanager",
+      "description": "Planung und Durchführung von Corporate Events. Organisationstalent und Kreativität erforderlich.",
+      "salary": "44000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 36,
+    "fields": {
+      "name": "Chemiker",
+      "description": "Durchführung chemischer Analysen und Entwicklung neuer Substanzen. Technisches Verständnis und Laborerfahrung erforderlich.",
+      "salary": "58000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 37,
+    "fields": {
+      "name": "SEO Specialist",
+      "description": "Optimierung von Webseiten für Suchmaschinen. SEO-Kenntnisse und Kreativität erforderlich.",
+      "salary": "48000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 38,
+    "fields": {
+      "name": "Buchhalter",
+      "description": "Führung der Finanzbuchhaltung und Erstellung von Jahresabschlüssen. Excel und Kenntnisse in Buchhaltungssoftware erforderlich.",
+      "salary": "45000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 39,
+    "fields": {
+      "name": "Erzieher",
+      "description": "Betreuung und pädagogische Förderung von Kindern. Einfühlungsvermögen und Geduld erforderlich.",
+      "salary": "38000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 40,
+    "fields": {
+      "name": "Network Engineer",
+      "description": "Verwaltung und Optimierung der Netzwerkinfrastruktur. Kenntnisse in Netzwerksicherheit und agile Methoden erforderlich.",
+      "salary": "62000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 41,
+    "fields": {
+      "name": "Psychologe",
+      "description": "Beratung und Therapie von Patienten. Medizinische Kenntnisse und Empathie erforderlich.",
+      "salary": "52000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 42,
+    "fields": {
+      "name": "Scrum Master",
+      "description": "Führung agiler Teams und Koordination von Sprints. Agile Methoden und Kommunikationsfähigkeit erforderlich.",
+      "salary": "65000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 43,
+    "fields": {
+      "name": "Pilot",
+      "description": "Führung von Passagierflugzeugen. Technische Ausbildung und Präzision erforderlich.",
+      "salary": "95000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 44,
+    "fields": {
+      "name": "Full Stack Developer",
+      "description": "Entwicklung moderner Webanwendungen mit Frontend und Backend Technologien. Python und JavaScript-Kenntnisse erforderlich.",
+      "salary": "69000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 45,
+    "fields": {
+      "name": "Apotheker",
+      "description": "Beratung von Kunden und Ausgabe von Medikamenten. Medizinische Kenntnisse und Sorgfalt erforderlich.",
+      "salary": "55000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 46,
+    "fields": {
+      "name": "Video Editor",
+      "description": "Schnitt und Bearbeitung von Video-Content. Kreativität und Adobe Premiere Kenntnisse erforderlich.",
+      "salary": "42000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 47,
+    "fields": {
+      "name": "Bauingenieur",
+      "description": "Planung und Überwachung von Bauprojekten. AutoCAD und technisches Verständnis erforderlich.",
+      "salary": "63000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 48,
+    "fields": {
+      "name": "AI Engineer",
+      "description": "Entwicklung von Machine Learning Modellen und KI-Lösungen. Python-Kenntnisse zwingend erforderlich.",
+      "salary": "82000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 49,
+    "fields": {
+      "name": "Personalreferent",
+      "description": "Recruiting und Betreuung von Mitarbeitern. Kommunikationsfähigkeit und Empathie erforderlich.",
+      "salary": "47000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 50,
+    "fields": {
+      "name": "Arzt Allgemeinmedizin",
+      "description": "Behandlung und Beratung von Patienten. Medizinische Kenntnisse und Einfühlungsvermögen erforderlich.",
+      "salary": "85000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 51,
+    "fields": {
+      "name": "IT Support Specialist",
+      "description": "Technischer Support und Lösung von IT-Problemen. Kommunikationsfähigkeit und technisches Verständnis erforderlich.",
+      "salary": "40000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 52,
+    "fields": {
+      "name": "Journalist",
+      "description": "Recherche und Verfassen von Artikeln für Print und Online. Kreativität und Schreibtalent erforderlich.",
+      "salary": "43000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 53,
+    "fields": {
+      "name": "Database Administrator",
+      "description": "Verwaltung und Optimierung von Datenbanksystemen. SQL und Python-Kenntnisse erforderlich.",
+      "salary": "61000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 54,
+    "fields": {
+      "name": "Hotelmanager",
+      "description": "Leitung eines Hotels und Koordination des Personals. Organisationstalent und Führungserfahrung erforderlich.",
+      "salary": "54000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 55,
+    "fields": {
+      "name": "Game Developer",
+      "description": "Entwicklung von Computerspielen mit Unity und Unreal Engine. Kreativität und Programmierkenntnisse erforderlich.",
+      "salary": "66000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 56,
+    "fields": {
+      "name": "Optiker",
+      "description": "Beratung von Kunden und Anpassung von Sehhilfen. Technisches Verständnis und Präzision erforderlich.",
+      "salary": "39000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 57,
+    "fields": {
+      "name": "Supply Chain Manager",
+      "description": "Optimierung der Lieferkette und Koordination von Warenflüssen. Organisationstalent und Marktkenntnisse erforderlich.",
+      "salary": "68000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 58,
+    "fields": {
+      "name": "Tierarzt",
+      "description": "Behandlung und Betreuung von Tieren. Medizinische Kenntnisse und Einfühlungsvermögen erforderlich.",
+      "salary": "58000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 59,
+    "fields": {
+      "name": "Blockchain Developer",
+      "description": "Entwicklung dezentraler Anwendungen und Smart Contracts. Kenntnisse in agiler Softwareentwicklung erforderlich.",
+      "salary": "76000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 60,
+    "fields": {
+      "name": "Versicherungsberater",
+      "description": "Beratung von Kunden in Versicherungsfragen. Kommunikationsfähigkeit und Fachwissen erforderlich.",
+      "salary": "46000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 61,
+    "fields": {
+      "name": "Innenarchitekt",
+      "description": "Gestaltung von Innenräumen und Entwicklung kreativer Designs. Kreativität und AutoCAD Kenntnisse erforderlich.",
+      "salary": "51000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 62,
+    "fields": {
+      "name": "System Administrator",
+      "description": "Verwaltung der IT-Infrastruktur und Server. Docker und Netzwerksicherheit Kenntnisse erforderlich.",
+      "salary": "57000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 63,
+    "fields": {
+      "name": "Verkäufer Einzelhandel",
+      "description": "Beratung von Kunden und Verkauf von Produkten. Kommunikationsfähigkeit und Freundlichkeit erforderlich.",
+      "salary": "32000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 64,
+    "fields": {
+      "name": "Machine Learning Engineer",
+      "description": "Entwicklung und Training von Machine Learning Modellen. Python-Kenntnisse zwingend erforderlich.",
+      "salary": "77000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 65,
+    "fields": {
+      "name": "Dolmetscher",
+      "description": "Übersetzung und Dolmetschen in verschiedenen Sprachen. Sprachkenntnisse und Kommunikationsfähigkeit erforderlich.",
+      "salary": "49000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 66,
+    "fields": {
+      "name": "E-Commerce Manager",
+      "description": "Verwaltung und Optimierung eines Online-Shops. SEO-Kenntnisse und digitaler Werbung Erfahrung erforderlich.",
+      "salary": "56000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 67,
+    "fields": {
+      "name": "Klempner",
+      "description": "Installation und Reparatur von Sanitäranlagen. Technische Ausbildung und handwerkliches Geschick erforderlich.",
+      "salary": "41000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 68,
+    "fields": {
+      "name": "Security Engineer",
+      "description": "Schutz der IT-Infrastruktur und Durchführung von Sicherheitsaudits. Kenntnisse in Netzwerksicherheit erforderlich.",
+      "salary": "73000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 69,
+    "fields": {
+      "name": "Pharmareferent",
+      "description": "Beratung von Ärzten und Verkauf pharmazeutischer Produkte. Medizinische Kenntnisse und Kommunikationsfähigkeit erforderlich.",
+      "salary": "52000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 70,
+    "fields": {
+      "name": "Web Designer",
+      "description": "Gestaltung benutzerfreundlicher Webseiten. Figma, Adobe Creative Suite und Kreativität erforderlich.",
+      "salary": "48000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 71,
+    "fields": {
+      "name": "Bankkaufmann",
+      "description": "Beratung von Kunden in Finanzfragen. Excel und Kommunikationsfähigkeit erforderlich.",
+      "salary": "44000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 72,
+    "fields": {
+      "name": "Embedded Systems Engineer",
+      "description": "Entwicklung von Embedded Software für technische Geräte. CAD-Software Kenntnisse und technisches Verständnis erforderlich.",
+      "salary": "64000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 73,
+    "fields": {
+      "name": "Fitnesstrainer",
+      "description": "Training und Betreuung von Sportlern. Leidenschaft für Fitness und Kommunikationsfähigkeit erforderlich.",
+      "salary": "35000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 74,
+    "fields": {
+      "name": "Compliance Officer",
+      "description": "Überwachung der Einhaltung gesetzlicher Vorschriften. Juristisches Fachwissen und Sorgfalt erforderlich.",
+      "salary": "67000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 75,
+    "fields": {
+      "name": "Kosmetiker",
+      "description": "Durchführung kosmetischer Behandlungen. Kreativität und Kundenorientierung erforderlich.",
+      "salary": "33000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 76,
+    "fields": {
+      "name": "Robotics Engineer",
+      "description": "Entwicklung und Programmierung von Robotersystemen. Python-Kenntnisse und technisches Verständnis erforderlich.",
+      "salary": "72000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 77,
+    "fields": {
+      "name": "Marktforscher",
+      "description": "Durchführung von Marktanalysen und Entwicklung von Strategien. Excel und Python-Kenntnisse erforderlich.",
+      "salary": "53000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 78,
+    "fields": {
+      "name": "Tischler",
+      "description": "Herstellung und Reparatur von Möbeln. Handwerkliches Geschick und Präzision erforderlich.",
+      "salary": "38000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 79,
+    "fields": {
+      "name": "Product Owner",
+      "description": "Verantwortung für Produktstrategie und Backlog-Management. Agile Methoden und Führungserfahrung erforderlich.",
+      "salary": "70000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 80,
+    "fields": {
+      "name": "Umweltingenieur",
+      "description": "Planung und Umsetzung umweltschonender Projekte. Technisches Verständnis und Engagement erforderlich.",
+      "salary": "59000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 81,
+    "fields": {
+      "name": "Technical Writer",
+      "description": "Erstellung technischer Dokumentationen. Schreibtalent und technisches Verständnis erforderlich.",
+      "salary": "47000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 82,
+    "fields": {
+      "name": "Chirurg",
+      "description": "Durchführung operativer Eingriffe. Medizinische Kenntnisse und Präzision erforderlich.",
+      "salary": "120000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 83,
+    "fields": {
+      "name": "ERP Consultant",
+      "description": "Beratung bei der Implementierung von ERP-Systemen. SAP-Kenntnisse und Kommunikationsfähigkeit erforderlich.",
+      "salary": "69000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 84,
+    "fields": {
+      "name": "Maler",
+      "description": "Anstrich und Gestaltung von Innen- und Außenflächen. Handwerkliches Geschick und Kreativität erforderlich.",
+      "salary": "37000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 85,
+    "fields": {
+      "name": "IoT Developer",
+      "description": "Entwicklung von Internet-of-Things Lösungen. Kenntnisse in agiler Softwareentwicklung und Python erforderlich.",
+      "salary": "68000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 86,
+    "fields": {
+      "name": "Ergotherapeut",
+      "description": "Rehabilitation von Patienten mit motorischen Einschränkungen. Medizinische Kenntnisse und Geduld erforderlich.",
+      "salary": "42000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 87,
+    "fields": {
+      "name": "Sales Engineer",
+      "description": "Technische Beratung und Verkauf komplexer Lösungen. Kommunikationsfähigkeit und technisches Verständnis erforderlich.",
+      "salary": "65000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 88,
+    "fields": {
+      "name": "Florist",
+      "description": "Gestaltung von Blumenarrangements und Beratung von Kunden. Kreativität und Leidenschaft für Pflanzen erforderlich.",
+      "salary": "31000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 89,
+    "fields": {
+      "name": "Site Reliability Engineer",
+      "description": "Sicherstellung der Verfügbarkeit und Performance von Systemen. Docker, Kubernetes und agile Methoden erforderlich.",
+      "salary": "74000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 90,
+    "fields": {
+      "name": "Unternehmensberater",
+      "description": "Beratung von Unternehmen in strategischen Fragen. Excel und Kommunikationsfähigkeit erforderlich.",
+      "salary": "78000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 91,
+    "fields": {
+      "name": "Konditor",
+      "description": "Herstellung von Backwaren und Torten. Kreativität und handwerkliches Geschick erforderlich.",
+      "salary": "34000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 92,
+    "fields": {
+      "name": "BI Analyst",
+      "description": "Analyse von Geschäftsdaten und Erstellung von Reports. Excel und Python-Kenntnisse erforderlich.",
+      "salary": "60000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 93,
+    "fields": {
+      "name": "Rettungssanitäter",
+      "description": "Notfallversorgung und Transport von Patienten. Medizinische Kenntnisse und Stressresistenz erforderlich.",
+      "salary": "40000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 94,
+    "fields": {
+      "name": "Solutions Architect",
+      "description": "Entwicklung technischer Lösungsarchitekturen. Cloud-Infrastruktur und agile Methoden Kenntnisse erforderlich.",
+      "salary": "81000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 95,
+    "fields": {
+      "name": "Zahntechniker",
+      "description": "Herstellung von Zahnersatz und Prothesen. Technisches Verständnis und Präzision erforderlich.",
+      "salary": "43000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 96,
+    "fields": {
+      "name": "Brand Manager",
+      "description": "Entwicklung und Pflege der Markenidentität. Kreativität und Kenntnisse in digitaler Werbung erforderlich.",
+      "salary": "62000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 97,
+    "fields": {
+      "name": "Bestatter",
+      "description": "Organisation von Bestattungen und Betreuung von Angehörigen. Einfühlungsvermögen und Organisationstalent erforderlich.",
+      "salary": "36000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 98,
+    "fields": {
+      "name": "Research Scientist",
+      "description": "Durchführung wissenschaftlicher Forschung und Entwicklung neuer Technologien. Python-Kenntnisse und analytisches Denken erforderlich.",
+      "salary": "71000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 99,
+    "fields": {
+      "name": "Gärtner",
+      "description": "Pflege von Grünanlagen und Gestaltung von Gärten. Leidenschaft für Pflanzen und handwerkliches Geschick erforderlich.",
+      "salary": "35000.00"
+    }
+  },
+  {
+    "model": "products.jobs",
+    "pk": 100,
+    "fields": {
+      "name": "Innovation Manager",
+      "description": "Entwicklung innovativer Produkte und Prozesse. Agile Methoden und Kreativität erforderlich.",
+      "salary": "73000.00"
+    }
   }
 ]
