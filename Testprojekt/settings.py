@@ -51,7 +51,11 @@ INSTALLED_APPS = [
     'django_filters',   # für einfache Filter in API
     'drf_spectacular',  # für API-Dokumentation
     'products',
+    'users',
 ]
+
+AUTH_USER_MODEL = 'users.CustomUser'     # Custom User Model erbt von User in models.py und ersetzt das
+                                         # default User Model
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
