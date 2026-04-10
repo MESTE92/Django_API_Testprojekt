@@ -46,3 +46,26 @@ class Product(models.Model):                  # das Model Product
         verbose_name_plural = 'Produkte'   # Anzeige in Adminpannel bei mehreren Produkten
 
 
+
+
+class Jobs(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    salary = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        unique_together = ['name', 'salary']
+        verbose_name = 'Job'
+        verbose_name_plural = 'Jobs'
+
+        ordering = ['-salary', 'name']
+
+        indexes = [
+            models.Index(fields=['salary']),
+            models.Index(fields=['name']),
+        ]
+
+    def __str__(self):
+        return self.name
+
+

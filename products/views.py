@@ -1,7 +1,9 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView  # Die generischen Views
-from .serializers import CategorySerializer, ProductSerializer                        # Die Serialisier
-from .models import Category, Product                                                 # Die Model-Klassen
-from .pagination import CategoryPagination, ProductPagination
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView   # Die generischen Views
+from .serializers import CategorySerializer, ProductSerializer, JobSerializer         # Die Serialisier
+from .models import Category, Product, Jobs                                                # Die Model-Klassen
+from .pagination import CategoryPagination, ProductPagination, JobPagination
+
+from rest_framework.permissions import IsAuthenticated
 
 
 # Alle Kategorien (GET) + neue Kategorie (POST)
@@ -63,4 +65,32 @@ class ProductDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
     queryset         = Product.objects.select_related('category')
 
-    # kein get_queryset() noetig -> DRF holt Objekt automatisch per pk aus der URL
+    # kein get_queryset() nötig -> DRF holt Objekt automatisch per pk aus der URL
+
+
+
+class JobListCreateView(ListCreateAPIView):
+    serializer_class = JobSerializer
+    pagination_class = JobPagination
+    permission_classes = [IsAuthenticated]            # Authentifizierung für die CRUD-Operationen nötig
+
+    filterset_fields = ['name', 'salary']
+    ordering_fields  = ['salary', 'name']
+    search_fields    = ['name']
+
+    def get_queryset(self):
+        queryset = Jobs.objects.all()
+        name = self.request.query_params.get('name')
+        salary = self.request.query_params.get('salary')
+
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+        if salary:
+            queryset = queryset.filter(salary__gte=salary)
+
+        return queryset
+
+class JobDetailView(RetrieveUpdateDestroyAPIView):
+    serializer_class = JobSerializer
+    queryset         = Jobs.objects.all()
+    permission_classes = [IsAuthenticated]              # auch hier Authentifizierung für die CRUD-Operationen nötig

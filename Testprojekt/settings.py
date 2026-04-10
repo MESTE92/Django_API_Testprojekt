@@ -82,6 +82,9 @@ REST_FRAMEWORK = {
         'rest_framework.filters.OrderingFilter',                    # für Sortierung
         'rest_framework.filters.SearchFilter',                      # ein einfacher Suchfilter
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [                             # globale Authentifizierungsklassen
+        'rest_framework.authentication.TokenAuthentication',
+    ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 
     #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',

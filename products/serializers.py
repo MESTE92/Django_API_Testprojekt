@@ -1,12 +1,23 @@
 import bleach                                          # für Datenbereinigung XSS
 from rest_framework import serializers                 # für Serialisierung
-from .models import Category, Product                  # Model-Klassen für Serialisierung
+from .models import Category, Product, Jobs            # Model-Klassen für Serialisierung
 
 # Serialisierung der Kategorien
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model  = Category                                # Jeder Serializer braucht ein Model
         fields = ['id', 'name']                          # Felder die erialisiert werden sollen
+
+        extra_kwargs = {
+            'name': {'min_length': 3, 'required': True},
+        }
+
+    def validate(self, attrs):
+        fields_to_validate = ['name']
+        for field in fields_to_validate:
+            if attrs.get(field):
+                attrs[field] = bleach.clean(attrs[field])
+        return attrs
 
 
 
@@ -37,12 +48,12 @@ class ProductSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'id':       {'read_only': True},
             'description': {'required': False},
-            'name':     {'min_length': 3},
-            'price':    {'min_value': 0.01},
+            'name':     {'min_length': 3, 'required': True},
+            'price':    {'min_value': 0.01, 'required': True},
             'sku':      {'required': True},
             'category': {'write_only': True},
             'category_name': {'read_only': True},
-            'stock':    {'min_value': 0},
+            'stock':    {'min_value': 0, 'required': True},
             'image':    {'required': False, 'allow_null': True},
             # write_only=True -> category ID nur als Input, nicht im JSON Output
         }
@@ -65,3 +76,30 @@ class ProductSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Der Lagerbestand darf maximal 5.000 Produkte betragen !")
 
         return attrs   # gibt die Validierungsergebnisse zurück
+
+
+
+
+class JobSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Jobs
+        fields = ['id', 'name', 'salary', 'description']
+
+        extra_kwargs = {
+            'id': {'read_only': True},
+            'description': {'required': False},
+            'salary': {'min_value': 0.01, 'required': True},
+            'name': {'min_length': 3, 'max_length': 255, 'required': True},
+        }
+
+
+    def validate(self, attrs):
+        fields_to_validate = ['name', 'description']
+        for field in fields_to_validate:
+            if attrs.get(field):
+                attrs[field] = bleach.clean(attrs[field])
+
+        if attrs['salary'] <= 0:
+            raise serializers.ValidationError("Das Gehalt muss groesser als 0 sein !")
+
+        return attrs

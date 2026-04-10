@@ -1,6 +1,7 @@
 
 from django.urls import path
 from .views import CategoryListCreateView, ProductListCreateView, ProductDetailView  # die Views
+from .views import JobListCreateView, JobDetailView
 
 app_name = 'products'  # Namespace -> verhindert Konflikte mit möglichen anderen Apps
 
@@ -18,4 +19,14 @@ urlpatterns = [
     # PUT    /api/products/1/ -> Produkt komplett ersetzen
     # PATCH  /api/products/1/ -> Produkt teilweise ändern
     # DELETE /api/products/1/ -> Produkt löschen
+
+    path('jobs/', JobListCreateView.as_view(), name='job-list'),
+    # GET  /api/jobs/   -> alle Jobs (mit Filter/Suche/Sortierung)
+    # POST /api/jobs/   -> neue Jobs erstellen
+
+    path('jobs/<int:pk>/', JobDetailView.as_view(), name='job-detail'),
+    # GET    /api/jobs/1/ -> einzelner Job
+    # PUT    /api/jobs/1/ -> Job komplett ersetzen
+    # PATCH  /api/jobs/1/ -> Job teilweise ändern
+    # DELETE /api/jobs/1/ -> Job löschen
 ]

@@ -36,6 +36,22 @@ class ProductPagination(PageNumberPagination):
 
 
 
+class JobPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 20
+
+    def paginate_queryset(self, queryset, request, view=None):
+        try:
+            return super().paginate_queryset(queryset, request, view)
+        except EmptyPage:
+            # Bei ungültiger Seite: automatisch letzte Seite zurückgeben
+            paginator = Paginator(queryset, self.get_page_size(request))
+            self.page = paginator.page(paginator.num_pages)
+            return self.page.object_list
+
+
+
 
 
 
