@@ -67,6 +67,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+
+
+
 # REST Framework Konfiguration
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [

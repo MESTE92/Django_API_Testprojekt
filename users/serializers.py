@@ -1,7 +1,6 @@
 import re                                                    # für Regex Validierung
 import bleach                                                # für XSS Schutz
 from rest_framework import serializers                       # für Serialisierung
-from rest_framework.authtoken.models import Token            # für Token Erstellung
 from django.contrib.auth import get_user_model               # gibt CustomUser zurück
 
 User = get_user_model()                                      # == CustomUser zur Laufzeit
@@ -45,8 +44,8 @@ class RegisterSerializer(serializers.ModelSerializer):    # -> für Registrierun
     def create(self, validated_data):
         # create_user() hasht das Passwort – niemals User.objects.create() direkt nutzen
         # sonst landet es im Klartext in der Datenbank
+        # Token wird automatisch via post_save-Signal in models.py erstellt
         user = User.objects.create_user(**validated_data)
-        Token.objects.create(user=user)  # -> Token direkt bei Registrierung erstellen
         return user
 
 
