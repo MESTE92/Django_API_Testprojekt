@@ -55,6 +55,18 @@ class RegisterSerializer(serializers.ModelSerializer):    # -> für Registrierun
 
 
 
+class UserPublicSerializer(serializers.ModelSerializer):        # -> für öffentliche Profilansicht (nur-lesen)
+
+    class Meta:
+        model  = User
+        fields = ['username', 'profile_picture']
+
+        extra_kwargs = {
+            'username':        {'read_only': True},
+            'profile_picture': {'read_only': True},
+        }
+
+
 class UserProfileSerializer(serializers.ModelSerializer):      # -> für User Profil
 
     class Meta:

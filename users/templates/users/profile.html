@@ -4,201 +4,155 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mein Profil</title>
+<title>PROFIL // {{ user.username }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Zen+Kaku+Gothic+New:wght@300;400;700&display=swap');
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --sakura-deep: #e91e8c; --sakura-petal: #ffb7c5;
-    --white-glass: rgba(255,255,255,0.82); --text-dark: #2d1b2e;
-    --text-mid: #6b3a5e; --input-bg: rgba(255,255,255,0.65);
-    --border-soft: rgba(233,30,140,0.25); --danger: #c2185b;
+    --pink: #ff0090; --pink-dim: rgba(255,0,144,0.45); --pink-glow: rgba(255,0,144,0.2);
+    --cyan: #00fff9; --purple: #9900ff; --dark: #030008; --dark-card: rgba(5,0,12,0.88);
+    --text: #e8e8e8; --text-dim: rgba(232,232,232,0.45); --border: rgba(255,0,144,0.35);
   }
-  body {
-    min-height: 100vh; font-family: 'Zen Kaku Gothic New', sans-serif;
-    background: linear-gradient(160deg, #fff0f5 0%, #fce4ec 30%, #f3e5f5 60%, #e8eaf6 100%);
-    display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;
-  }
-  #sakura-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-  body::before {
-    content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
-    background: radial-gradient(ellipse at 20% 20%, rgba(255,183,197,0.3) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(206,147,216,0.25) 0%, transparent 50%);
-    z-index: 0;
-  }
-  .container { position: relative; z-index: 10; width: 100%; max-width: 500px; padding: 20px; }
-  .header-deco { text-align: center; margin-bottom: 24px; }
-  .kanji-deco { font-family: 'Noto Serif JP', serif; font-size: 12px; letter-spacing: 8px; color: var(--text-mid); opacity: 0.7; margin-bottom: 6px; }
-  .title-main { font-family: 'Noto Serif JP', serif; font-size: 26px; font-weight: 300; color: var(--text-dark); letter-spacing: 2px; margin-bottom: 4px; }
-  .divider { display: flex; align-items: center; gap: 12px; margin: 0 0 24px; }
-  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(233,30,140,0.4), transparent); }
-  .avatar-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 28px; }
-  .avatar-ring { width: 96px; height: 96px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, #f06292, #e91e8c, #9c27b0); margin-bottom: 12px; box-shadow: 0 4px 20px rgba(233,30,140,0.3); }
-  .avatar-inner { width: 100%; height: 100%; border-radius: 50%; overflow: hidden; background: var(--sakura-petal); display: flex; align-items: center; justify-content: center; }
-  .avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
-  .avatar-placeholder { font-family: 'Noto Serif JP', serif; font-size: 32px; color: #fff; opacity: 0.9; }
-  .username-display { font-family: 'Noto Serif JP', serif; font-size: 18px; font-weight: 400; color: var(--text-dark); letter-spacing: 2px; }
-  .token-badge { margin-top: 6px; font-size: 10px; letter-spacing: 2px; color: var(--text-mid); opacity: 0.6; text-transform: uppercase; }
-  .card {
-    background: var(--white-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border-radius: 24px; border: 1px solid rgba(255,183,197,0.5); padding: 36px 32px;
-    box-shadow: 0 8px 32px rgba(233,30,140,0.08), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9);
-  }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-group { margin-bottom: 18px; }
-  label { display: block; font-size: 11px; letter-spacing: 3px; color: var(--text-mid); text-transform: uppercase; margin-bottom: 7px; font-weight: 700; }
-  input[type="text"], input[type="email"], input[type="password"] {
-    width: 100%; padding: 12px 15px; background: var(--input-bg);
-    border: 1px solid var(--border-soft); border-radius: 12px;
-    font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 14px; color: var(--text-dark);
-    outline: none; transition: all 0.3s ease;
-  }
-  input:focus { border-color: rgba(233,30,140,0.5); background: rgba(255,255,255,0.9); box-shadow: 0 0 0 3px rgba(233,30,140,0.08); }
-  input::placeholder { color: rgba(107,58,94,0.35); }
-  .upload-area { border: 1.5px dashed rgba(233,30,140,0.35); border-radius: 12px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.3s; background: rgba(255,255,255,0.4); position: relative; overflow: hidden; }
-  .upload-area:hover { border-color: rgba(233,30,140,0.6); background: rgba(255,183,197,0.1); }
-  .upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-  .upload-text { font-size: 12px; color: var(--text-mid); letter-spacing: 1px; }
-  .error-msg { font-size: 12px; color: var(--danger); letter-spacing: 0.5px; margin-top: 5px; display: block; }
-  .alert { padding: 10px 16px; border-radius: 10px; font-size: 13px; margin-bottom: 16px; border: 1px solid rgba(233,30,140,0.2); background: rgba(233,30,140,0.07); color: var(--text-mid); }
-  .alert-success { background: rgba(76,175,80,0.08); border-color: rgba(76,175,80,0.3); color: #2e7d32; }
-  .section-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(233,30,140,0.25), transparent); margin: 20px 0; }
-  .section-label { font-size: 10px; letter-spacing: 4px; color: var(--text-mid); opacity: 0.6; text-transform: uppercase; margin-bottom: 16px; text-align: center; }
-  .btn-group { display: grid; grid-template-columns: 1fr auto; gap: 12px; margin-top: 8px; align-items: center; }
-  .btn-save {
-    padding: 14px; border: none; border-radius: 14px;
-    font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 13px; font-weight: 700;
-    letter-spacing: 3px; color: #fff; cursor: pointer;
-    background: linear-gradient(135deg, #f06292 0%, #e91e8c 40%, #9c27b0 100%);
-    box-shadow: 0 4px 18px rgba(233,30,140,0.35); transition: all 0.3s; text-transform: uppercase;
-    position: relative; overflow: hidden;
-  }
-  .btn-save::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
-  .btn-save:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(233,30,140,0.45); }
-  .btn-save:hover::before { left: 100%; }
-  .btn-delete {
-    padding: 14px 18px; border: 1.5px solid rgba(194,24,91,0.4); border-radius: 14px;
-    font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 12px; font-weight: 700;
-    letter-spacing: 2px; color: var(--danger); cursor: pointer; background: rgba(255,255,255,0.5);
-    transition: all 0.3s; text-transform: uppercase; white-space: nowrap;
-  }
-  .btn-delete:hover { background: rgba(194,24,91,0.08); border-color: var(--danger); transform: translateY(-1px); }
+  body { min-height: 100vh; font-family: 'Share Tech Mono', monospace; background: var(--dark); display: flex; flex-direction: column; overflow-x: hidden; overflow-y: auto; position: relative; }
+  body::after { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.10) 2px, rgba(0,0,0,0.10) 4px); pointer-events: none; z-index: 9999; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(255,0,144,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,249,0.02) 1px, transparent 1px); background-size: 45px 45px; z-index: 0; pointer-events: none; }
+  #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.35; }
+
+  /* ── NAVBAR ── */
+  .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; align-items: center; justify-content: space-between; padding: 0 36px; height: 58px; background: rgba(3,0,8,0.92); border-bottom: 1px solid var(--border); box-shadow: 0 2px 30px var(--pink-glow); backdrop-filter: blur(14px); }
+  .nav-brand { font-family: 'Orbitron', monospace; font-size: 13px; font-weight: 900; color: var(--pink); letter-spacing: 4px; text-decoration: none; text-transform: uppercase; text-shadow: 0 0 10px var(--pink), 0 0 25px var(--pink-dim); }
+  .nav-center { font-size: 9px; letter-spacing: 3px; color: var(--text-dim); display: flex; align-items: center; gap: 6px; }
+  .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 6px var(--pink); animation: dotPulse 1.5s ease-in-out infinite; }
+  @keyframes dotPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+  /* Avatar + Dropdown */
+  .nav-avatar-wrap { position: relative; cursor: pointer; }
+  .nav-avatar { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--pink); overflow: hidden; display: flex; align-items: center; justify-content: center; background: rgba(255,0,144,0.1); box-shadow: 0 0 10px var(--pink-glow); transition: box-shadow 0.3s; }
+  .nav-avatar:hover { box-shadow: 0 0 22px var(--pink-dim); }
+  .nav-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .nav-avatar-letter { font-family: 'Orbitron', monospace; font-size: 14px; font-weight: 700; color: var(--pink); }
+  .nav-dropdown { position: absolute; top: calc(100% + 12px); right: 0; min-width: 200px; background: rgba(4,0,10,0.97); border: 1px solid var(--border); clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%); box-shadow: 0 0 30px var(--pink-glow); display: none; flex-direction: column; z-index: 600; }
+  .nav-dropdown.open { display: flex; }
+  .dropdown-header { padding: 10px 16px; font-size: 9px; letter-spacing: 3px; color: var(--pink); opacity: 0.6; text-transform: uppercase; border-bottom: 1px solid rgba(255,0,144,0.12); }
+  .dropdown-item { padding: 13px 16px; font-family: 'Orbitron', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); text-decoration: none; border-bottom: 1px solid rgba(255,0,144,0.08); transition: all 0.2s; cursor: pointer; background: transparent; border-left: none; border-right: none; border-top: none; width: 100%; text-align: left; display: block; }
+  .dropdown-item:hover { color: var(--pink); background: rgba(255,0,144,0.06); padding-left: 22px; }
+  .dropdown-item:last-child { border-bottom: none; }
+  .dropdown-logout { color: rgba(255,68,102,0.7); }
+  .dropdown-logout:hover { color: #ff4466; background: rgba(255,34,85,0.07); }
+
+  /* ── MAIN ── */
+  .main-wrap { position: relative; z-index: 10; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px 60px; text-align: center; min-height: 100vh; }
+
+  .welcome-tag { font-size: 10px; letter-spacing: 6px; color: var(--cyan); margin-bottom: 20px; opacity: 0.7; animation: blink 2.5s step-end infinite; }
+  @keyframes blink { 0%,100% { opacity: 0.7; } 50% { opacity: 0.2; } }
+
+  .welcome-title { font-family: 'Orbitron', monospace; font-size: clamp(28px, 5vw, 52px); font-weight: 900; color: var(--pink); letter-spacing: 5px; text-transform: uppercase; text-shadow: 0 0 15px var(--pink), 0 0 40px var(--pink-dim), 0 0 80px var(--pink-glow); margin-bottom: 12px; animation: glitch 8s infinite; }
+  @keyframes glitch { 0%,88%,100% { text-shadow: 0 0 15px var(--pink), 0 0 40px var(--pink-dim); transform: none; } 89% { transform: translate(-3px,0); text-shadow: 3px 0 var(--cyan); } 91% { transform: translate(3px,0); text-shadow: -3px 0 var(--purple); } 93% { transform: none; } }
+
+  .welcome-user { font-family: 'Orbitron', monospace; font-size: clamp(14px, 2.5vw, 22px); font-weight: 700; color: var(--cyan); letter-spacing: 6px; text-transform: uppercase; opacity: 0.9; margin-bottom: 40px; }
+
+  .divider { width: 280px; height: 1px; margin: 0 auto 40px; background: linear-gradient(90deg, transparent, var(--pink-dim), transparent); }
+
+  .coming-soon-card { background: var(--dark-card); border: 1px solid var(--border); clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)); padding: 36px 44px; box-shadow: 0 0 40px var(--pink-glow), inset 0 0 40px rgba(255,0,144,0.03); position: relative; display: inline-block; }
+  .coming-soon-card::before { content: ''; position: absolute; top: 0; right: 0; width: 20px; height: 20px; background: var(--pink); clip-path: polygon(0 0, 100% 0, 100% 100%); opacity: 0.7; }
+  .coming-soon-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 20px; height: 20px; background: var(--cyan); clip-path: polygon(0 0, 0 100%, 100% 100%); opacity: 0.4; }
+
+  /* Scan-Linie */
+  .card-scan { position: absolute; inset: 0; overflow: hidden; pointer-events: none; clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)); }
+  .card-scan::before { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 40%; background: linear-gradient(180deg, transparent, rgba(255,0,144,0.06), transparent); animation: scanMove 3s ease-in-out infinite; }
+  @keyframes scanMove { 0% { top: -100%; } 100% { top: 200%; } }
+
+  .soon-icon { font-size: 36px; display: block; margin-bottom: 16px; filter: drop-shadow(0 0 10px var(--pink)); animation: iconPulse 3s ease-in-out infinite; }
+  @keyframes iconPulse { 0%,100% { filter: drop-shadow(0 0 8px var(--pink)); } 50% { filter: drop-shadow(0 0 20px var(--pink)) drop-shadow(0 0 40px var(--pink-dim)); } }
+  .soon-text { font-family: 'Orbitron', monospace; font-size: 11px; font-weight: 700; letter-spacing: 4px; color: var(--text-dim); text-transform: uppercase; }
+  .soon-dot { display: inline-block; animation: ellipsis 1.5s steps(4, end) infinite; overflow: hidden; vertical-align: bottom; width: 1.5em; }
+  @keyframes ellipsis { 0%{width:0;} 100%{width:1.5em;} }
+
+  /* Status Badges */
+  .badges { display: flex; gap: 12px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
+  .badge { padding: 6px 16px; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; border: 1px solid rgba(0,255,249,0.3); color: var(--cyan); background: rgba(0,255,249,0.05); clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); display: flex; align-items: center; gap: 6px; }
+  .badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 5px var(--cyan); animation: dotPulse 1.5s ease-in-out infinite; }
+
+  /* ── FOOTER ── */
+  .footer { position: relative; z-index: 10; text-align: center; padding: 22px 20px 30px; border-top: 1px solid rgba(255,0,144,0.1); font-size: 10px; letter-spacing: 3px; color: var(--text-dim); text-transform: uppercase; opacity: 0.5; }
+  .footer-sep { margin: 0 10px; color: var(--pink); opacity: 0.5; }
+  .footer-link { color: var(--pink); text-decoration: none; transition: all 0.2s; }
+  .footer-link:hover { text-shadow: 0 0 8px var(--pink); color: #fff; }
 </style>
 </head>
 <body>
-<canvas id="sakura-canvas"></canvas>
-<div class="container">
-  <div class="header-deco">
-    <div class="kanji-deco">プロフィール · Profil</div>
-    <h1 class="title-main">Mein Profil</h1>
-  </div>
-  <div class="divider"><span style="font-size:14px;color:#e91e8c;opacity:0.7;">🌸</span></div>
+<canvas id="bg-canvas"></canvas>
 
-  <div class="avatar-section">
-    <div class="avatar-ring">
-      <div class="avatar-inner">
-        {% if user.profile_picture %}
-          <img src="{{ user.profile_picture.url }}" alt="Profilbild">
-        {% else %}
-          <span class="avatar-placeholder">{{ user.username|first|upper }}</span>
-        {% endif %}
+<nav class="navbar">
+  <a href="{% url 'home' %}" class="nav-brand">◆ TESTPROJEKT_SYS</a>
+  <div class="nav-center"><span class="nav-dot"></span><span id="nav-ts">--:--:--</span></div>
+  <div class="nav-links">
+    <div class="nav-avatar-wrap" id="avatarTrigger">
+      <div class="nav-avatar">
+        {% if user.profile_picture %}<img src="{{ user.profile_picture.url }}" alt="">
+        {% else %}<span class="nav-avatar-letter">{{ user.username|first|upper }}</span>{% endif %}
+      </div>
+      <div class="nav-dropdown" id="avatarDropdown">
+        <div class="dropdown-header">{{ user.username }}</div>
+        <a href="{% url 'profile_edit' user.pk %}" class="dropdown-item">// Profil bearbeiten</a>
+        <form method="POST" action="{% url 'logout' %}" style="display:block;">
+          {% csrf_token %}
+          <button type="submit" class="dropdown-item dropdown-logout">// Logout</button>
+        </form>
       </div>
     </div>
-    <div class="username-display">{{ user.username }}</div>
-    <div class="token-badge">Token · 認証済み</div>
+  </div>
+</nav>
+
+<main class="main-wrap">
+  <div class="welcome-tag">// SESSION_ACTIVE :: USER_VERIFIED //</div>
+  <h1 class="welcome-title">WILLKOMMEN ZURÜCK</h1>
+  <div class="welcome-user">{{ user.username }}</div>
+
+  <div class="divider"></div>
+
+  <div class="coming-soon-card">
+    <div class="card-scan"></div>
+    <span class="soon-icon">◈</span>
+    <div class="soon-text">Weitere Features folgen bald<span class="soon-dot">...</span></div>
   </div>
 
-  <div class="card">
-    {% if error %}<div class="alert">{{ error }}</div>{% endif %}
-    {% if success %}<div class="alert alert-success">{{ success }}</div>{% endif %}
-
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="first_name">Vorname</label>
-          <input type="text" id="first_name" name="first_name"
-                 placeholder="Max" value="{{ user.first_name }}">
-        </div>
-        <div class="form-group">
-          <label for="last_name">Nachname</label>
-          <input type="text" id="last_name" name="last_name"
-                 placeholder="Mustermann" value="{{ user.last_name }}">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="username">Benutzername</label>
-        <input type="text" id="username" name="username"
-               value="{{ user.username }}">
-        {% if errors.username %}<span class="error-msg">{{ errors.username.0 }}</span>{% endif %}
-      </div>
-
-      <div class="form-group">
-        <label for="email">E-Mail</label>
-        <input type="email" id="email" name="email"
-               value="{{ user.email }}">
-        {% if errors.email %}<span class="error-msg">{{ errors.email.0 }}</span>{% endif %}
-      </div>
-
-      <div class="section-divider"></div>
-      <div class="section-label">Passwort ändern · パスワード変更</div>
-
-      <div class="form-group">
-        <label for="password">Neues Passwort <span style="opacity:0.5;font-size:10px;">(optional)</span></label>
-        <input type="password" id="password" name="password"
-               placeholder="Leer lassen = nicht ändern">
-        {% if errors.password %}<span class="error-msg">{{ errors.password.0 }}</span>{% endif %}
-      </div>
-
-      <div class="section-divider"></div>
-
-      <div class="form-group">
-        <label>Profilbild</label>
-        <div class="upload-area">
-          <input type="file" name="profile_picture" accept="image/*">
-          <div class="upload-text">🌸 &nbsp;Neues Bild auswählen</div>
-        </div>
-      </div>
-
-      <div class="btn-group">
-        <button type="submit" name="action" value="update" class="btn-save">保存 · Speichern</button>
-        <button type="submit" name="action" value="delete" class="btn-delete"
-                onclick="return confirm('Profil wirklich löschen?')">削除</button>
-      </div>
-    </form>
+  <div class="badges">
+    <span class="badge"><span class="badge-dot"></span>TOKEN_VALID</span>
+    <span class="badge"><span class="badge-dot"></span>SESSION_ACTIVE</span>
   </div>
-</div>
+</main>
+
+<footer class="footer">
+  <span>© 2026 TESTPROJEKT_SYS</span><span class="footer-sep">|</span>
+  <span>All Rights Reserved <a href="https://github.com/MESTE92" target="_blank" class="footer-link">MESTE92</a></span><span class="footer-sep">|</span>
+  <span>Django REST Framework</span>
+</footer>
+
 <script>
-const canvas = document.getElementById('sakura-canvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
-const petals = Array.from({length: 50}, () => ({
-  x: Math.random() * canvas.width, y: Math.random() * canvas.height - canvas.height,
-  size: Math.random() * 13 + 6, speedY: Math.random() * 1.1 + 0.35,
-  speedX: Math.random() * 0.7 - 0.35, rotation: Math.random() * Math.PI * 2,
-  rotSpeed: (Math.random() - 0.5) * 0.03, opacity: Math.random() * 0.45 + 0.2,
-  swaySpeed: Math.random() * 0.018 + 0.005, swayOffset: Math.random() * Math.PI * 2,
-  sway: Math.random() * 2,
-  color: ['#ffb7c5','#ffc1cc','#f48fb1','#f8bbd9','#ff80ab','#fce4ec'][Math.floor(Math.random()*6)]
-}));
-let frame = 0;
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height); frame++;
-  petals.forEach(p => {
-    p.y += p.speedY; p.x += p.speedX + Math.sin(frame * p.swaySpeed + p.swayOffset) * p.sway * 0.05;
-    p.rotation += p.rotSpeed;
-    if (p.y > canvas.height + 20) { p.y = -20; p.x = Math.random() * canvas.width; }
-    ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rotation); ctx.globalAlpha = p.opacity; ctx.fillStyle = p.color;
-    ctx.beginPath(); ctx.ellipse(0, -p.size/2, p.size*0.38, p.size*0.58, 0, 0, Math.PI*2); ctx.fill();
-    ctx.beginPath(); ctx.ellipse(p.size*0.28, 0, p.size*0.38, p.size*0.58, Math.PI/3, 0, Math.PI*2); ctx.fill();
-    ctx.restore();
-  });
-  requestAnimationFrame(animate);
+function ts() { const n=new Date(); document.getElementById('nav-ts').textContent=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0'); }
+setInterval(ts,1000); ts();
+const trigger=document.getElementById('avatarTrigger'), dropdown=document.getElementById('avatarDropdown');
+trigger.addEventListener('click', e=>{ dropdown.classList.toggle('open'); e.stopPropagation(); });
+document.addEventListener('click', ()=>dropdown.classList.remove('open'));
+
+const canvas=document.getElementById('bg-canvas'), ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight; });
+const HEX_SIZE=30; let frame=0;
+function hexPath(cx,cy,size){ ctx.beginPath(); for(let i=0;i<6;i++){ const a=(Math.PI/3)*i-Math.PI/6; const x=cx+size*Math.cos(a), y=cy+size*Math.sin(a); i===0?ctx.moveTo(x,y):ctx.lineTo(x,y); } ctx.closePath(); }
+const hexes=[];
+const cols=Math.ceil(canvas.width/(HEX_SIZE*1.75))+2, rows=Math.ceil(canvas.height/(HEX_SIZE*1.5))+2;
+for(let r=0;r<rows;r++) for(let c=0;c<cols;c++) hexes.push({ cx:c*HEX_SIZE*1.75+(r%2)*HEX_SIZE*.875, cy:r*HEX_SIZE*1.5, pulse:Math.random()*Math.PI*2, speed:Math.random()*.008+.004, baseOpacity:Math.random()*.06+.01 });
+function drawHexBg(){
+  frame++;ctx.clearRect(0,0,canvas.width,canvas.height);
+  hexes.forEach(h=>{ h.pulse+=h.speed; const op=h.baseOpacity+Math.sin(h.pulse)*.04; hexPath(h.cx,h.cy,HEX_SIZE-2); ctx.strokeStyle=`rgba(255,0,144,${op})`; ctx.lineWidth=.6; ctx.stroke(); });
+  const time=frame*.005;
+  for(let i=0;i<5;i++){ const cx=(Math.sin(time*.7+i*1.3)*.5+.5)*canvas.width, cy=(Math.cos(time*.5+i*.9)*.5+.5)*canvas.height; hexPath(cx,cy,HEX_SIZE); ctx.strokeStyle=`rgba(255,0,144,${.12+Math.sin(time+i)*.06})`; ctx.lineWidth=1; ctx.stroke(); }
+  requestAnimationFrame(drawHexBg);
 }
-animate();
+drawHexBg();
 </script>
 </body>
 </html>

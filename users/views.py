@@ -1,15 +1,22 @@
-from django.shortcuts import render, redirect, get_object_or_404    # NEW
+from django.shortcuts import render, redirect, get_object_or_404   # get_object_or_404: Hilfsfunktion, die ein Objekt anhand von Kriterien abruft oder 404-Fehler zurückgibt
 from django.contrib.auth import get_user_model                    # gibt CustomUser zurück
-from django.contrib.auth import login, logout, authenticate
-from rest_framework.views import APIView
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth import login, logout, authenticate       # login: erstellt Session, logout: beendet Session, authenticate: prüft Credentials
+from rest_framework.views import APIView                           # Basis-View für benutzerdefinierte Logik (z.B. Login/Logout ohne Serializer)   
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveAPIView
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.parsers import MultiPartParser, FormParser       # NEW - für Datei-Uploads per Formular
 
-from .serializers import RegisterSerializer, UserProfileSerializer
+from .serializers import RegisterSerializer, UserProfileSerializer, UserPublicSerializer
 from .permissions import IsOwner
 
 User = get_user_model()
+
+
+class HomeView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'users/home.html')
 
 
 class RegisterView(ListCreateAPIView):
@@ -27,9 +34,7 @@ class RegisterView(ListCreateAPIView):
 
         if serializer.is_valid():
             serializer.save()
-            return render(request, 'users/register.html', {
-                'success': 'Registrierung erfolgreich! Du kannst dich jetzt anmelden.'
-            })
+            return redirect('login')
 
         # Fehler an Template zurückgeben
         return render(request, 'users/register.html', {
@@ -76,7 +81,7 @@ class UserProfileView(RetrieveUpdateDestroyAPIView):
 
 
 
-class LoginView(APIView):                                   # kein Serializer nötig – Django auth übernimmt
+class LoginView(APIView):                             # kein Serializer nötig – Django auth übernimmt
     def get(self, request, *args, **kwargs):
         return render(request, 'users/login.html')
 
@@ -102,6 +107,50 @@ class LogoutView(APIView):
 
     def post(self, request, *args, **kwargs):
         logout(request)                                     # Session beenden
-        return redirect('login')
+        return redirect('home')
+
+
+class ProfileEditView(RetrieveUpdateDestroyAPIView):
+    serializer_class   = UserProfileSerializer
+    queryset           = User.objects.all()
+    permission_classes = [IsAuthenticated, IsOwner]
+    parser_classes     = [MultiPartParser, FormParser]
+
+    def get(self, request, *args, **kwargs):
+        user = get_object_or_404(User, pk=kwargs['pk'])
+        self.check_object_permissions(request, user)
+        return render(request, 'users/profile_edit.html', {'user': user})
+
+    def post(self, request, *args, **kwargs):
+        user = get_object_or_404(User, pk=kwargs['pk'])
+        self.check_object_permissions(request, user)
+
+        if request.data.get('action') == 'delete':
+            user.delete()
+            return redirect('register')
+
+        serializer = UserProfileSerializer(user, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return render(request, 'users/profile_edit.html', {
+                'user': user,
+                'success': 'Profil erfolgreich gespeichert.'
+            })
+
+        return render(request, 'users/profile_edit.html', {
+            'user': user,
+            'errors': serializer.errors
+        })
+
+
+class UserPublicProfileView(RetrieveAPIView):               # Öffentliche Profilansicht (nur-lesen)
+    serializer_class   = UserPublicSerializer
+    queryset           = User.objects.all()
+    permission_classes = [IsAuthenticated]                  # eingeloggt sein reicht – kein IsOwner
+
+    def get(self, request, *args, **kwargs):
+        profile_user = get_object_or_404(User, pk=kwargs['pk'])
+        return render(request, 'users/public_profile.html', {'profile_user': profile_user})
 
 

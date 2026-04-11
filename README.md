@@ -1,6 +1,11 @@
 # Django REST API Testprojekt
 
-Ein kleines Django-Testprojekt mit REST API für Produkt- und Kategorienverwaltung, inklusive Filterfunktionen, Suchoptionen und Admin-Panel.
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![Django](https://img.shields.io/badge/Django-6.0.3-green)
+![DRF](https://img.shields.io/badge/DRF-3.17.1-red)
+![Lizenz](https://img.shields.io/badge/Lizenz-MIT-lightgrey)
+
+Ein Django-Testprojekt mit REST API für Produkt-, Kategorie- und Benutzerverwaltung, inklusive Token-Authentifizierung, Filterfunktionen, Suchoptionen und Admin-Panel.
 
 ## Screenshots
 
@@ -21,6 +26,8 @@ Ein kleines Django-Testprojekt mit REST API für Produkt- und Kategorienverwaltu
 - [Server starten](#server-starten)
 - [API-Dokumentation](#api-dokumentation)
 - [API testen](#api-testen)
+- [User- & Authentifizierungs-API](#user---authentifizierungs-api)
+- [Geschützte vs. öffentliche Endpunkte](#geschützte-vs-öffentliche-endpunkte)
 - [Admin-Panel](#admin-panel)
 - [Projektstruktur](#projektstruktur)
 - [Nächste Schritte](#nächste-schritte)
@@ -35,6 +42,14 @@ Ein kleines Django-Testprojekt mit REST API für Produkt- und Kategorienverwaltu
 
 - **RESTful API** mit Django REST Framework
 - **Produkt- und Kategorieverwaltung** mit vollständigem CRUD
+- **Job-Verwaltung** mit Gehaltsfeldern und Sortierung
+- **Benutzerverwaltung**:
+  - Registrierung mit Passwort-Validierung (Groß-/Kleinbuchstaben, Zahl, Sonderzeichen)
+  - XSS-Schutz durch `bleach`-Sanitierung aller Texteingaben
+  - Profilbild-Upload (ImageField)
+  - Öffentliche Profilansicht (Benutzername + Profilbild)
+  - Automatische Token-Erstellung bei Registrierung (via `post_save`-Signal)
+  - Session-basierter Login/Logout
 - **Erweiterte Suchfunktionen**:
   - Globale Suche über mehrere Felder (`?search=`)
   - Gezielte Filterung (Name, SKU, Beschreibung, Preis, Kategorie, Status)
@@ -63,6 +78,7 @@ Ein kleines Django-Testprojekt mit REST API für Produkt- und Kategorienverwaltu
 - **Datenbank**: SQLite3 (Standard)
 - **Filter**: django-filter
 - **API-Dokumentation**: drf-spectacular (OpenAPI 3.0)
+- **XSS-Schutz**: bleach
 - **Python**: 3.x
 
 ---
@@ -179,11 +195,11 @@ Das Projekt nutzt **drf-spectacular** für eine automatisch generierte, interakt
 ![API Dokumentation](Beispielbilder/API_Doku.png)
 
 **Was du hier tun kannst:**
-- 📖 Alle verfügbaren Endpunkte durchsuchen
-- 🔍 Request/Response-Schemas ansehen
-- ✅ API-Requests direkt im Browser testen (Try it out!)
-- 📝 Parameter und Filter dokumentiert
-- 🎯 Beispiel-Responses für jeden Endpunkt
+- Alle verfügbaren Endpunkte durchsuchen
+- Request/Response-Schemas ansehen
+- API-Requests direkt im Browser testen (Try it out!)
+- Parameter und Filter dokumentiert
+- Beispiel-Responses für jeden Endpunkt
 
 ### OpenAPI Schema exportieren
 
@@ -201,11 +217,11 @@ Die Datei `test_requests.txt` enthält vorkonfigurierte URLs zum Testen aller AP
 
 ### Hauptendpunkte
 
-| Endpunkt | Beschreibung |
-|----------|--------------|
-| `http://127.0.0.1:8000/api/products/` | Alle Produkte abrufen |
-| `http://127.0.0.1:8000/api/products/1/` | Einzelnes Produkt (ID: 1) |
-| `http://127.0.0.1:8000/api/categories/` | Alle Kategorien abrufen |
+| Endpunkt | Methode | Beschreibung |
+|----------|---------|--------------|
+| `http://127.0.0.1:8000/api/products/` | GET | Alle Produkte abrufen |
+| `http://127.0.0.1:8000/api/products/1/` | GET | Einzelnes Produkt (ID: 1) |
+| `http://127.0.0.1:8000/api/categories/` | GET | Alle Kategorien abrufen |
 
 ### Suchfunktionen
 
@@ -283,6 +299,78 @@ curl http://127.0.0.1:8000/api/products/
 
 ---
 
+## User- & Authentifizierungs-API
+
+Das Projekt enthält eine vollständige Benutzerverwaltung unter dem Präfix `/api/users/`.
+
+### Endpunkte
+
+| Endpunkt | Methode | Beschreibung | Auth erforderlich |
+|----------|---------|--------------|:-----------------:|
+| `http://127.0.0.1:8000/api/users/register/` | GET | Registrierungs-Formular anzeigen | Nein |
+| `http://127.0.0.1:8000/api/users/register/` | POST | Neuen Benutzer registrieren | Nein |
+| `http://127.0.0.1:8000/api/users/login/` | GET | Login-Formular anzeigen | Nein |
+| `http://127.0.0.1:8000/api/users/login/` | POST | Einloggen (Session) | Nein |
+| `http://127.0.0.1:8000/api/users/logout/` | POST | Ausloggen | Ja |
+| `http://127.0.0.1:8000/api/users/profile/<pk>/` | GET | Eigenes Profil anzeigen | Ja (nur Eigentümer) |
+| `http://127.0.0.1:8000/api/users/profile/<pk>/` | POST | Profil bearbeiten oder löschen | Ja (nur Eigentümer) |
+| `http://127.0.0.1:8000/api/users/profile/<pk>/public/` | GET | Öffentliches Profil ansehen | Ja |
+
+### Registrierung
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/users/register/ \
+  -F "username=MeinName" \
+  -F "email=email@example.com" \
+  -F "password=MeinPasswort1!"
+```
+
+**Passwort-Anforderungen:**
+- Mindestens 8 Zeichen
+- Mindestens ein Großbuchstabe
+- Mindestens ein Kleinbuchstabe
+- Mindestens eine Zahl
+- Mindestens ein Sonderzeichen (`!@#$%^&*` etc.)
+
+> **Hinweis**: Bei der Registrierung wird automatisch ein Auth-Token erstellt und der Session-Login ist sofort möglich.
+
+### Login
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/users/login/ \
+  -F "username=MeinName" \
+  -F "password=MeinPasswort1!"
+```
+
+### Token-Authentifizierung
+
+Jeder Benutzer bekommt bei der Registrierung automatisch einen Token zugewiesen. Den Token findest du im Django Admin-Panel unter **Tokens** (`http://127.0.0.1:8000/admin/authtoken/token/`).
+
+Token in Requests verwenden:
+
+```bash
+curl http://127.0.0.1:8000/api/users/profile/1/public/ \
+  -H "Authorization: Token <dein-token>"
+```
+
+---
+
+## Geschützte vs. öffentliche Endpunkte
+
+| Endpunkt | Zugriff |
+|----------|---------|
+| `GET /api/products/` | Öffentlich |
+| `GET /api/categories/` | Öffentlich |
+| `POST/PUT/DELETE /api/products/` | Öffentlich (Dev-Modus) |
+| `GET /api/users/register/` | Öffentlich |
+| `POST /api/users/register/` | Öffentlich |
+| `GET/POST /api/users/login/` | Öffentlich |
+| `POST /api/users/logout/` | Eingeloggt |
+| `GET/POST /api/users/profile/<pk>/` | Eingeloggt + Eigentümer |
+| `GET /api/users/profile/<pk>/public/` | Eingeloggt |
+
+---
+
 ## Admin-Panel
 
 Zugriff auf das Django Admin-Panel: **http://127.0.0.1:8000/admin/**
@@ -334,10 +422,12 @@ Superuser created successfully.
 **Im Admin-Panel kannst du:**
 - Produkte erstellen, bearbeiten und löschen
 - Kategorien verwalten
+- Jobs verwalten
 - Produktbilder hochladen
 - Lagerbestände anpassen
 - Produkte aktivieren/deaktivieren
 - Benutzer und Berechtigungen verwalten
+- Auth-Tokens einsehen (`/admin/authtoken/token/`)
 
 ---
 
@@ -346,15 +436,24 @@ Superuser created successfully.
 ```
 Projekt_mit_API/
 │
-├── products/                      # Haupt-App für Produkte und Kategorien
+├── products/                      # App für Produkte, Kategorien und Jobs
 │   ├── fixtures/
 │   │   └── initial_data.json     # Testdaten zum Importieren
 │   ├── migrations/                # Datenbank-Migrationen
-│   ├── models.py                  # Product & Category Models
+│   ├── models.py                  # Product, Category & Jobs Models
 │   ├── serializers.py             # DRF Serializers
 │   ├── views.py                   # API Views
 │   ├── urls.py                    # API URL-Routing
 │   ├── pagination.py              # Pagination-Konfiguration
+│   └── admin.py                   # Admin-Konfiguration
+│
+├── users/                         # App für Benutzerverwaltung & Auth
+│   ├── migrations/                # Datenbank-Migrationen
+│   ├── models.py                  # CustomUser Model + Token-Signal
+│   ├── serializers.py             # Register-, Profile- & Public-Serializer
+│   ├── views.py                   # Register, Login, Logout, Profile Views
+│   ├── urls.py                    # User URL-Routing
+│   ├── permissions.py             # IsOwner Permission
 │   └── admin.py                   # Admin-Konfiguration
 │
 ├── Testprojekt/                   # Hauptprojekt-Konfiguration
@@ -387,6 +486,7 @@ Projekt_mit_API/
 5. **Öffne die API-Dokumentation** unter http://127.0.0.1:8000/api/docs/
 6. **Teste die API** mit den URLs aus `test_requests.txt`
 7. **Erkunde das Admin-Panel** unter http://127.0.0.1:8000/admin/
+8. **Registriere einen Testbenutzer** unter http://127.0.0.1:8000/api/users/register/
 
 ---
 
@@ -407,39 +507,37 @@ Projekt_mit_API/
 - **Development-Modus**: Dieses Projekt ist für Entwicklungs- und Testzwecke konfiguriert
 - **Sicherheit**: Ändere SECRET_KEY und andere Credentials für Produktionsumgebungen
 - **Datenbank**: SQLite wird verwendet (für Production PostgreSQL/MySQL empfohlen)
+- **Dateiname**: `Beispielbilder/bidl_1.png` enthält einen Tippfehler im Dateinamen (nicht in der README)
 
 ---
 
 ## Kurzanleitung
-- **pip install -r requirements.txt**
-- **python manage.py migrate**
-- **python manage.py loaddata initial_data.json**
-- **python manage.py runserver**
 
+```bash
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py loaddata products/fixtures/initial_data.json
+python manage.py runserver
+```
 
 ---
 
 ## Empfohlene Betrachtungsweise
-- **Ordner products / settings.py**
 
-
-- **Ordner products / models.py**
-- **Ordner products / admin.py**
-
-
-- **Ordner products / serializers.py**
-
-
-- **Ordner products / pagination.py**
-
-
-- **Ordner products / views.py**
-
-
-- **Ordner products / urls.py**
-
-
-- **Ordner Testprojekt / urls.py**
+- **Testprojekt / settings.py**
+- **products / models.py**
+- **products / admin.py**
+- **products / serializers.py**
+- **products / pagination.py**
+- **products / views.py**
+- **products / urls.py**
+- **users / models.py**
+- **users / serializers.py**
+- **users / permissions.py**
+- **users / views.py**
+- **users / urls.py**
+- **Testprojekt / urls.py**
 
 ---
 **Viel Erfolg beim Testen!**

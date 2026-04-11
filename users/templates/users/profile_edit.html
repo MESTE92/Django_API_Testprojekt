@@ -1,0 +1,231 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROFIL BEARBEITEN // {{ user.username }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --pink: #ff0090; --pink-dim: rgba(255,0,144,0.45); --pink-glow: rgba(255,0,144,0.2);
+    --cyan: #00fff9; --purple: #9900ff; --dark: #030008; --dark-card: rgba(5,0,12,0.88);
+    --text: #e8e8e8; --text-dim: rgba(232,232,232,0.45); --border: rgba(255,0,144,0.35);
+    --danger: #ff2255;
+  }
+  body { min-height: 100vh; font-family: 'Share Tech Mono', monospace; background: var(--dark); display: flex; flex-direction: column; overflow-x: hidden; overflow-y: auto; position: relative; }
+  body::after { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.10) 2px, rgba(0,0,0,0.10) 4px); pointer-events: none; z-index: 9999; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(255,0,144,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,249,0.02) 1px, transparent 1px); background-size: 45px 45px; z-index: 0; pointer-events: none; }
+  #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.35; }
+
+  /* ── NAVBAR ── */
+  .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; align-items: center; justify-content: space-between; padding: 0 36px; height: 58px; background: rgba(3,0,8,0.92); border-bottom: 1px solid var(--border); box-shadow: 0 2px 30px var(--pink-glow); backdrop-filter: blur(14px); }
+  .nav-brand { font-family: 'Orbitron', monospace; font-size: 13px; font-weight: 900; color: var(--pink); letter-spacing: 4px; text-decoration: none; text-transform: uppercase; text-shadow: 0 0 10px var(--pink), 0 0 25px var(--pink-dim); }
+  .nav-center { font-size: 9px; letter-spacing: 3px; color: var(--text-dim); display: flex; align-items: center; gap: 6px; }
+  .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 6px var(--pink); animation: dotPulse 1.5s ease-in-out infinite; }
+  @keyframes dotPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+  .nav-avatar-wrap { position: relative; cursor: pointer; }
+  .nav-avatar { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--pink); overflow: hidden; display: flex; align-items: center; justify-content: center; background: rgba(255,0,144,0.1); box-shadow: 0 0 10px var(--pink-glow); transition: box-shadow 0.3s; }
+  .nav-avatar:hover { box-shadow: 0 0 22px var(--pink-dim); }
+  .nav-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .nav-avatar-letter { font-family: 'Orbitron', monospace; font-size: 14px; font-weight: 700; color: var(--pink); }
+  .nav-dropdown { position: absolute; top: calc(100% + 12px); right: 0; min-width: 200px; background: rgba(4,0,10,0.97); border: 1px solid var(--border); clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%); box-shadow: 0 0 30px var(--pink-glow); display: none; flex-direction: column; z-index: 600; }
+  .nav-dropdown.open { display: flex; }
+  .dropdown-header { padding: 10px 16px; font-size: 9px; letter-spacing: 3px; color: var(--pink); opacity: 0.6; text-transform: uppercase; border-bottom: 1px solid rgba(255,0,144,0.12); }
+  .dropdown-item { padding: 13px 16px; font-family: 'Orbitron', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); text-decoration: none; border-bottom: 1px solid rgba(255,0,144,0.08); transition: all 0.2s; cursor: pointer; background: transparent; border-left: none; border-right: none; border-top: none; width: 100%; text-align: left; display: block; }
+  .dropdown-item:hover { color: var(--pink); background: rgba(255,0,144,0.06); padding-left: 22px; }
+  .dropdown-item:last-child { border-bottom: none; }
+  .dropdown-logout { color: rgba(255,68,102,0.7); }
+  .dropdown-logout:hover { color: #ff4466; background: rgba(255,34,85,0.07); }
+
+  /* ── MAIN ── */
+  .main-wrap { position: relative; z-index: 10; flex: 1; display: flex; justify-content: center; padding: 80px 20px 60px; }
+  .container { width: 100%; max-width: 520px; }
+  .header-deco { text-align: center; margin-bottom: 24px; }
+  .sys-tag { font-size: 9px; letter-spacing: 5px; color: var(--cyan); margin-bottom: 8px; opacity: 0.7; animation: blink 2.5s step-end infinite; }
+  @keyframes blink { 0%,100% { opacity: 0.7; } 50% { opacity: 0.2; } }
+  .title-main { font-family: 'Orbitron', monospace; font-size: 22px; font-weight: 900; color: var(--pink); letter-spacing: 5px; text-transform: uppercase; text-shadow: 0 0 10px var(--pink), 0 0 30px var(--pink-dim); animation: glitch 8s infinite; }
+  @keyframes glitch { 0%,88%,100% { transform: none; text-shadow: 0 0 10px var(--pink), 0 0 30px var(--pink-dim); } 89% { transform: translate(-2px,0); text-shadow: 2px 0 var(--cyan); } 91% { transform: translate(2px,0); text-shadow: -2px 0 var(--purple); } 93% { transform: none; } }
+
+  /* Avatar */
+  .avatar-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 24px; }
+  .avatar-hex-outer { width: 80px; height: 80px; position: relative; margin-bottom: 10px; }
+  .avatar-hex-outer::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--pink), var(--purple), var(--cyan)); clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%); animation: hexGlow 3s ease-in-out infinite; }
+  @keyframes hexGlow { 0%,100% { filter: drop-shadow(0 0 6px var(--pink)); } 50% { filter: drop-shadow(0 0 16px var(--pink)) drop-shadow(0 0 30px var(--pink-dim)); } }
+  .avatar-hex-inner { position: absolute; inset: 3px; background: var(--dark); clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .avatar-hex-inner img { width: 100%; height: 100%; object-fit: cover; }
+  .avatar-placeholder { font-family: 'Orbitron', monospace; font-size: 26px; font-weight: 900; color: var(--pink); text-shadow: 0 0 15px var(--pink); }
+  .username-display { font-family: 'Orbitron', monospace; font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: 3px; }
+  .user-status { margin-top: 4px; font-size: 9px; letter-spacing: 4px; color: var(--cyan); opacity: 0.7; text-transform: uppercase; }
+
+  /* Card */
+  .card { background: var(--dark-card); border: 1px solid var(--border); clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)); padding: 34px 30px; box-shadow: 0 0 40px var(--pink-glow), inset 0 0 40px rgba(255,0,144,0.03); position: relative; }
+  .card::before { content: ''; position: absolute; top: 0; right: 0; width: 20px; height: 20px; background: var(--pink); clip-path: polygon(0 0, 100% 0, 100% 100%); opacity: 0.7; }
+  .card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 20px; height: 20px; background: var(--cyan); clip-path: polygon(0 0, 0 100%, 100% 100%); opacity: 0.4; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-group { margin-bottom: 18px; }
+  label { display: block; font-size: 9px; letter-spacing: 4px; color: var(--pink); text-transform: uppercase; margin-bottom: 7px; font-family: 'Orbitron', monospace; }
+  input[type="text"], input[type="email"], input[type="password"] { width: 100%; padding: 11px 13px; background: rgba(255,0,144,0.04); border: 1px solid rgba(255,0,144,0.22); border-left: 2px solid var(--pink); font-family: 'Share Tech Mono', monospace; font-size: 13px; color: var(--text); outline: none; transition: all 0.25s; clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 0 100%); }
+  input:focus { background: rgba(255,0,144,0.08); border-color: var(--pink); box-shadow: 0 0 0 1px var(--pink-dim), 0 0 14px var(--pink-glow); color: #fff; }
+  input::placeholder { color: rgba(255,0,144,0.3); }
+  .upload-area { border: 1px dashed rgba(255,0,144,0.35); padding: 14px; text-align: center; cursor: pointer; transition: all 0.3s; background: rgba(255,0,144,0.03); position: relative; overflow: hidden; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px)); }
+  .upload-area:hover { border-color: var(--pink); background: rgba(255,0,144,0.08); box-shadow: 0 0 14px var(--pink-glow); }
+  .upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .upload-text { font-size: 10px; color: var(--text-dim); letter-spacing: 2px; }
+  .error-msg { font-size: 10px; color: #ff4488; letter-spacing: 1px; margin-top: 5px; display: block; }
+  .error-msg::before { content: '> '; color: var(--pink); }
+  .alert { padding: 9px 13px; font-size: 11px; margin-bottom: 14px; border-left: 2px solid #ff4488; background: rgba(255,68,136,0.08); color: #ff4488; letter-spacing: 1px; }
+  .alert::before { content: '[ERR] '; color: var(--pink); }
+  .alert-success { border-left-color: var(--cyan); background: rgba(0,255,249,0.06); color: var(--cyan); }
+  .alert-success::before { content: '[OK] '; color: var(--cyan); }
+  .section-divider { height: 1px; margin: 18px 0; background: linear-gradient(90deg, transparent, rgba(255,0,144,0.3), transparent); }
+  .section-label { font-size: 9px; letter-spacing: 4px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 14px; text-align: center; }
+  .btn-group { display: grid; grid-template-columns: 1fr auto; gap: 12px; margin-top: 8px; align-items: center; }
+  .btn-save { padding: 13px; border: 1px solid var(--pink); background: transparent; font-family: 'Orbitron', monospace; font-size: 11px; font-weight: 700; letter-spacing: 4px; color: var(--pink); cursor: pointer; text-transform: uppercase; position: relative; overflow: hidden; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px)); transition: all 0.3s; box-shadow: 0 0 18px var(--pink-glow); }
+  .btn-save::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,0,144,0.2), transparent); transition: left 0.5s; }
+  .btn-save:hover { background: rgba(255,0,144,0.1); color: #fff; box-shadow: 0 0 35px var(--pink-dim); text-shadow: 0 0 8px var(--pink); }
+  .btn-save:hover::before { left: 100%; }
+  .btn-delete { padding: 13px 16px; border: 1px solid rgba(255,34,85,0.45); background: transparent; font-family: 'Orbitron', monospace; font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--danger); cursor: pointer; text-transform: uppercase; white-space: nowrap; transition: all 0.3s; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px)); }
+  .btn-delete:hover { background: rgba(255,34,85,0.1); border-color: var(--danger); box-shadow: 0 0 20px rgba(255,34,85,0.3); }
+
+  /* ── FOOTER ── */
+  .footer { position: relative; z-index: 10; text-align: center; padding: 22px 20px 30px; border-top: 1px solid rgba(255,0,144,0.1); font-size: 10px; letter-spacing: 3px; color: var(--text-dim); text-transform: uppercase; opacity: 0.5; }
+  .footer-sep { margin: 0 10px; color: var(--pink); opacity: 0.5; }
+  .footer-link { color: var(--pink); text-decoration: none; transition: all 0.2s; }
+  .footer-link:hover { text-shadow: 0 0 8px var(--pink); color: #fff; opacity: 1; }
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+
+<nav class="navbar">
+  <a href="{% url 'home' %}" class="nav-brand">◆ TESTPROJEKT_SYS</a>
+  <div class="nav-center"><span class="nav-dot"></span><span id="nav-ts">--:--:--</span></div>
+  <div class="nav-links">
+    <div class="nav-avatar-wrap" id="avatarTrigger">
+      <div class="nav-avatar">
+        {% if user.profile_picture %}<img src="{{ user.profile_picture.url }}" alt="">
+        {% else %}<span class="nav-avatar-letter">{{ user.username|first|upper }}</span>{% endif %}
+      </div>
+      <div class="nav-dropdown" id="avatarDropdown">
+        <div class="dropdown-header">{{ user.username }}</div>
+        <a href="{% url 'profile' user.pk %}" class="dropdown-item">// Profil</a>
+        <a href="{% url 'profile_edit' user.pk %}" class="dropdown-item" style="color:var(--pink);">// Profil bearbeiten</a>
+        <form method="POST" action="{% url 'logout' %}" style="display:block;">
+          {% csrf_token %}
+          <button type="submit" class="dropdown-item dropdown-logout">// Logout</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="main-wrap">
+  <div class="container">
+    <div class="header-deco">
+      <div class="sys-tag">// USER_RECORD :: EDIT_MODE //</div>
+      <h1 class="title-main">PROFIL BEARBEITEN</h1>
+    </div>
+
+    <div class="avatar-section">
+      <div class="avatar-hex-outer">
+        <div class="avatar-hex-inner">
+          {% if user.profile_picture %}<img src="{{ user.profile_picture.url }}" alt="">
+          {% else %}<span class="avatar-placeholder">{{ user.username|first|upper }}</span>{% endif %}
+        </div>
+      </div>
+      <div class="username-display">{{ user.username }}</div>
+      <div class="user-status"><span class="nav-dot" style="display:inline-block;"></span>AUTHENTICATED · TOKEN_VALID</div>
+    </div>
+
+    <div class="card">
+      {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+      {% if success %}<div class="alert alert-success">{{ success }}</div>{% endif %}
+
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first_name">// Vorname</label>
+            <input type="text" id="first_name" name="first_name" placeholder="FIRST_NAME" value="{{ user.first_name }}">
+          </div>
+          <div class="form-group">
+            <label for="last_name">// Nachname</label>
+            <input type="text" id="last_name" name="last_name" placeholder="LAST_NAME" value="{{ user.last_name }}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="username">// Benutzername</label>
+          <input type="text" id="username" name="username" value="{{ user.username }}">
+          {% if errors.username %}<span class="error-msg">{{ errors.username.0 }}</span>{% endif %}
+        </div>
+
+        <div class="form-group">
+          <label for="email">// E-Mail</label>
+          <input type="email" id="email" name="email" value="{{ user.email }}">
+          {% if errors.email %}<span class="error-msg">{{ errors.email.0 }}</span>{% endif %}
+        </div>
+
+        <div class="section-divider"></div>
+        <div class="section-label">◆ PASSWORT ÄNDERN ◆</div>
+
+        <div class="form-group">
+          <label for="password">// Neues Passwort <span style="opacity:0.4;font-size:8px;">[OPTIONAL]</span></label>
+          <input type="password" id="password" name="password" placeholder="LEER LASSEN = NICHT ÄNDERN">
+          {% if errors.password %}<span class="error-msg">{{ errors.password.0 }}</span>{% endif %}
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="form-group">
+          <label>// Profilbild</label>
+          <div class="upload-area">
+            <input type="file" name="profile_picture" accept="image/*">
+            <div class="upload-text">⬡ &nbsp;NEUES BILD AUSWÄHLEN</div>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button type="submit" name="action" value="update" class="btn-save">▶ DATEN SPEICHERN</button>
+          <button type="submit" name="action" value="delete" class="btn-delete"
+                  onclick="return confirm('[WARNUNG] Profil unwiderruflich löschen?')">✕ DELETE</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <span>© 2026 TESTPROJEKT_SYS</span><span class="footer-sep">|</span>
+  <span>All Rights Reserved <a href="https://github.com/MESTE92" target="_blank" class="footer-link">MESTE92</a></span><span class="footer-sep">|</span>
+  <span>Django REST Framework</span>
+</footer>
+
+<script>
+function ts() { const n=new Date(); document.getElementById('nav-ts').textContent=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0'); }
+setInterval(ts,1000); ts();
+const trigger=document.getElementById('avatarTrigger'), dropdown=document.getElementById('avatarDropdown');
+trigger.addEventListener('click', e=>{ dropdown.classList.toggle('open'); e.stopPropagation(); });
+document.addEventListener('click', ()=>dropdown.classList.remove('open'));
+const canvas=document.getElementById('bg-canvas'), ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight; });
+const HEX_SIZE=30; let frame=0;
+function hexPath(cx,cy,size){ ctx.beginPath(); for(let i=0;i<6;i++){ const a=(Math.PI/3)*i-Math.PI/6; i===0?ctx.moveTo(cx+size*Math.cos(a),cy+size*Math.sin(a)):ctx.lineTo(cx+size*Math.cos(a),cy+size*Math.sin(a)); } ctx.closePath(); }
+const hexes=[], cols=Math.ceil(canvas.width/(HEX_SIZE*1.75))+2, rows=Math.ceil(canvas.height/(HEX_SIZE*1.5))+2;
+for(let r=0;r<rows;r++) for(let c=0;c<cols;c++) hexes.push({cx:c*HEX_SIZE*1.75+(r%2)*HEX_SIZE*.875,cy:r*HEX_SIZE*1.5,pulse:Math.random()*Math.PI*2,speed:Math.random()*.008+.004,baseOpacity:Math.random()*.06+.01});
+function drawHexBg(){
+  frame++; ctx.clearRect(0,0,canvas.width,canvas.height);
+  hexes.forEach(h=>{ h.pulse+=h.speed; const op=h.baseOpacity+Math.sin(h.pulse)*.04; hexPath(h.cx,h.cy,HEX_SIZE-2); ctx.strokeStyle=`rgba(255,0,144,${op})`; ctx.lineWidth=.6; ctx.stroke(); });
+  const time=frame*.005;
+  for(let i=0;i<5;i++){ const cx=(Math.sin(time*.7+i*1.3)*.5+.5)*canvas.width, cy=(Math.cos(time*.5+i*.9)*.5+.5)*canvas.height; hexPath(cx,cy,HEX_SIZE); ctx.strokeStyle=`rgba(255,0,144,${.12+Math.sin(time+i)*.06})`; ctx.lineWidth=1; ctx.stroke(); }
+  requestAnimationFrame(drawHexBg);
+}
+drawHexBg();
+</script>
+</body>
+</html>

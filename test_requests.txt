@@ -131,6 +131,14 @@ http://127.0.0.1:8000/api/products/?category__name=Technik&page=1&page_size=5
 http://127.0.0.1:8000/api/products/?category__name=Lebensmittel&page=1&page_size=10
 http://127.0.0.1:8000/api/products/?category__name=Buecher&page=2&page_size=3
 
+
+
+
+
+
+
+
+
 # =====================================================
 # JOBS API - Erfordert Token Authentication
 # =====================================================
@@ -177,3 +185,38 @@ http://127.0.0.1:8000/api/jobs/?search=Kreativität&max_salary=50000  # Kreative
 http://127.0.0.1:8000/api/jobs/?page=1                               # Erste Seite
 http://127.0.0.1:8000/api/jobs/?page=1&page_size=10                  # 10 Jobs pro Seite
 http://127.0.0.1:8000/api/jobs/?search=Python&page=1&page_size=5     # Python-Jobs, 5 pro Seite
+
+
+
+
+
+
+
+
+
+
+
+# =====================================================
+# USER - Öffentliche Profilansicht (RetrieveAPIView)
+# =====================================================
+# WICHTIG: Alle Requests erfordern Token Authentication:
+# Authorization: Token <your-token-key>
+#
+# Sichtbar: nur Benutzername + Profilbild (falls vorhanden)
+# Kein Bearbeiten möglich – rein lesend
+#
+# URL-Schema: /users/profile/<pk>/public/
+
+# Normaler Abruf – User mit ID 1
+http://127.0.0.1:8000/users/profile/1/public/                        # Profil von User ID 1
+
+# Weitere User-IDs
+http://127.0.0.1:8000/users/profile/2/public/                        # Profil von User ID 2
+http://127.0.0.1:8000/users/profile/3/public/                        # Profil von User ID 3
+
+# Edge Cases
+http://127.0.0.1:8000/users/profile/999/public/                      # Nicht existierender User → 404
+http://127.0.0.1:8000/users/profile/0/public/                        # Ungültige ID → 404
+
+# Ohne Token → 401 Unauthorized (kein anonymer Zugriff erlaubt)
+# → Authorization-Header weglassen um diesen Fall zu testen

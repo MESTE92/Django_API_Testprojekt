@@ -4,166 +4,177 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Registrierung</title>
+<title>REGISTRIERUNG // SYS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Zen+Kaku+Gothic+New:wght@300;400;700&display=swap');
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --sakura-deep: #e91e8c;
-    --sakura-petal: #ffb7c5;
-    --white-glass: rgba(255,255,255,0.82);
-    --text-dark: #2d1b2e;
-    --text-mid: #6b3a5e;
-    --input-bg: rgba(255,255,255,0.65);
-    --border-soft: rgba(233,30,140,0.25);
+    --pink: #ff0090; --pink-dim: rgba(255,0,144,0.45); --pink-glow: rgba(255,0,144,0.2);
+    --cyan: #00fff9; --purple: #9900ff; --dark: #030008; --dark-card: rgba(5,0,12,0.88);
+    --text: #e8e8e8; --text-dim: rgba(232,232,232,0.45); --border: rgba(255,0,144,0.35);
   }
-  body {
-    min-height: 100vh;
-    font-family: 'Zen Kaku Gothic New', sans-serif;
-    background: linear-gradient(160deg, #fff0f5 0%, #fce4ec 30%, #f3e5f5 60%, #e8eaf6 100%);
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden; position: relative;
-  }
-  #sakura-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-  body::before {
-    content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
-    background: radial-gradient(ellipse at 20% 20%, rgba(255,183,197,0.3) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(206,147,216,0.25) 0%, transparent 50%);
-    z-index: 0;
-  }
-  .container { position: relative; z-index: 10; width: 100%; max-width: 460px; padding: 20px; }
+  body { min-height: 100vh; font-family: 'Share Tech Mono', monospace; background: var(--dark); display: flex; flex-direction: column; overflow-x: hidden; overflow-y: auto; position: relative; }
+  body::after { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.12) 2px, rgba(0,0,0,0.12) 4px); pointer-events: none; z-index: 9999; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(255,0,144,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,0,144,0.04) 1px, transparent 1px); background-size: 40px 40px; z-index: 1; pointer-events: none; }
+  #rain-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.55; }
+
+  /* ── NAVBAR ── */
+  .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; align-items: center; justify-content: space-between; padding: 0 36px; height: 58px; background: rgba(3,0,8,0.92); border-bottom: 1px solid var(--border); box-shadow: 0 2px 30px var(--pink-glow); backdrop-filter: blur(14px); }
+  .nav-brand { font-family: 'Orbitron', monospace; font-size: 13px; font-weight: 900; color: var(--pink); letter-spacing: 4px; text-decoration: none; text-transform: uppercase; text-shadow: 0 0 10px var(--pink), 0 0 25px var(--pink-dim); }
+  .nav-center { font-size: 9px; letter-spacing: 3px; color: var(--text-dim); display: flex; align-items: center; gap: 6px; }
+  .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 6px var(--pink); animation: dotPulse 1.5s ease-in-out infinite; }
+  @keyframes dotPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+  .nav-links { display: flex; align-items: center; gap: 6px; }
+  .nav-link { padding: 8px 16px; font-family: 'Orbitron', monospace; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; border: 1px solid transparent; transition: all 0.25s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); position: relative; overflow: hidden; }
+  .nav-link::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,0,144,0.15), transparent); transition: left 0.4s; }
+  .nav-link:hover::before { left: 100%; }
+  .nav-link-login { color: var(--text-dim); border-color: rgba(255,0,144,0.2); background: rgba(255,0,144,0.04); }
+  .nav-link-login:hover { color: var(--text); border-color: var(--pink-dim); box-shadow: 0 0 14px var(--pink-glow); }
+  .nav-link-active { color: var(--pink); border-color: var(--border); background: rgba(255,0,144,0.06); box-shadow: 0 0 12px var(--pink-glow); cursor: default; }
+
+  /* ── MAIN ── */
+  .main-wrap { position: relative; z-index: 10; flex: 1; display: flex; align-items: center; justify-content: center; padding: 80px 20px 20px; }
+  .container { width: 100%; max-width: 480px; }
   .header-deco { text-align: center; margin-bottom: 28px; }
-  .kanji-deco { font-family: 'Noto Serif JP', serif; font-size: 13px; letter-spacing: 8px; color: var(--text-mid); opacity: 0.7; margin-bottom: 8px; }
-  .title-main { font-family: 'Noto Serif JP', serif; font-size: 28px; font-weight: 300; color: var(--text-dark); letter-spacing: 2px; margin-bottom: 6px; }
-  .title-sub { font-size: 12px; color: var(--text-mid); letter-spacing: 4px; opacity: 0.8; }
-  .divider { display: flex; align-items: center; gap: 12px; margin: 0 0 28px; }
-  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(233,30,140,0.4), transparent); }
-  .card {
-    background: var(--white-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border-radius: 24px; border: 1px solid rgba(255,183,197,0.5); padding: 40px 36px;
-    box-shadow: 0 8px 32px rgba(233,30,140,0.08), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9);
-  }
+  .sys-tag { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 5px; color: var(--cyan); opacity: 0.7; margin-bottom: 10px; animation: blink 2s step-end infinite; }
+  @keyframes blink { 0%,100% { opacity: 0.7; } 50% { opacity: 0.2; } }
+  .title-main { font-family: 'Orbitron', monospace; font-size: 26px; font-weight: 900; color: var(--pink); letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 0 10px var(--pink), 0 0 30px var(--pink-dim), 0 0 60px var(--pink-glow); animation: glitch 6s infinite; }
+  @keyframes glitch { 0%,88%,100% { text-shadow: 0 0 10px var(--pink), 0 0 30px var(--pink-dim); transform: none; } 89% { transform: translate(-2px,0); text-shadow: 2px 0 var(--cyan), -2px 0 var(--pink); } 91% { transform: translate(2px,0); text-shadow: -2px 0 var(--cyan), 2px 0 var(--pink); } 93% { transform: translate(-1px,0); } 95% { transform: none; } }
+  .title-sub { font-size: 10px; letter-spacing: 6px; color: var(--text-dim); margin-top: 6px; text-transform: uppercase; }
+  .divider { display: flex; align-items: center; gap: 12px; margin: 0 0 26px; }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--pink-dim), transparent); }
+  .divider-sym { font-size: 10px; color: var(--pink); letter-spacing: 2px; }
+  .card { background: var(--dark-card); border: 1px solid var(--border); clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px)); padding: 38px 34px; box-shadow: 0 0 40px var(--pink-glow), inset 0 0 40px rgba(255,0,144,0.04); position: relative; }
+  .card::before { content: ''; position: absolute; top: 0; right: 0; width: 18px; height: 18px; background: var(--pink); clip-path: polygon(0 0, 100% 0, 100% 100%); opacity: 0.6; }
+  .card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 18px; height: 18px; background: var(--pink); clip-path: polygon(0 0, 0 100%, 100% 100%); opacity: 0.6; }
+  .status-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 6px 10px; border: 1px solid rgba(255,0,144,0.15); background: rgba(255,0,144,0.03); font-size: 9px; letter-spacing: 3px; color: var(--text-dim); text-transform: uppercase; }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 6px var(--pink); animation: pulse-dot 1.5s ease-in-out infinite; display: inline-block; margin-right: 6px; }
+  @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
   .form-group { margin-bottom: 20px; }
-  label { display: block; font-size: 11px; letter-spacing: 3px; color: var(--text-mid); text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
-  input[type="text"], input[type="email"], input[type="password"] {
-    width: 100%; padding: 13px 16px; background: var(--input-bg);
-    border: 1px solid var(--border-soft); border-radius: 12px;
-    font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 15px; color: var(--text-dark);
-    outline: none; transition: all 0.3s ease;
-  }
-  input:focus { border-color: rgba(233,30,140,0.5); background: rgba(255,255,255,0.85); box-shadow: 0 0 0 3px rgba(233,30,140,0.08); }
-  input::placeholder { color: rgba(107,58,94,0.4); }
-  .upload-area {
-    border: 1.5px dashed rgba(233,30,140,0.35); border-radius: 12px; padding: 20px;
-    text-align: center; cursor: pointer; transition: all 0.3s; background: rgba(255,255,255,0.4);
-    position: relative; overflow: hidden;
-  }
-  .upload-area:hover { border-color: rgba(233,30,140,0.6); background: rgba(255,183,197,0.1); }
+  label { display: block; font-size: 9px; letter-spacing: 4px; color: var(--pink); text-transform: uppercase; margin-bottom: 8px; font-family: 'Orbitron', monospace; }
+  input[type="text"], input[type="email"], input[type="password"] { width: 100%; padding: 12px 14px; background: rgba(255,0,144,0.04); border: 1px solid rgba(255,0,144,0.25); border-left: 2px solid var(--pink); font-family: 'Share Tech Mono', monospace; font-size: 14px; color: var(--text); outline: none; transition: all 0.25s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%); }
+  input:focus { background: rgba(255,0,144,0.08); border-color: var(--pink); box-shadow: 0 0 0 1px var(--pink-dim), 0 0 15px var(--pink-glow); color: #fff; }
+  input::placeholder { color: rgba(255,0,144,0.3); }
+  .upload-area { border: 1px dashed rgba(255,0,144,0.35); padding: 18px; text-align: center; cursor: pointer; transition: all 0.3s; background: rgba(255,0,144,0.03); position: relative; overflow: hidden; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px)); }
+  .upload-area:hover { border-color: var(--pink); background: rgba(255,0,144,0.08); box-shadow: 0 0 15px var(--pink-glow); }
   .upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-  .upload-text { font-size: 12px; color: var(--text-mid); letter-spacing: 1px; }
-  .error-msg { font-size: 12px; color: #c2185b; letter-spacing: 0.5px; margin-top: 5px; display: block; }
-  .alert { padding: 10px 16px; border-radius: 10px; font-size: 13px; margin-bottom: 16px; border: 1px solid rgba(233,30,140,0.2); background: rgba(233,30,140,0.07); color: var(--text-mid); }
-  .alert-success { background: rgba(76,175,80,0.08); border-color: rgba(76,175,80,0.3); color: #2e7d32; }
-  .btn-submit {
-    width: 100%; padding: 15px; margin-top: 8px; border: none; border-radius: 14px;
-    font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 14px; font-weight: 700;
-    letter-spacing: 4px; color: #fff; cursor: pointer;
-    background: linear-gradient(135deg, #f06292 0%, #e91e8c 40%, #9c27b0 100%);
-    box-shadow: 0 4px 20px rgba(233,30,140,0.35); transition: all 0.3s ease;
-    text-transform: uppercase; position: relative; overflow: hidden;
-  }
-  .btn-submit::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s ease; }
-  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(233,30,140,0.45); }
+  .upload-text { font-size: 11px; color: var(--text-dim); letter-spacing: 2px; margin-top: 6px; }
+  .upload-icon { font-size: 22px; display: block; margin-bottom: 6px; }
+  .error-msg { font-size: 11px; color: #ff4488; letter-spacing: 1px; margin-top: 5px; display: block; }
+  .error-msg::before { content: '> '; color: var(--pink); }
+  .alert { padding: 10px 14px; font-size: 12px; margin-bottom: 16px; border-left: 2px solid #ff4488; background: rgba(255,68,136,0.08); color: #ff4488; letter-spacing: 1px; }
+  .alert::before { content: '[ERR] '; color: var(--pink); }
+  .alert-success { border-left-color: var(--cyan); background: rgba(0,255,249,0.06); color: var(--cyan); }
+  .alert-success::before { content: '[OK] '; color: var(--cyan); }
+  .btn-submit { width: 100%; padding: 15px; margin-top: 8px; border: 1px solid var(--pink); background: transparent; font-family: 'Orbitron', monospace; font-size: 13px; font-weight: 700; letter-spacing: 5px; color: var(--pink); cursor: pointer; text-transform: uppercase; position: relative; overflow: hidden; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px)); transition: all 0.3s; box-shadow: 0 0 20px var(--pink-glow), inset 0 0 20px rgba(255,0,144,0.04); }
+  .btn-submit::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,0,144,0.25), transparent); transition: left 0.5s; }
+  .btn-submit:hover { background: rgba(255,0,144,0.12); color: #fff; box-shadow: 0 0 35px var(--pink-dim); text-shadow: 0 0 8px var(--pink); }
   .btn-submit:hover::before { left: 100%; }
-  .btn-submit:active { transform: translateY(0); }
-  .login-link { text-align: center; margin-top: 20px; font-size: 13px; color: var(--text-mid); opacity: 0.8; }
-  .login-link a { color: var(--sakura-deep); text-decoration: none; font-weight: 700; letter-spacing: 1px; border-bottom: 1px solid rgba(233,30,140,0.3); padding-bottom: 1px; transition: border-color 0.2s; }
-  .login-link a:hover { border-color: var(--sakura-deep); }
+  .login-link { text-align: center; margin-top: 20px; font-size: 11px; color: var(--text-dim); letter-spacing: 2px; }
+  .login-link a { color: var(--pink); text-decoration: none; font-family: 'Orbitron', monospace; font-size: 11px; letter-spacing: 2px; font-weight: 700; border-bottom: 1px solid var(--pink-dim); transition: all 0.2s; }
+  .login-link a:hover { color: #fff; border-color: var(--pink); text-shadow: 0 0 8px var(--pink); }
+
+  /* ── FOOTER ── */
+  .footer { position: relative; z-index: 10; text-align: center; padding: 22px 20px 30px; border-top: 1px solid rgba(255,0,144,0.1); font-size: 10px; letter-spacing: 3px; color: var(--text-dim); text-transform: uppercase; opacity: 0.5; }
+  .footer-sep { margin: 0 10px; color: var(--pink); opacity: 0.5; }
+  .footer-link { color: var(--pink); text-decoration: none; transition: all 0.2s; }
+  .footer-link:hover { text-shadow: 0 0 8px var(--pink); color: #fff; }
 </style>
 </head>
 <body>
-<canvas id="sakura-canvas"></canvas>
-<div class="container">
-  <div class="header-deco">
-    <div class="kanji-deco">桜 · さくら · Sakura</div>
-    <h1 class="title-main">Registrierung</h1>
-    <div class="title-sub">WILLKOMMEN · ようこそ</div>
+<canvas id="rain-canvas"></canvas>
+
+<nav class="navbar">
+  <a href="{% url 'home' %}" class="nav-brand">◆ TESTPROJEKT_SYS</a>
+  <div class="nav-center"><span class="nav-dot"></span><span id="nav-ts">--:--:--</span></div>
+  <div class="nav-links">
+    <a href="{% url 'login' %}" class="nav-link nav-link-login">// Login</a>
+    <span class="nav-link nav-link-active">// Registrieren</span>
   </div>
-  <div class="divider"><span style="font-size:16px;color:#e91e8c;opacity:0.7;">🌸</span></div>
-  <div class="card">
-    {% if error %}<div class="alert">{{ error }}</div>{% endif %}
-    {% if success %}<div class="alert alert-success">{{ success }}</div>{% endif %}
+</nav>
 
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-
-      <div class="form-group">
-        <label for="username">Benutzername</label>
-        <input type="text" id="username" name="username"
-               placeholder="dein_username" value="{{ request.POST.username }}">
-        {% if errors.username %}<span class="error-msg">{{ errors.username.0 }}</span>{% endif %}
+<div class="main-wrap">
+  <div class="container">
+    <div class="header-deco">
+      <div class="sys-tag">// SYSTEM :: NEW_USER_PROTOCOL //</div>
+      <h1 class="title-main">REGISTRIERUNG</h1>
+      <div class="title-sub">ACCESS_LEVEL: PUBLIC &nbsp;|&nbsp; NODE: AUTH</div>
+    </div>
+    <div class="divider"><span class="divider-sym">◆ NEW IDENTITY ◆</span></div>
+    <div class="card">
+      <div class="status-bar">
+        <span><span class="status-dot"></span>VERBINDUNG AKTIV</span>
+        <span id="ts">...</span>
       </div>
-
-      <div class="form-group">
-        <label for="email">E-Mail</label>
-        <input type="email" id="email" name="email"
-               placeholder="name@email.de" value="{{ request.POST.email }}">
-        {% if errors.email %}<span class="error-msg">{{ errors.email.0 }}</span>{% endif %}
-      </div>
-
-      <div class="form-group">
-        <label for="password">Passwort</label>
-        <input type="password" id="password" name="password"
-               placeholder="Min. 8 Zeichen · A-z · 0-9 · Sonderzeichen">
-        {% if errors.password %}<span class="error-msg">{{ errors.password.0 }}</span>{% endif %}
-      </div>
-
-      <div class="form-group">
-        <label>Profilbild <span style="opacity:0.5;font-size:10px;">(optional)</span></label>
-        <div class="upload-area">
-          <input type="file" name="profile_picture" accept="image/*">
-          <span style="font-size:28px;display:block;margin-bottom:8px;">🌸</span>
-          <div class="upload-text">Bild auswählen · 画像を選択</div>
+      {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+      {% if success %}<div class="alert alert-success">{{ success }}</div>{% endif %}
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="username">// Benutzername</label>
+          <input type="text" id="username" name="username" placeholder="IDENT_HANDLE" value="{{ request.POST.username }}" autocomplete="off">
+          {% if errors.username %}<span class="error-msg">{{ errors.username.0 }}</span>{% endif %}
         </div>
-      </div>
-
-      <button type="submit" class="btn-submit">登録 · Registrieren</button>
-    </form>
-
-    <div class="login-link">
-      Bereits registriert? <a href="{% url 'login' %}">Anmelden</a>
+        <div class="form-group">
+          <label for="email">// E-Mail</label>
+          <input type="email" id="email" name="email" placeholder="signal@domain.net" value="{{ request.POST.email }}">
+          {% if errors.email %}<span class="error-msg">{{ errors.email.0 }}</span>{% endif %}
+        </div>
+        <div class="form-group">
+          <label for="password">// Passwort</label>
+          <input type="password" id="password" name="password" placeholder="A-Z · a-z · 0-9 · [SONDERZEICHEN] · MIN.8">
+          {% if errors.password %}<span class="error-msg">{{ errors.password.0 }}</span>{% endif %}
+        </div>
+        <div class="form-group">
+          <label>// Profilbild <span style="opacity:0.4;font-size:9px;">[OPTIONAL]</span></label>
+          <div class="upload-area">
+            <input type="file" name="profile_picture" accept="image/*">
+            <span class="upload-icon">⬡</span>
+            <div class="upload-text">DATEI AUSWÄHLEN &nbsp;|&nbsp; DRAG & DROP</div>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit">▶ IDENTITÄT ERSTELLEN</button>
+      </form>
+      <div class="login-link">Bereits registriert?&nbsp; <a href="{% url 'login' %}">EINLOGGEN</a></div>
     </div>
   </div>
 </div>
+
+<footer class="footer">
+  <span>© 2026 TESTPROJEKT_SYS</span><span class="footer-sep">|</span>
+  <span>All Rights Reserved <a href="https://github.com/MESTE92" target="_blank" class="footer-link">MESTE92</a></span><span class="footer-sep">|</span>
+  <span>Django REST Framework</span>
+</footer>
+
 <script>
-const canvas = document.getElementById('sakura-canvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
-const petals = Array.from({length: 55}, () => ({
-  x: Math.random() * canvas.width, y: Math.random() * canvas.height - canvas.height,
-  size: Math.random() * 14 + 7, speedY: Math.random() * 1.2 + 0.4,
-  speedX: Math.random() * 0.8 - 0.4, rotation: Math.random() * Math.PI * 2,
-  rotSpeed: (Math.random() - 0.5) * 0.03, opacity: Math.random() * 0.5 + 0.25,
-  swaySpeed: Math.random() * 0.02 + 0.005, swayOffset: Math.random() * Math.PI * 2,
-  sway: Math.random() * 2,
-  color: ['#ffb7c5','#ffc1cc','#f48fb1','#f8bbd9','#ff80ab','#fce4ec'][Math.floor(Math.random()*6)]
-}));
-let frame = 0;
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height); frame++;
-  petals.forEach(p => {
-    p.y += p.speedY; p.x += p.speedX + Math.sin(frame * p.swaySpeed + p.swayOffset) * p.sway * 0.05;
-    p.rotation += p.rotSpeed;
-    if (p.y > canvas.height + 20) { p.y = -20; p.x = Math.random() * canvas.width; }
-    ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rotation); ctx.globalAlpha = p.opacity; ctx.fillStyle = p.color;
-    ctx.beginPath(); ctx.ellipse(0, -p.size/2, p.size*0.38, p.size*0.58, 0, 0, Math.PI*2); ctx.fill();
-    ctx.beginPath(); ctx.ellipse(p.size*0.28, 0, p.size*0.38, p.size*0.58, Math.PI/3, 0, Math.PI*2); ctx.fill();
-    ctx.restore();
+function ts() { const n=new Date(); const t=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0'); document.getElementById('nav-ts').textContent=t; document.getElementById('ts').textContent=n.getFullYear()+'.'+String(n.getMonth()+1).padStart(2,'0')+'.'+String(n.getDate()).padStart(2,'0')+' '+t; }
+setInterval(ts,1000); ts();
+const canvas=document.getElementById('rain-canvas'), ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;initColumns();});
+const CHARS='アイウエオカキクケコサシスセソ01アイウエ01<>[]{}|/\\%$#@ABCDEF01';
+const FONT_SIZE=14; let columns=[];
+function initColumns(){const cols=Math.floor(canvas.width/FONT_SIZE);columns=Array.from({length:cols},()=>({y:Math.random()*-canvas.height,speed:Math.random()*1.5+.5,chars:Array.from({length:Math.floor(canvas.height/FONT_SIZE)+5},()=>CHARS[Math.floor(Math.random()*CHARS.length)]),opacity:Math.random()*.5+.15}));}
+initColumns();
+function drawRain(){
+  ctx.fillStyle='rgba(3,0,8,0.18)';ctx.fillRect(0,0,canvas.width,canvas.height);
+  columns.forEach((col,i)=>{
+    col.chars.forEach((ch,j)=>{
+      const x=i*FONT_SIZE,y=col.y+j*FONT_SIZE;
+      if(y<0||y>canvas.height)return;
+      ctx.font=`${FONT_SIZE}px 'Share Tech Mono', monospace`;
+      if(j===col.chars.length-1){ctx.fillStyle=`rgba(255,255,255,${col.opacity*2})`;ctx.shadowColor='#ff0090';ctx.shadowBlur=8;}
+      else{const fade=1-j/col.chars.length;ctx.fillStyle=`rgba(255,0,144,${col.opacity*fade*.8})`;ctx.shadowBlur=0;}
+      if(Math.random()<.01)col.chars[j]=CHARS[Math.floor(Math.random()*CHARS.length)];
+      ctx.fillText(ch,x,y);
+    });
+    col.y+=col.speed;
+    if(col.y>canvas.height){col.y=Math.random()*-canvas.height*.5;col.speed=Math.random()*1.5+.5;}
   });
-  requestAnimationFrame(animate);
+  ctx.shadowBlur=0;requestAnimationFrame(drawRain);
 }
-animate();
+drawRain();
 </script>
 </body>
 </html>

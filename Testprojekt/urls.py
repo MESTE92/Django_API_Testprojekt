@@ -22,13 +22,15 @@ from django.conf import settings    # nötig für Zugriff auf alle Settings.py V
 from django.conf.urls.static import static  # generiert einen URL-Pattern der statische Dateien aus dem MEDIA_ROOT verarbeitet
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('products.urls')),
-    path('api/users/', include('users.urls')),
+    path('', include('users.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/auth/', obtain_auth_token, name='api_token_auth'),  # ermöglicht es, einen Token zu generieren, indem man Benutzernamen und Passwort an diesen Endpunkt sendet
 ]
 
 
