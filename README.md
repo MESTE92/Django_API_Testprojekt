@@ -9,10 +9,24 @@ Ein Django-Testprojekt mit REST API für Produkt-, Kategorie- und Benutzerverwal
 
 ## Screenshots
 
+### API & Dokumentation
+
 <p align="center">
   <img src="Beispielbilder/bidl_1.png" alt="API Browsable Interface" width="30%">
   <img src="Beispielbilder/bild_2.png" alt="API Response Example" width="30%">
   <img src="Beispielbilder/API_Doku.png" alt="Interactive API Documentation" width="30%">
+</p>
+
+### Benutzeroberfläche
+
+<p align="center">
+  <img src="Beispielbilder/Homepage.png" alt="Homescreen" width="30%">
+  <img src="Beispielbilder/Homepage_2.png" alt="Homescreen (eingeloggt)" width="30%">
+  <img src="Beispielbilder/Login.png" alt="Login-Seite" width="30%">
+</p>
+<p align="center">
+  <img src="Beispielbilder/Registrierung.png" alt="Registrierungs-Seite" width="30%">
+  <img src="Beispielbilder/User.png" alt="Benutzerprofil" width="30%">
 </p>
 
 ---
@@ -27,6 +41,7 @@ Ein Django-Testprojekt mit REST API für Produkt-, Kategorie- und Benutzerverwal
 - [API-Dokumentation](#api-dokumentation)
 - [API testen](#api-testen)
 - [User- & Authentifizierungs-API](#user---authentifizierungs-api)
+- [Benutzer über das Admin-Panel anlegen](#option-3--benutzer--token-komplett-über-das-admin-panel-anlegen)
 - [Geschützte vs. öffentliche Endpunkte](#geschützte-vs-öffentliche-endpunkte)
 - [Admin-Panel](#admin-panel)
 - [Projektstruktur](#projektstruktur)
@@ -43,13 +58,15 @@ Ein Django-Testprojekt mit REST API für Produkt-, Kategorie- und Benutzerverwal
 - **RESTful API** mit Django REST Framework
 - **Produkt- und Kategorieverwaltung** mit vollständigem CRUD
 - **Job-Verwaltung** mit Gehaltsfeldern und Sortierung
-- **Benutzerverwaltung**:
+- **Benutzerverwaltung mit UI**:
+  - **Homescreen** mit Navigationslinks (Login, Registrierung, API-Docs)
   - Registrierung mit Passwort-Validierung (Groß-/Kleinbuchstaben, Zahl, Sonderzeichen)
+  - Session-basierter Login/Logout mit Template-Oberfläche
+  - Profilseite mit Bearbeiten-Funktion und Profilbild-Upload (ImageField)
+  - Öffentliche Profilansicht (Benutzername + Profilbild, zugänglich für eingeloggte User)
   - XSS-Schutz durch `bleach`-Sanitierung aller Texteingaben
-  - Profilbild-Upload (ImageField)
-  - Öffentliche Profilansicht (Benutzername + Profilbild)
   - Automatische Token-Erstellung bei Registrierung (via `post_save`-Signal)
-  - Session-basierter Login/Logout
+  - Token-Abruf per POST an `/api/auth/` (ohne Registrierungs-Flow)
 - **Erweiterte Suchfunktionen**:
   - Globale Suche über mehrere Felder (`?search=`)
   - Gezielte Filterung (Name, SKU, Beschreibung, Preis, Kategorie, Status)
@@ -301,25 +318,38 @@ curl http://127.0.0.1:8000/api/products/
 
 ## User- & Authentifizierungs-API
 
-Das Projekt enthält eine vollständige Benutzerverwaltung unter dem Präfix `/api/users/`.
+Das Projekt enthält eine vollständige Benutzerverwaltung mit Template-Oberfläche. Die Routen liegen direkt auf dem Root-Pfad (kein `/api/users/`-Präfix).
 
 ### Endpunkte
 
 | Endpunkt | Methode | Beschreibung | Auth erforderlich |
 |----------|---------|--------------|:-----------------:|
-| `http://127.0.0.1:8000/api/users/register/` | GET | Registrierungs-Formular anzeigen | Nein |
-| `http://127.0.0.1:8000/api/users/register/` | POST | Neuen Benutzer registrieren | Nein |
-| `http://127.0.0.1:8000/api/users/login/` | GET | Login-Formular anzeigen | Nein |
-| `http://127.0.0.1:8000/api/users/login/` | POST | Einloggen (Session) | Nein |
-| `http://127.0.0.1:8000/api/users/logout/` | POST | Ausloggen | Ja |
-| `http://127.0.0.1:8000/api/users/profile/<pk>/` | GET | Eigenes Profil anzeigen | Ja (nur Eigentümer) |
-| `http://127.0.0.1:8000/api/users/profile/<pk>/` | POST | Profil bearbeiten oder löschen | Ja (nur Eigentümer) |
-| `http://127.0.0.1:8000/api/users/profile/<pk>/public/` | GET | Öffentliches Profil ansehen | Ja |
+| `http://127.0.0.1:8000/` | GET | Homescreen | Nein |
+| `http://127.0.0.1:8000/home/` | GET | Homescreen (alternativ) | Nein |
+| `http://127.0.0.1:8000/register/` | GET | Registrierungs-Formular anzeigen | Nein |
+| `http://127.0.0.1:8000/register/` | POST | Neuen Benutzer registrieren | Nein |
+| `http://127.0.0.1:8000/login/` | GET | Login-Formular anzeigen | Nein |
+| `http://127.0.0.1:8000/login/` | POST | Einloggen (Session) | Nein |
+| `http://127.0.0.1:8000/logout/` | POST | Ausloggen | Ja |
+| `http://127.0.0.1:8000/profile/<pk>/` | GET | Eigenes Profil anzeigen | Ja (nur Eigentümer) |
+| `http://127.0.0.1:8000/profile/<pk>/` | POST | Profil bearbeiten oder löschen | Ja (nur Eigentümer) |
+| `http://127.0.0.1:8000/profile/<pk>/edit/` | GET/POST | Profil bearbeiten (Edit-Formular) | Ja (nur Eigentümer) |
+| `http://127.0.0.1:8000/profile/<pk>/public/` | GET | Öffentliches Profil ansehen | Ja |
+| `http://127.0.0.1:8000/api/auth/` | POST | Token per Credentials abrufen | Nein |
+
+### Homescreen
+
+Der Homescreen unter `http://127.0.0.1:8000/` bietet eine Übersicht aller wichtigen Links:
+- Login & Registrierung
+- Link zur interaktiven API-Dokumentation
+- Navigation zum eigenen Profil (wenn eingeloggt)
 
 ### Registrierung
 
+Über die Weboberfläche unter `http://127.0.0.1:8000/register/` oder per curl:
+
 ```bash
-curl -X POST http://127.0.0.1:8000/api/users/register/ \
+curl -X POST http://127.0.0.1:8000/register/ \
   -F "username=MeinName" \
   -F "email=email@example.com" \
   -F "password=MeinPasswort1!"
@@ -332,26 +362,73 @@ curl -X POST http://127.0.0.1:8000/api/users/register/ \
 - Mindestens eine Zahl
 - Mindestens ein Sonderzeichen (`!@#$%^&*` etc.)
 
-> **Hinweis**: Bei der Registrierung wird automatisch ein Auth-Token erstellt und der Session-Login ist sofort möglich.
+> **Hinweis**: Bei der Registrierung wird automatisch ein Auth-Token erstellt. Nach der Registrierung erfolgt eine automatische Weiterleitung zur Login-Seite.
 
-### Login
+### Login & Session
+
+Über die Weboberfläche unter `http://127.0.0.1:8000/login/` oder per curl:
 
 ```bash
-curl -X POST http://127.0.0.1:8000/api/users/login/ \
+curl -X POST http://127.0.0.1:8000/login/ \
   -F "username=MeinName" \
   -F "password=MeinPasswort1!"
 ```
 
-### Token-Authentifizierung
+Nach erfolgreichem Login wird die Session gesetzt und der Benutzer zum eigenen Profil weitergeleitet.
 
-Jeder Benutzer bekommt bei der Registrierung automatisch einen Token zugewiesen. Den Token findest du im Django Admin-Panel unter **Tokens** (`http://127.0.0.1:8000/admin/authtoken/token/`).
-
-Token in Requests verwenden:
+### Logout
 
 ```bash
-curl http://127.0.0.1:8000/api/users/profile/1/public/ \
+curl -X POST http://127.0.0.1:8000/logout/ \
   -H "Authorization: Token <dein-token>"
 ```
+
+Nach dem Logout wird die Session beendet und der Benutzer zum Homescreen weitergeleitet.
+
+### Token-Authentifizierung
+
+#### Option 1 – Token per API abrufen (`/api/auth/`)
+
+Sende einen POST-Request mit Benutzername und Passwort an den `api/auth/`-Endpunkt, um direkt einen Token zurückzubekommen – ohne den Registrierungs-Flow zu durchlaufen:
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/auth/ \
+  -H "Content-Type: application/json" \
+  -d '{"username": "MeinName", "password": "MeinPasswort1!"}'
+```
+
+**Antwort:**
+```json
+{
+  "token": "9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b"
+}
+```
+
+Dieser Token kann anschließend in jedem Request im `Authorization`-Header mitgeschickt werden:
+
+```bash
+curl http://127.0.0.1:8000/profile/1/public/ \
+  -H "Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b"
+```
+
+#### Option 2 – Token im Admin-Panel einsehen
+
+Jeder Benutzer bekommt bei der Registrierung automatisch einen Token zugewiesen. Den Token findest du im Django Admin-Panel unter **Tokens**:
+
+**http://127.0.0.1:8000/admin/authtoken/token/**
+
+#### Option 3 – Benutzer & Token komplett über das Admin-Panel anlegen
+
+Falls du den Registrierungs-Flow überspringen möchtest, kannst du Benutzer und Token direkt im Admin-Panel anlegen:
+
+1. Öffne **http://127.0.0.1:8000/admin/**
+2. Gehe zu **Benutzer → Benutzer hinzufügen** und lege den neuen Benutzer an
+3. Vergib Passwort, E-Mail und ggf. Berechtigungen direkt im Formular
+4. Navigiere anschließend zu **Auth Token → Tokens → Token hinzufügen**
+5. Wähle den neu angelegten Benutzer aus – der Token wird automatisch generiert und gespeichert
+6. Der Token ist sofort aktiv und kann in API-Requests verwendet werden
+
+> **Tipp**: Das Admin-Panel ist der schnellste Weg, um Test-User mit Tokens anzulegen, ohne die Registrierungsseite zu nutzen.
 
 ---
 
@@ -359,15 +436,19 @@ curl http://127.0.0.1:8000/api/users/profile/1/public/ \
 
 | Endpunkt | Zugriff |
 |----------|---------|
+| `GET /` | Öffentlich (Homescreen) |
+| `GET /home/` | Öffentlich (Homescreen) |
 | `GET /api/products/` | Öffentlich |
 | `GET /api/categories/` | Öffentlich |
 | `POST/PUT/DELETE /api/products/` | Öffentlich (Dev-Modus) |
-| `GET /api/users/register/` | Öffentlich |
-| `POST /api/users/register/` | Öffentlich |
-| `GET/POST /api/users/login/` | Öffentlich |
-| `POST /api/users/logout/` | Eingeloggt |
-| `GET/POST /api/users/profile/<pk>/` | Eingeloggt + Eigentümer |
-| `GET /api/users/profile/<pk>/public/` | Eingeloggt |
+| `GET /register/` | Öffentlich |
+| `POST /register/` | Öffentlich |
+| `GET/POST /login/` | Öffentlich |
+| `POST /api/auth/` | Öffentlich (Token per Credentials abrufen) |
+| `POST /logout/` | Eingeloggt |
+| `GET/POST /profile/<pk>/` | Eingeloggt + Eigentümer |
+| `GET/POST /profile/<pk>/edit/` | Eingeloggt + Eigentümer |
+| `GET /profile/<pk>/public/` | Eingeloggt |
 
 ---
 
