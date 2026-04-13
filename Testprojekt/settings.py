@@ -32,6 +32,7 @@ DEBUG = config('DEBUG', cast=bool)      # nutzt environment variable
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
+    #'*'
 ]
 
 
