@@ -3,6 +3,7 @@ attrs==26.1.0
 bleach==6.3.0
 defusedxml==0.7.1
 Django==6.0.3
+django-extensions==4.1
 django-filter==25.2
 django-rest-framework==0.1.0
 django-stubs==6.0.2
@@ -16,6 +17,8 @@ inflection==0.5.1
 jsonschema==4.26.0
 jsonschema-specifications==2025.9.1
 pillow==12.2.0
+pydotplus==2.0.2
+pyparsing==3.3.2
 python-decouple==3.8
 PyYAML==6.0.3
 referencing==0.37.0

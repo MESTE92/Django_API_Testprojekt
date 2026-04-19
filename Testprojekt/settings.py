@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'drf_spectacular',  # für API-Dokumentation
     'products',
     'users',
+    'django_extensions',   # für graph_models
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'     # Custom User Model erbt von User in models.py und ersetzt das
