@@ -1,4 +1,6 @@
 
+from xml.parsers.expat import model
+
 from django.db import models
 
 class Category(models.Model):                 # das Model Category
@@ -67,5 +69,4 @@ class Jobs(models.Model):
 
     def __str__(self):
         return self.name
-
-
+    
