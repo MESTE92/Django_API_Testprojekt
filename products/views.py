@@ -1,7 +1,10 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView   # Die generischen Views
+from django.shortcuts import render
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.exceptions import PermissionDenied
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView     # Die generischen Views
 from .serializers import CategorySerializer, ProductSerializer, JobSerializer         # Die Serialisier
 from .models import Category, Product, Jobs                                                # Die Model-Klassen
-from .pagination import CategoryPagination, ProductPagination, JobPagination
+from .pagination import CategoryPagination, ProductPagination, JobPagination            # Die Paginierungsklassen
 
 from rest_framework.permissions import IsAuthenticated
 
@@ -93,4 +96,15 @@ class JobListCreateView(ListCreateAPIView):
 class JobDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = JobSerializer
     queryset         = Jobs.objects.all()
-    permission_classes = [IsAuthenticated]              # auch hier Authentifizierung für die CRUD-Operationen nötig
+    permission_classes = [IsAuthenticated]      # auch hier Authentifizierung für die CRUD-Operationennötig
+    
+    
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])  # Authentifizierung für diese Funktion nötig
+def app_manager_view(request):
+    if request.user.groups.filter(name='Admingruppe').exists():  # zusätzlich prüfen ob der User in der Gruppe 'app_manager' ist
+        return render(request, 'app_manager.html')
+    else:
+        raise PermissionDenied("Du hast keine Berechtigung, diese Seite zu sehen.")
