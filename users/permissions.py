@@ -15,3 +15,7 @@ class IsOwner(BasePermission):
     """
     def has_object_permission(self, request, view, obj):
         return obj == request.user
+    
+class IsAppManager(BasePermission):        # Beispiel für eine benutzerdefinierte Berechtigungsklasse, die prüft ob der User in der Gruppe 'app_manager' ist
+    def has_permission(self, request, view):
+        return request.user.groups.filter(name='app_manager').exists()

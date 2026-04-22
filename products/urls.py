@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import CategoryListCreateView, ProductListCreateView, ProductDetailView  # die Views
+from .views import CategoryListCreateView, ProductListCreateView, ProductDetailView, app_manager_view  # die Views
 from .views import JobListCreateView, JobDetailView
 
 app_name = 'products'  # Namespace -> verhindert Konflikte mit möglichen anderen Apps
@@ -29,4 +29,7 @@ urlpatterns = [
     # PUT    /api/jobs/1/ -> Job komplett ersetzen
     # PATCH  /api/jobs/1/ -> Job teilweise ändern
     # DELETE /api/jobs/1/ -> Job löschen
+    
+    path('app-manager/', app_manager_view, name='app-manager'),  # Beispiel für eine Funktion-basierte View
+    # GET /api/app-manager/ -> Zugriff auf diese Funktion, Authentifizierung nötig
 ]

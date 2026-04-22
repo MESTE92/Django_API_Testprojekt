@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App Manager</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #0f0f1a;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 72px 24px 56px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 60% 40%, rgba(99,102,241,.18) 0%, transparent 70%);
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(90deg, #818cf8, #38bdf8, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+        .hero p {
+            margin-top: 16px;
+            color: #94a3b8;
+            font-size: 1.1rem;
+            position: relative;
+        }
+        .badge-row {
+            margin-top: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+        }
+        .badge {
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: .78rem;
+            font-weight: 600;
+            letter-spacing: .04em;
+            border: 1px solid;
+        }
+        .badge-blue  { background: rgba(56,189,248,.1); border-color: #38bdf8; color: #38bdf8; }
+        .badge-violet{ background: rgba(129,140,248,.1); border-color: #818cf8; color: #818cf8; }
+        .badge-green { background: rgba(52,211,153,.1);  border-color: #34d399; color: #34d399; }
+        .badge-orange{ background: rgba(251,146,60,.1);  border-color: #fb923c; color: #fb923c; }
+
+        /* ── Layout ── */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        .section { padding: 60px 0; }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, #334155, transparent);
+        }
+
+        /* ── Cards ── */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: #1e1e2e;
+            border: 1px solid #2d2d44;
+            border-radius: 16px;
+            padding: 28px;
+            transition: transform .2s, border-color .2s, box-shadow .2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #4f46e5;
+            box-shadow: 0 12px 40px rgba(79,70,229,.2);
+        }
+        .card-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+        }
+        .icon-blue   { background: rgba(56,189,248,.15); }
+        .icon-violet { background: rgba(129,140,248,.15); }
+        .icon-green  { background: rgba(52,211,153,.15); }
+        .card h3 { font-size: 1.1rem; font-weight: 700; color: #f1f5f9; }
+        .card p  { margin-top: 8px; color: #94a3b8; font-size: .9rem; line-height: 1.6; }
+
+        /* ── Endpoints ── */
+        .endpoint-table { width: 100%; border-collapse: collapse; }
+        .endpoint-table th {
+            text-align: left;
+            padding: 10px 16px;
+            font-size: .78rem;
+            letter-spacing: .07em;
+            color: #64748b;
+            border-bottom: 1px solid #2d2d44;
+        }
+        .endpoint-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #1e1e2e;
+            font-size: .88rem;
+            vertical-align: middle;
+        }
+        .endpoint-table tr:last-child td { border-bottom: none; }
+        .endpoint-table tbody tr:hover td { background: #1e1e2e; }
+        .method {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .05em;
+        }
+        .m-get    { background: rgba(52,211,153,.15); color: #34d399; }
+        .m-post   { background: rgba(56,189,248,.15); color: #38bdf8; }
+        .m-put    { background: rgba(251,191,36,.15);  color: #fbbf24; }
+        .m-patch  { background: rgba(251,146,60,.15);  color: #fb923c; }
+        .m-delete { background: rgba(248,113,113,.15); color: #f87171; }
+        .url-path { font-family: 'Cascadia Code', 'Fira Code', monospace; color: #cbd5e1; }
+        .lock-icon { font-size: .8rem; color: #fb923c; margin-left: 6px; }
+
+        /* ── Feature list ── */
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+        }
+        .feature-item {
+            background: #1e1e2e;
+            border: 1px solid #2d2d44;
+            border-radius: 12px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+        .feature-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+        .dot-blue   { background: #38bdf8; box-shadow: 0 0 8px #38bdf8; }
+        .dot-violet { background: #818cf8; box-shadow: 0 0 8px #818cf8; }
+        .dot-green  { background: #34d399; box-shadow: 0 0 8px #34d399; }
+        .dot-orange { background: #fb923c; box-shadow: 0 0 8px #fb923c; }
+        .feature-item strong { display: block; color: #f1f5f9; font-size: .9rem; }
+        .feature-item span   { color: #64748b; font-size: .82rem; }
+
+        /* ── Footer ── */
+        footer {
+            background: #0a0a14;
+            border-top: 1px solid #1e1e2e;
+            padding: 32px 24px;
+            text-align: center;
+            color: #475569;
+            font-size: .85rem;
+        }
+        footer span { color: #818cf8; }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1>Product & Job API</h1>
+        <p>Vollständige REST-API auf Basis von Django & Django REST Framework</p>
+        <div class="badge-row">
+            <span class="badge badge-violet">Django 5</span>
+            <span class="badge badge-blue">Django REST Framework</span>
+            <span class="badge badge-green">JWT Auth</span>
+            <span class="badge badge-orange">SQLite / PostgreSQL</span>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Models -->
+        <div class="section">
+            <h2 class="section-title">Datenmodelle</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon icon-blue">🗂️</div>
+                    <h3>Category</h3>
+                    <p>Produktkategorien als Fremdschlüssel-Basis. Jede Kategorie kann beliebig viele Produkte enthalten (<code>related_name='products'</code>).</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon icon-violet">📦</div>
+                    <h3>Product</h3>
+                    <p>Kern-Entity mit Name, Beschreibung, Preis, Lagerbestand, SKU, Bild und Status. DB-Indizes auf häufig gefilterten Feldern, Schutz-FK zur Kategorie.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon icon-green">💼</div>
+                    <h3>Jobs</h3>
+                    <p>Stellenanzeigen mit Name, Beschreibung und Gehalt. Sortierung standardmäßig nach Gehalt absteigend. CRUD nur für authentifizierte Nutzer.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Endpoints -->
+        <div class="section" style="padding-top:0">
+            <h2 class="section-title">API-Endpunkte</h2>
+            <div class="card" style="padding:0;overflow:hidden;">
+                <table class="endpoint-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>URL</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="method m-get">GET</span></td>
+                            <td class="url-path">/api/categories/</td>
+                            <td>Alle Kategorien (paginiert)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method m-post">POST</span></td>
+                            <td class="url-path">/api/categories/</td>
+                            <td>Neue Kategorie erstellen</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method m-get">GET</span></td>
+                            <td class="url-path">/api/products/</td>
+                            <td>Produkte — Filter, Suche, Sortierung</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method m-post">POST</span></td>
+                            <td class="url-path">/api/products/</td>
+                            <td>Neues Produkt anlegen</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method m-get">GET</span></td>
+                            <td class="url-path">/api/products/&lt;id&gt;/</td>
+                            <td>Einzelnes Produkt abrufen</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method m-patch">PATCH</span></td>
+                            <td class="url-path">/api/products/&lt;id&gt;/</td>
+                            <td>Produkt teilweise aktualisieren</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method m-delete">DELETE</span></td>
+                            <td class="url-path">/api/products/&lt;id&gt;/</td>
+                            <td>Produkt löschen</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method m-get">GET</span></td>
+                            <td class="url-path">/api/jobs/ <span class="lock-icon">🔒</span></td>
+                            <td>Alle Jobs — Filter &amp; Suche</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method m-post">POST</span></td>
+                            <td class="url-path">/api/jobs/ <span class="lock-icon">🔒</span></td>
+                            <td>Neuen Job erstellen</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method m-get">GET</span></td>
+                            <td class="url-path">/api/jobs/&lt;id&gt;/ <span class="lock-icon">🔒</span></td>
+                            <td>Einzelnen Job abrufen</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method m-put">PUT</span> <span class="method m-patch">PATCH</span></td>
+                            <td class="url-path">/api/jobs/&lt;id&gt;/ <span class="lock-icon">🔒</span></td>
+                            <td>Job aktualisieren</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method m-delete">DELETE</span></td>
+                            <td class="url-path">/api/jobs/&lt;id&gt;/ <span class="lock-icon">🔒</span></td>
+                            <td>Job löschen</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method m-get">GET</span></td>
+                            <td class="url-path">/api/app-manager/ <span class="lock-icon">🔒</span></td>
+                            <td>App Manager (diese Seite)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top:12px; font-size:.8rem; color:#475569;">🔒 = Authentifizierung erforderlich (Bearer Token)</p>
+        </div>
+
+        <!-- Features -->
+        <div class="section" style="padding-top:0">
+            <h2 class="section-title">Features</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-dot dot-blue"></div>
+                    <div><strong>Paginierung</strong><span>Eigene Pagination-Klassen für Categories, Products und Jobs</span></div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-dot dot-violet"></div>
+                    <div><strong>Filterung</strong><span>Exakte Filter per URL-Parameter, z.B. <code>?active=true</code></span></div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-dot dot-green"></div>
+                    <div><strong>Volltextsuche</strong><span>Globale Suche über Name, Beschreibung, SKU und Kategorie</span></div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-dot dot-orange"></div>
+                    <div><strong>Sortierung</strong><span>Flexibles Ordering per <code>?ordering=price</code> oder <code>-salary</code></span></div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-dot dot-blue"></div>
+                    <div><strong>Queryset-Optimierung</strong><span><code>select_related</code> für JOIN-basiertes Laden der FK-Daten</span></div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-dot dot-violet"></div>
+                    <div><strong>DB-Indizes</strong><span>Indizes auf SKU, active, category und name für schnelle Abfragen</span></div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-dot dot-green"></div>
+                    <div><strong>JWT Authentication</strong><span>Schützt Job-CRUD und den App Manager</span></div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-dot dot-orange"></div>
+                    <div><strong>Bildupload</strong><span>Produktbilder via <code>ImageField</code> unter <code>/media/products/</code></span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Product &amp; Job API &mdash; gebaut mit <span>Django REST Framework</span> &bull; 2026</p>
+    </footer>
+
+</body>
+</html>
