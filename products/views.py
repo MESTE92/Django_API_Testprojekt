@@ -1,12 +1,16 @@
 from django.shortcuts import render
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, throttle_classes
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView     # Die generischen Views
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView # generische Klassen für CRUD-Operationen
+from rest_framework.response import Response 
+from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+
 from .serializers import CategorySerializer, ProductSerializer, JobSerializer         # Die Serialisier
 from .models import Category, Product, Jobs                                                # Die Model-Klassen
 from .pagination import CategoryPagination, ProductPagination, JobPagination            # Die Paginierungsklassen
+from .throttle import CustomAnonRateThrottle, CustomUserRateThrottle                    # Die Custom Throttle-Klassen
 
-from rest_framework.permissions import IsAuthenticated
 
 
 # Alle Kategorien (GET) + neue Kategorie (POST)
@@ -23,6 +27,7 @@ class CategoryListCreateView(ListCreateAPIView):
 class ProductListCreateView(ListCreateAPIView):
     serializer_class = ProductSerializer
     pagination_class = ProductPagination
+    permission_classes = [IsAuthenticatedOrReadOnly]            # Authentifizierung für die CRUD-Operationen nötig
 
     filterset_fields = ['active', 'category', 'category__name']          # Filter für exakte Suchwerte zb. ?active=true
     ordering_fields  = ['price', 'name', 'category__name']               # Custom Sortierung wenn die Parameter in der URL angegeben sind
@@ -96,7 +101,8 @@ class JobListCreateView(ListCreateAPIView):
 class JobDetailView(RetrieveUpdateDestroyAPIView):
     serializer_class = JobSerializer
     queryset         = Jobs.objects.all()
-    permission_classes = [IsAuthenticated]      # auch hier Authentifizierung für die CRUD-Operationennötig
+    permission_classes = [IsAuthenticated]
+    
     
     
 
@@ -108,3 +114,22 @@ def app_manager_view(request):
         return render(request, 'app_manager.html')
     else:
         raise PermissionDenied("Du hast keine Berechtigung, diese Seite zu sehen.")
+    
+
+@api_view(['GET'])
+@throttle_classes([AnonRateThrottle])  # Throttling für diese Funktion, limitiert die Anzahl der Anfragen pro User/IP
+def throttle_check(request):
+    return Response({"message": "Throttling funktioniert!"})
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])  # Authentifizierung für diese Funktion nötig
+@throttle_classes([UserRateThrottle])  # Throttling für diese Funktion, limitiert die Anzahl der Anfragen pro authentifiziertem User
+def throttle_check_auth(request):
+    return Response({"message": "Throttling funktioniertmit höheren Raten für authentifizierte User!"})
+
+
+# TODO: cumstom anon function 
+
+# TODO: custoim auth function
+

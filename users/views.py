@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404   # get_object_or_404: Hilfsfunktion, die ein Objekt anhand von Kriterien abruft oder 404-Fehler zurückgibt
 from django.contrib.auth import get_user_model                    # gibt CustomUser zurück
 from django.contrib.auth import login, logout, authenticate       # login: erstellt Session, logout: beendet Session, authenticate: prüft Credentials
+from rest_framework.throttling import UserRateThrottle
 from rest_framework.views import APIView                           # Basis-View für benutzerdefinierte Logik (z.B. Login/Logout ohne Serializer)   
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -14,6 +15,7 @@ User = get_user_model()
 
 class HomeView(APIView):
     permission_classes = [AllowAny]
+    throttle_classes = []  # Keine Throttling für die Startseite
 
     def get(self, request, *args, **kwargs):
         return render(request, 'users/home.html')
@@ -46,6 +48,7 @@ class UserProfileView(RetrieveUpdateDestroyAPIView):
     serializer_class   = UserProfileSerializer
     queryset           = User.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
+    throttle_classes  = [UserRateThrottle]                          # Throttling für diese View, limitiert die Anzahl der Anfragen pro authentifiziertem User
     parser_classes     = [MultiPartParser, FormParser]               # Formular + Datei-Upload
 
     def get(self, request, *args, **kwargs):
@@ -114,6 +117,7 @@ class ProfileEditView(RetrieveUpdateDestroyAPIView):
     serializer_class   = UserProfileSerializer
     queryset           = User.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
+    throttle_classes  = [UserRateThrottle]                          # Throttling für diese View, limitiert die Anzahl der Anfragen pro authentifiziertem User
     parser_classes     = [MultiPartParser, FormParser]
 
     def get(self, request, *args, **kwargs):

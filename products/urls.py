@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import CategoryListCreateView, ProductListCreateView, ProductDetailView, app_manager_view  # die Views
+from .views import CategoryListCreateView, ProductListCreateView, ProductDetailView, app_manager_view, throttle_check, throttle_check_auth  # die Views
 from .views import JobListCreateView, JobDetailView
 
 app_name = 'products'  # Namespace -> verhindert Konflikte mit möglichen anderen Apps
@@ -32,4 +32,10 @@ urlpatterns = [
     
     path('app-manager/', app_manager_view, name='app-manager'),  # Beispiel für eine Funktion-basierte View
     # GET /api/app-manager/ -> Zugriff auf diese Funktion, Authentifizierung nötig
+    
+    path('throttle-check/', throttle_check, name='throttle-check'),  # Beispiel für eine Funktion-basierte View, die Throttling testet
+    # GET /api/throttle-check/ -> Zugriff auf diese Funktion, Throttling nötig
+    
+    path('throttle-check-auth/', throttle_check_auth, name='throttle-check-auth'),  # Beispiel für eine Funktion-basierte View, die Throttling mit Authentifizierung testet
+    # GET /api/throttle-check-auth/ -> Zugriff auf diese Funktion, Throttling
 ]

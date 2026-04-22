@@ -96,6 +96,16 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
+    'DEFAULT_THROTTLE_CLASSES': [                                    # globale Throttle-Klassen
+        'rest_framework.throttling.UserRateThrottle',
+        'rest_framework.throttling.AnonRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {                                      # Throttle-Raten
+            'user': '1000/day',   # 1000 Anfragen pro Tag pro authentifiziertem User
+            'anon': '2/minute',    # 2 Anfragen pro Minute pro nicht-authentifiziertem User/IP
+            'twenty': '20/minute',   # Custom 20 Anfragen pro Minute pro nicht-authentifiziertem User/IP für CustomAnonRateThrottle
+            'hundret': '100/minute', # Custom 100 Anfragen pro Minute pro authentifiziertem User für CustomUserRateThrottle
+    },  
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 
     #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
