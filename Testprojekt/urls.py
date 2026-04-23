@@ -30,6 +30,8 @@ urlpatterns = [
     path('', include('users.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('auth/', include('djoser.urls')),  # Djoser Endpoints für User Registration, Login, Logout, Passwortänderung etc.
+    path('auth/', include('djoser.urls.authtoken')),  # Djoser Endpoints für Token Authentication (z.B. Token erstellen, löschen)
     path('api/auth/', obtain_auth_token, name='api_token_auth'),  # ermöglicht es, einen Token zu generieren, indem man Benutzernamen und Passwort an diesen Endpunkt sendet
 ]
 

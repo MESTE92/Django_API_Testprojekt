@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'products',
     'users',
     'django_extensions',   # für graph_models
+    'djoser',              # für User Registration und Authentifizierung (z.B. Login, Logout, Passwortänderung)
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'     # Custom User Model erbt von User in models.py und ersetzt das
@@ -113,9 +114,10 @@ REST_FRAMEWORK = {
     # -> das wäre eine Alternative globale Pagination
 }
 
-
-
-
+DJOSER = {
+    'USER_ID_FIELD': 'username',  # oder 'id' je nachdem welches Feld als eindeutige ID verwendet werden soll
+    'LOGIN_FIELD': 'username',    # oder 'email' wenn die Anmeldung per E-Mail erfolgen soll
+}
 
 
 
