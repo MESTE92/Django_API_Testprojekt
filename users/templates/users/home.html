@@ -130,7 +130,7 @@ body{min-height:100vh;font-family:'Nunito',sans-serif;background:var(--bg);overf
 </div>
 
 <nav class="navbar">
-  <a href="{% url 'home' %}" class="nav-brand">🌿 Testprojekt</a>
+  <a href="{% url 'users:home' %}" class="nav-brand">🌿 Testprojekt</a>
   <div class="nav-links">
     {% if user.is_authenticated %}
       <div class="nav-avatar-wrap" id="avatarTrigger">
@@ -142,17 +142,17 @@ body{min-height:100vh;font-family:'Nunito',sans-serif;background:var(--bg);overf
         </div>
         <div class="nav-dropdown" id="avatarDropdown">
           <div class="dropdown-header">{{ user.username }}</div>
-          <a href="{% url 'profile' user.pk %}" class="dropdown-item">👤 Mein Profil</a>
-          <a href="{% url 'profile_edit' user.pk %}" class="dropdown-item">✏️ Profil bearbeiten</a>
-          <form method="POST" action="{% url 'logout' %}" class="logout-form" style="display:block;">
+          <a href="{% url 'users:profile' user.pk %}" class="dropdown-item">👤 Mein Profil</a>
+          <a href="{% url 'users:profile_edit' user.pk %}" class="dropdown-item">✏️ Profil bearbeiten</a>
+          <form method="POST" action="{% url 'users:logout' %}" class="logout-form" style="display:block;">
             {% csrf_token %}
             <button type="submit" class="dropdown-item dropdown-logout">👋 Ausloggen</button>
           </form>
         </div>
       </div>
     {% else %}
-      <a href="{% url 'register' %}" class="nav-link nav-ghost">Registrieren</a>
-      <a href="{% url 'login' %}" class="nav-link nav-green">Login</a>
+      <a href="{% url 'users:register' %}" class="nav-link nav-ghost">Registrieren</a>
+      <a href="{% url 'users:login' %}" class="nav-link nav-green">Login</a>
     {% endif %}
   </div>
 </nav>
@@ -172,11 +172,11 @@ body{min-height:100vh;font-family:'Nunito',sans-serif;background:var(--bg);overf
   <div class="hero-divider"></div>
   <div class="hero-cta">
     {% if user.is_authenticated %}
-      <a href="{% url 'profile' user.pk %}" class="cta-btn cta-primary">👤 Mein Profil</a>
+      <a href="{% url 'users:profile' user.pk %}" class="cta-btn cta-primary">👤 Mein Profil</a>
       <a href="/api/docs/" class="cta-btn cta-secondary">📄 API Docs</a>
     {% else %}
-      <a href="{% url 'register' %}" class="cta-btn cta-primary">🌱 Jetzt starten</a>
-      <a href="{% url 'login' %}" class="cta-btn cta-secondary">Einloggen</a>
+      <a href="{% url 'users:register' %}" class="cta-btn cta-primary">🌱 Jetzt starten</a>
+      <a href="{% url 'users:login' %}" class="cta-btn cta-secondary">Einloggen</a>
     {% endif %}
   </div>
 </section>

@@ -131,7 +131,7 @@ input::placeholder{color:#d1d5db;}
 </div>
 
 <nav class="navbar">
-  <a href="{% url 'home' %}" class="nav-brand">🌿 Testprojekt</a>
+  <a href="{% url 'users:home' %}" class="nav-brand">🌿 Testprojekt</a>
   <div class="nav-avatar-wrap" id="avatarTrigger">
     <div class="nav-avatar">
       <div class="nav-avatar-inner">
@@ -141,9 +141,9 @@ input::placeholder{color:#d1d5db;}
     </div>
     <div class="nav-dropdown" id="avatarDropdown">
       <div class="dropdown-header">{{ user.username }}</div>
-      <a href="{% url 'profile' user.pk %}" class="dropdown-item">👤 Mein Profil</a>
-      <a href="{% url 'profile_edit' user.pk %}" class="dropdown-item" style="color:var(--g);">✏️ Profil bearbeiten</a>
-      <form method="POST" action="{% url 'logout' %}" class="logout-form" style="display:block;">
+      <a href="{% url 'users:profile' user.pk %}" class="dropdown-item">👤 Mein Profil</a>
+      <a href="{% url 'users:profile_edit' user.pk %}" class="dropdown-item" style="color:var(--g);">✏️ Profil bearbeiten</a>
+      <form method="POST" action="{% url 'users:logout' %}" class="logout-form" style="display:block;">
         {% csrf_token %}
         <button type="submit" class="dropdown-item dropdown-logout">👋 Ausloggen</button>
       </form>

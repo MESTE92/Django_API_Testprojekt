@@ -114,7 +114,7 @@ body{min-height:100vh;font-family:'Nunito',sans-serif;background:var(--bg);displ
 </div>
 
 <nav class="navbar">
-  <a href="{% url 'home' %}" class="nav-brand">🌿 Testprojekt</a>
+  <a href="{% url 'users:home' %}" class="nav-brand">🌿 Testprojekt</a>
   <div>
     {% if user.is_authenticated %}
       <div class="nav-avatar-wrap" id="avatarTrigger">
@@ -126,8 +126,8 @@ body{min-height:100vh;font-family:'Nunito',sans-serif;background:var(--bg);displ
         </div>
         <div class="nav-dropdown" id="avatarDropdown">
           <div class="dropdown-header">{{ user.username }}</div>
-          <a href="{% url 'profile_edit' user.pk %}" class="dropdown-item">✏️ Profil bearbeiten</a>
-          <form method="POST" action="{% url 'logout' %}" class="logout-form" style="display:block;">
+          <a href="{% url 'users:profile_edit' user.pk %}" class="dropdown-item">✏️ Profil bearbeiten</a>
+          <form method="POST" action="{% url 'users:logout' %}" class="logout-form" style="display:block;">
             {% csrf_token %}
             <button type="submit" class="dropdown-item dropdown-logout">👋 Ausloggen</button>
           </form>

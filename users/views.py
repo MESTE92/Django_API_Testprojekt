@@ -36,7 +36,7 @@ class RegisterView(ListCreateAPIView):
 
         if serializer.is_valid():
             serializer.save()
-            return redirect('login')
+            return redirect('users:login')
 
         # Fehler an Template zurückgeben
         return render(request, 'users/register.html', {
@@ -64,7 +64,7 @@ class UserProfileView(RetrieveUpdateDestroyAPIView):
         # Löschen wenn action=delete
         if request.data.get('action') == 'delete':
             user.delete()
-            return redirect('register')
+            return redirect('users:register')
 
         # Update – partial=True erlaubt PATCH-ähnliches Verhalten (nicht alle Felder Pflicht)
         serializer = UserProfileSerializer(user, data=request.data, partial=True)
@@ -96,7 +96,7 @@ class LoginView(APIView):                             # kein Serializer nötig �
 
         if user is not None:
             login(request, user)                            # Session erstellen
-            return redirect('profile', pk=user.pk)         # weiterleiten zum Profil
+            return redirect('users:profile', pk=user.pk)         # weiterleiten zum Profil
 
         return render(request, 'users/login.html', {
             'error': 'Benutzername oder Passwort falsch.'
@@ -110,7 +110,7 @@ class LogoutView(APIView):
 
     def post(self, request, *args, **kwargs):
         logout(request)                                     # Session beenden
-        return redirect('home')
+        return redirect('users:home')
 
 
 class ProfileEditView(RetrieveUpdateDestroyAPIView):
@@ -131,7 +131,7 @@ class ProfileEditView(RetrieveUpdateDestroyAPIView):
 
         if request.data.get('action') == 'delete':
             user.delete()
-            return redirect('register')
+            return redirect('users:register')
 
         serializer = UserProfileSerializer(user, data=request.data, partial=True)
 

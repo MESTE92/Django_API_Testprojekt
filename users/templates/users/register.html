@@ -108,9 +108,9 @@ input::placeholder{color:#d1d5db;}
 <div class="confetti-wrap" id="conf"></div>
 
 <nav class="navbar">
-  <a href="{% url 'home' %}" class="nav-brand">🌿 Testprojekt</a>
+  <a href="{% url 'users:home' %}" class="nav-brand">🌿 Testprojekt</a>
   <div class="nav-links">
-    <a href="{% url 'login' %}" class="nav-link nav-ghost">Login</a>
+    <a href="{% url 'users:login' %}" class="nav-link nav-ghost">Login</a>
     <span class="nav-link nav-active">Registrieren</span>
   </div>
 </nav>
@@ -154,7 +154,7 @@ input::placeholder{color:#d1d5db;}
         </div>
         <button type="submit" class="btn-submit">Jetzt registrieren 🎉</button>
       </form>
-      <div class="link-row">Bereits registriert? <a href="{% url 'login' %}">Einloggen</a></div>
+      <div class="link-row">Bereits registriert? <a href="{% url 'users:login' %}">Einloggen</a></div>
     </div>
   </div>
 </div>

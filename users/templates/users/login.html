@@ -92,9 +92,9 @@ input::placeholder{color:#d1d5db;}
 <div class="sparkle-wrap" id="sparks"></div>
 
 <nav class="navbar">
-  <a href="{% url 'home' %}" class="nav-brand">🌿 Testprojekt</a>
+  <a href="{% url 'users:home' %}" class="nav-brand">🌿 Testprojekt</a>
   <div class="nav-links">
-    <a href="{% url 'register' %}" class="nav-link nav-ghost">Registrieren</a>
+    <a href="{% url 'users:register' %}" class="nav-link nav-ghost">Registrieren</a>
     <span class="nav-link nav-active">Login</span>
   </div>
 </nav>
@@ -122,7 +122,7 @@ input::placeholder{color:#d1d5db;}
         </div>
         <button type="submit" class="btn-submit">Einloggen ✨</button>
       </form>
-      <div class="link-row">Noch kein Konto? <a href="{% url 'register' %}">Jetzt registrieren</a></div>
+      <div class="link-row">Noch kein Konto? <a href="{% url 'users:register' %}">Jetzt registrieren</a></div>
     </div>
   </div>
 </div>

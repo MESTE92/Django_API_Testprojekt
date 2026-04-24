@@ -1,6 +1,8 @@
 from django.urls import path                         # für URL-Definitionen
 from .views import HomeView, RegisterView, UserProfileView, ProfileEditView, LoginView, LogoutView, UserPublicProfileView
 
+app_name = 'users'   # Namespace verhindert Kollision mit djoser (name="login" / name="logout")
+
 
 urlpatterns = [
     path('', HomeView.as_view()),

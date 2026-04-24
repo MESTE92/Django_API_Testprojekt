@@ -50,6 +50,7 @@ Ein Django-Testprojekt mit REST API für Produkt-, Kategorie- und Benutzerverwal
 - [Notizen](#notizen)
 - [Kurzanleitung](#kurzanleitung)
 - [Empfohlene Betrachtungsweise](#empfohlene-betrachtungsweise)
+- [Djoser & JWT (implementiert, nicht aktiv)](#djoser--jwt-implementiert-nicht-aktiv)
 
 ---
 
@@ -96,6 +97,7 @@ Ein Django-Testprojekt mit REST API für Produkt-, Kategorie- und Benutzerverwal
 - **Filter**: django-filter
 - **API-Dokumentation**: drf-spectacular (OpenAPI 3.0)
 - **XSS-Schutz**: bleach
+- **Authentifizierung (installiert, noch nicht aktiv genutzt)**: djoser + djangorestframework-simplejwt
 - **Python**: 3.x
 
 ---
@@ -619,6 +621,42 @@ python manage.py runserver
 - **users / views.py**
 - **users / urls.py**
 - **Testprojekt / urls.py**
+
+---
+
+## Djoser & JWT (implementiert, nicht aktiv)
+
+Das Projekt hat **djoser** und **djangorestframework-simplejwt** installiert und konfiguriert – beide werden aktuell **nicht aktiv genutzt**. Das Projekt verwendet stattdessen seine eigene session-basierte Authentifizierung (Login/Logout/Register über Custom Views).
+
+### Warum sind sie trotzdem enthalten?
+
+Die Pakete sind als Vorbereitung für zukünftige API-Clients (z. B. mobile Apps oder ein React-Frontend) bereits eingebunden und konfiguriert, damit der Umstieg auf tokenbasierte Authentifizierung jederzeit ohne Installationsaufwand möglich ist.
+
+### Verfügbare Endpunkte (aktuell nicht genutzt)
+
+| Endpunkt | Methode | Beschreibung |
+|----------|---------|--------------|
+| `/auth/token/login/` | POST | djoser: Token per Credentials abrufen |
+| `/auth/token/logout/` | POST | djoser: Token invalidieren |
+| `/api/auth/jwt/create/` | POST | simplejwt: Access- + Refresh-Token erstellen |
+| `/api/auth/jwt/refresh/` | POST | simplejwt: Access-Token erneuern |
+| `/api/auth/jwt/blacklist/` | POST | simplejwt: Refresh-Token auf Blacklist setzen |
+
+### Konfiguration
+
+Die JWT-Einstellungen sind in `Testprojekt/settings.py` unter `SIMPLE_JWT` hinterlegt:
+
+```python
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    ...
+}
+```
+
+> **Hinweis**: Die djoser-Endpunkte (`/auth/token/login/` und `/auth/token/logout/`) sind im URL-Namensraum von djoser und können zu Namenskonflikten mit den Custom-Views führen. Die Custom-Views nutzen daher den Namespace `users:` (z. B. `users:login`, `users:logout`), um eine saubere Trennung sicherzustellen.
 
 ---
 **Viel Erfolg beim Testen!**
