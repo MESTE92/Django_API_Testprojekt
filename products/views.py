@@ -1,15 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from rest_framework.decorators import api_view, permission_classes, throttle_classes
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView # generische Klassen für CRUD-Operationen
 from rest_framework.response import Response 
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser
 
 from .serializers import CategorySerializer, ProductSerializer, JobSerializer         # Die Serialisier
 from .models import Category, Product, Jobs                                                # Die Model-Klassen
 from .pagination import CategoryPagination, ProductPagination, JobPagination            # Die Paginierungsklassen
 from .throttle import CustomAnonRateThrottle, CustomUserRateThrottle                    # Die Custom Throttle-Klassen
+
+from django.contrib.auth.models import User, Group
 
 
 
@@ -132,4 +134,5 @@ def throttle_check_auth(request):
 # TODO: cumstom anon function 
 
 # TODO: custoim auth function
+
 
