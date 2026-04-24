@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 # pip install decouple für environment variable management
 from decouple import config
 
@@ -55,6 +56,8 @@ INSTALLED_APPS = [
     'users',
     'django_extensions',   # für graph_models
     'djoser',              # für User Registration und Authentifizierung (z.B. Login, Logout, Passwortänderung)
+    'rest_framework_simplejwt',  # für JWT Authentication (alternative zu Token Authentication)
+    'rest_framework_simplejwt.token_blacklist',  # für Blacklisting von JWTs (z.B. bei Logout)
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'     # Custom User Model erbt von User in models.py und ersetzt das
@@ -94,6 +97,7 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',                      # ein einfacher Suchfilter
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [                             # globale Authentifizierungsklassen
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
@@ -114,9 +118,14 @@ REST_FRAMEWORK = {
     # -> das wäre eine Alternative globale Pagination
 }
 
-DJOSER = {
+DJOSER = {                        # -> wird akutell noch nicht genutzt, da eigene Views für Registration, Login etc. erstellt vorhanden sind, aber nice to know
     'USER_ID_FIELD': 'username',  # oder 'id' je nachdem welches Feld als eindeutige ID verwendet werden soll
     'LOGIN_FIELD': 'username',    # oder 'email' wenn die Anmeldung per E-Mail erfolgen soll
+}
+
+SIMPLE_JWT = {                    # -> wird aktuell noch nicht genutzt, da eigene Views für Registration, Login etc. erstellt vorhanden sind, aber nice to know
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),  # Lebensdauer des Access Tokens
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),     # Lebensdauer des Refresh Tokens
 }
 
 
